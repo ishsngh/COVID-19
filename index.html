@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19</title>
+    <script data-ad-client="ca-pub-4159828980328985" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Product+Sans" rel="stylesheet" type="text/css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/dark.css">
+	<meta name="title" content="COVID-19 Updates | India">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <meta name="description" content="Tracking of live coronavirus stats and cases in India">
+	<link rel = "icon" href = "https://lh3.googleusercontent.com/proxy/oVXpbBs-QKuBpf52GPpfm5osHzyU8veM8Kns1Z1M9PSebp2B6-vJ9EdQ8VZk3DXzZ7O8nqZ0F1Nc3zZAoSLQCrTD_GV8mhYJzBFgx8gLOaIUyoM" type = "image/x-icon" type = "image/x-icon" sizes="192x192"> 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+	<script src="./json/states.js"></script>
+	<script src="./json/covid.js"></script>
+	<script src="./json/line.js"></script>
+	<script src="./json/map.js"></script>
+	<script src="./json/darkmode.js"></script>
+	<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+</head>
+<body style="animation-delay: 0.5s; transition: all .5s ease-in-out 0s;">
+
+	<header>
+		<div class="navbar" style="animation-delay: 0.5s; transition: all 0.3s ease-in-out 0s;"><b>
+		  <a href="index.html" class="now" >Home</a>
+		  <a href="sources.html"  >Sources</a>
+		  <a href="who.html"  >WHO</a>
+		  <a href="faqs.html" >FAQs</a>            
+		  <span class="inner-switch"></span>
+		</div>
+
+		
+		<div class="Level fadeInUp" style="animation-delay: 0.5s;">
+			<div class="heading">
+				<div class="bulb"><b>
+				Tip: Try tapping the Bulb
+				</b></div>
+				<br><br>
+				<div class="text"> COVID-19 </div>
+				<div class="ico"><svg xmlns="http://www.w3.org/2000/svg" width="66px" height="66px" style="margin-bottom: -2.3rem;" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"><path d="M483.55 227.55H462c-50.68 0-76.07-61.27-40.23-97.11L437 115.19A28.44 28.44 0 0 0 396.8 75l-15.24 15.22c-35.84 35.83-97.11 10.45-97.11-40.23V28.44a28.45 28.45 0 0 0-56.9 0V50c0 50.68-61.27 76.06-97.11 40.23L115.2 75A28.44 28.44 0 0 0 75 115.19l15.25 15.25c35.84 35.84 10.45 97.11-40.23 97.11H28.45a28.45 28.45 0 1 0 0 56.89H50c50.68 0 76.07 61.28 40.23 97.12L75 396.8a28.45 28.45 0 0 0 40.2 40.2l15.24-15.25c35.84-35.84 97.11-10.45 97.11 40.23v21.54a28.45 28.45 0 0 0 56.9 0V462c0-50.68 61.27-76.07 97.11-40.23L396.8 437a28.45 28.45 0 0 0 40.2-40.2l-15.25-15.24c-35.84-35.84-10.45-97.12 40.23-97.12h21.54a28.45 28.45 0 1 0 0-56.89zM224 272a48 48 0 1 1 48-48a48 48 0 0 1-48 48zm80 56a24 24 0 1 1 24-24a24 24 0 0 1-24 24z"/></svg></div>
+				<div class="text1">INDIA </div>
+			</div><br>
+		<div id="covid3" class="date"><b> </b></div>
+		<br><br>
+		<div id="covid4" class="Level fadeInUp" style="animation-delay: 0.6s;">
+		</div>
+	<div class="Level fadeInUp" style="animation-delay: 0.4s; overflow-x: hidden;">
+			<div id="world" class="info" style="border-radius: 3px;overflow-x: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); background: linear-gradient(90deg, rgba(153,0,255,.3) 0%, rgba(55,55,255,.3) 32%, rgba(0,255,243,.3) 100%);">
+			<h1 align="center">World</h1>
+		</div></div>
+	</header><br>
+	<h1 align="center" style="margin-top: -65px;">Statistics by State</h1>
+	<!---<h3 align="center" style="margin-top: -15px;">Click on Column name to Sort</h3>--->
+	<table id="covid5">
+		<thead>
+			<tr>
+				<th class="tdgrey2" onclick="sortTable(0)">
+					<div class="sticky heading-content">State/UT</div>
+				</th>
+				<th class="tdpur2">
+					<div class="sticky heading-content">Confirmed</div>
+				</th>
+				<th style="background-color: rgba(0,123,255,.3); color: #007bff;">
+					<div class="sticky heading-content">Active</div>
+				</th>
+				<th style="background-color: rgba(40,167,69,.3); color: #28a745;">
+					<div class="sticky heading-content">Recovered</div>
+				</th>
+				<th style="background-color: rgba(255,7,58,0.3); color: #ff073a;">
+					<div class="sticky heading-content">Deaths</div>
+				</th>
+			</tr>
+		</thead>
+		<tbody id="table">
+		</tbody>
+		<tfoot id="foot">
+		</tfoot>
+	</table>
+<h1 align="center">Map Stats</h1>
+	<h2 align="center"><b>Cases in India</b></h2>
+<img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/COVID-19_Outbreak_Cases_in_India.svg" alt="map" style="width: 500px; height: 500px; display: flex; margin: auto; overflow-x:hidden">
+
+<div class="mapsvg1">
+   <svg id="chart" width="400" height="750" viewBox="0 0 650 750" preserveAspectRatio="xMidYMid meet">
+      <g class="legendLinear" transform="translate(1, 450)">
+         <g class="legendCells" transform="translate(0,33.0625)">
+            <g class="cell" transform="translate(0, 0)">
+               <rect class="swatch" height="15" width="50" style="fill: rgb(255, 213, 213);"></rect>
+               <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">1 - 9</text>
+            </g>
+            <g class="cell" transform="translate(0, 18.25)">
+               <rect class="swatch" height="15" width="50" style="fill: rgb(241, 156, 158);"></rect>
+               <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">10 - 50</text>
+            </g>
+            <g class="cell" transform="translate(0, 36.5)">
+               <rect class="swatch" height="15" width="50" style="fill: rgb(200, 6, 4);"></rect>
+               <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">51 - 99</text>
+            </g>
+            <g class="cell" transform="translate(0, 54.75)">
+               <rect class="swatch" height="15" width="50" style="fill: rgb(113, 0, 0);"></rect>
+               <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">100+</text>
+            </g>
+         </g>
+         <text style="font-size: 18px; font-weight: bold;">
+            <tspan x="0" dy="0em">Confirmed</tspan>
+            <tspan x="0" dy="1.2em">Cases</tspan>
+         </text>
+      </g>
+    </svg>
+  </div>
+  <h2 align="center" style="margin-top: -200px;"><b>Total Deaths</b></h2>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/COVID-19_Death_Cases_in_India.png/562px-COVID-19_Death_Cases_in_India.png" alt="map" style="width: 410px; height: 500px; display: flex; margin: auto; overflow-x:hidden">
+	<div class="mapsvg">
+	   <svg id="chart" width="400" height="750" viewBox="0 0 650 750" preserveAspectRatio="xMidYMid meet">
+		  <g class="legendLinear" transform="translate(1, 450)">
+			 <g class="legendCells" transform="translate(0,33.0625)">
+				<g class="cell" transform="translate(0, 0)">
+				   <rect class="swatch" height="15" width="50" style="fill: rgb(128, 128, 128);"></rect>
+				   <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">0</text>
+				</g>
+				<g class="cell" transform="translate(0, 18.25)">
+				   <rect class="swatch" height="15" width="50" style="fill: #ffd5d5ff;"></rect>
+				   <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">1-9</text>
+				</g>
+				<g class="cell" transform="translate(0, 36.50)">
+				   <rect class="swatch" height="15" width="50" style="fill: #f19c9eff;"></rect>
+				   <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">10-49</text>
+				</g>
+			 </g>
+			 <text  style="font-size: 18px; font-weight: bold;" class="legendTitle">
+				<tspan x="0" dy="1.5em">Deaths</tspan>
+			 </text>
+		  </g>
+		</svg>
+	  </div>
+	  <h2 align="center" style="margin-top: -200px;"><b>Timeline of Total cases</b></h2>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/COVID-19_India_Total_Cases_Animated_Map.gif/800px-COVID-19_India_Total_Cases_Animated_Map.gif" alt="map" style="width: 450px; height: 500px; display: flex; margin: auto; overflow-x:hidden">
+	<h1 align="center">Donut Graphs</h1>
+	<h4 align="center">Tap For the Data</h4>
+	<br>
+	<h1 align="center">Cases</h1>
+	<div>
+		<div class="chart">
+			<div id="covid19"></div>
+		</div>
+		<br>
+		<h1 align="center">Cases By States</h1>
+		<div class="chart">
+			<div id="covid"></div>
+		</div>
+	</div><br>
+	<h1 align="center">Line Chart</h1>
+	<h2 align="center">Total cases</h2>
+	<div class="chart" style="margin-top: -10px;">
+			<div id="curve_chart" style="width: 500px; height: 500px"></div>
+		</div>
+	<br>
+	<section class="help">
+      <div class="help__inner container">
+	  <b>Would love your feedback/suggestions! Just click the button given below.</b>
+	  <br>
+        <a href="formpage.html" class="join">Feedback</a>
+      </div>
+	  <ul class="social__list">
+	  <li><b>Ishaan | Shivan</b></li><li><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" style="margin-left:-6px"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm0 15.781c-2.084 0-3.781-1.696-3.781-3.781s1.696-3.781 3.781-3.781c1.172 0 2.306.523 3.136 1.669l1.857-1.218c-1.281-1.826-3.133-2.67-4.993-2.67-3.308 0-6 2.692-6 6s2.691 6 6 6c1.881 0 3.724-.859 4.994-2.67l-1.857-1.218c-.828 1.14-1.959 1.669-3.137 1.669z"/></svg></li></ul>
+	  <ul class="social__list" style="margin-top:-1px;">
+	  		<li>
+            <a href="https://www.facebook.com/ishaan.singh13"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm3 8h-1.35c-.538 0-.65.221-.65.778v1.222h2l-.209 2h-1.791v7h-3v-7h-2v-2h2v-2.308c0-1.769.931-2.692 3.029-2.692h1.971v3z"/></svg>          </li>
+          <li>
+            <a href="https://twitter.com/ishaan_singh15"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.066 9.645c.183 4.04-2.83 8.544-8.164 8.544-1.622 0-3.131-.476-4.402-1.291 1.524.18 3.045-.244 4.252-1.189-1.256-.023-2.317-.854-2.684-1.995.451.086.895.061 1.298-.049-1.381-.278-2.335-1.522-2.304-2.853.388.215.83.344 1.301.359-1.279-.855-1.641-2.544-.889-3.835 1.416 1.738 3.533 2.881 5.92 3.001-.419-1.796.944-3.527 2.799-3.527.825 0 1.572.349 2.096.907.654-.128 1.27-.368 1.824-.697-.215.671-.67 1.233-1.263 1.589.581-.07 1.135-.224 1.649-.453-.384.578-.87 1.084-1.433 1.489z"/></svg>          </li>
+		  <li>
+            <a href="https://www.instagram.com/i__shaan/"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M14.829 6.302c-.738-.034-.96-.04-2.829-.04s-2.09.007-2.828.04c-1.899.087-2.783.986-2.87 2.87-.033.738-.041.959-.041 2.828s.008 2.09.041 2.829c.087 1.879.967 2.783 2.87 2.87.737.033.959.041 2.828.041 1.87 0 2.091-.007 2.829-.041 1.899-.086 2.782-.988 2.87-2.87.033-.738.04-.96.04-2.829s-.007-2.09-.04-2.828c-.088-1.883-.973-2.783-2.87-2.87zm-2.829 9.293c-1.985 0-3.595-1.609-3.595-3.595 0-1.985 1.61-3.594 3.595-3.594s3.595 1.609 3.595 3.594c0 1.985-1.61 3.595-3.595 3.595zm3.737-6.491c-.464 0-.84-.376-.84-.84 0-.464.376-.84.84-.84.464 0 .84.376.84.84 0 .463-.376.84-.84.84zm-1.404 2.896c0 1.289-1.045 2.333-2.333 2.333s-2.333-1.044-2.333-2.333c0-1.289 1.045-2.333 2.333-2.333s2.333 1.044 2.333 2.333zm-2.333-12c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.958 14.886c-.115 2.545-1.532 3.955-4.071 4.072-.747.034-.986.042-2.887.042s-2.139-.008-2.886-.042c-2.544-.117-3.955-1.529-4.072-4.072-.034-.746-.042-.985-.042-2.886 0-1.901.008-2.139.042-2.886.117-2.544 1.529-3.955 4.072-4.071.747-.035.985-.043 2.886-.043s2.14.008 2.887.043c2.545.117 3.957 1.532 4.071 4.071.034.747.042.985.042 2.886 0 1.901-.008 2.14-.042 2.886z"/></svg>          </li>
+		  <li>
+            <a href="https://www.linkedin.com/in/ishaansingh10/"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z"/></svg>         </li>  
+        </ul>
+      </div>
+    </div>
+  </section>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="./json/darkmode.js"></script> 
+	<!-- Start Open Web Analytics Tracker -->
+<script type="text/javascript">
+//<![CDATA[
+var owa_baseUrl = 'https://covid-india.live/owa/';
+var owa_cmds = owa_cmds || [];
+owa_cmds.push(['setSiteId', 'c2779b0ba3fcd04ee2d6e1cdcf31db2d']);
+owa_cmds.push(['trackPageView']);
+owa_cmds.push(['trackClicks']);
+
+(function() {
+	var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
+	owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl );
+	_owa.src = owa_baseUrl + 'modules/base/js/owa.tracker-combined-min.js';
+	var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
+}());
+//]]>
+</script>
+<script>
+$(document).ready(function(){
+	$.getJSON("https://api.covid19india.org/data.json", function(data){
+		var tabledata = '';
+		$.each(data.statewise, function(key, value){
+			tabledata += '<tr>';
+			if (value.confirmed > 0) {
+			if (value.state != "Total") {
+			tabledata += '<td class="tdgrey" style="font-weight: 600;">' + value.state+'</td>';
+			if (value.deltaconfirmed > 0) {
+			tabledata += '<td class="tdpur"><div style="font-size:10px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a;">+'+ value.deltaconfirmed + '&nbsp;</div>' + value.confirmed+'</td>';}
+			else {
+				tabledata += '<td class="tdpur">' + value.confirmed+'</td>';}
+			tabledata += '<td style="background-color: rgba(0,123,255,.1); color: #007bff;">' + value.active+'</td>';
+			if (value.deltarecovered > 0) {
+			tabledata += '<td style="background-color: rgba(40,167,69,.1); color: #28a745;"><div style="font-size:10px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a;">+'+ value.deltarecovered + '&nbsp;</div>' + value.recovered+'</td>';}
+			else {
+			tabledata += '<td style="background-color: rgba(40,167,69,.1); color: #28a745;">' + value.recovered+'</td>';}
+			if (value.deltadeaths > 0) {
+			tabledata += '<td style="background-color: rgba(255,7,58,0.1); color: #ff073a;"><div style="font-size:10px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a;">+'+ value.deltadeaths + '&nbsp;</div>' + value.deaths+'</td>';}
+			else {
+			tabledata += '<td style="background-color: rgba(255,7,58,0.1); color: #ff073a;">' + value.deaths+'</td>';}
+			}}
+			tabledata += '</tr>';
+			
+	
+		});
+			$('#table').append(tabledata);
+	});
+});
+			
+</script>
+<script>
+$(document).ready(function(){
+	$.getJSON("https://api.covid19india.org/data.json", function(data){
+		var tabledata = '';
+		$.each(data.statewise, function(key, value){
+			tabledata += '<tr>';
+			if (value.state == "Total") {
+			tabledata += '<td class="tdgrey" style="font-weight: 600;">' + value.state+'</td>';
+			tabledata += '<td class="tdpur">' + value.confirmed+'</td>';
+			tabledata += '<td style="background-color: rgba(0,123,255,.1); color: #007bff;">' + value.active+'</td>';
+			tabledata += '<td style="background-color: rgba(40,167,69,.1); color: #28a745;">' + value.recovered+'</td>';
+			tabledata += '<td style="background-color: rgba(255,7,58,0.1); color: #ff073a;">' + value.deaths+'</td>';
+			}
+			tabledata += '</tr>';
+			
+	
+		});
+			$('#foot').append(tabledata);
+	});
+});
+			
+</script>
+<script>
+$(document).ready(function(){
+	$.getJSON("https://api.covid19india.org/data.json", function(data){
+		var timedata = '';
+		$.each(data.statewise, function(key, value){
+			if (value.state == "Total") {
+			timedata += 'Last updated: ' + value.lastupdatedtime;	}
+		});
+			$('#covid3').append(timedata);
+	});
+});
+			
+</script>
+<script>
+$(document).ready(function(){
+	$.getJSON("https://api.covid19india.org/data.json", function(data){
+		var updata = '';
+		$.each(data.statewise, function(key, value){
+			if (value.state == "Total") {
+			updata += '<div class="info">';
+			updata += '<div class="cases"><b>Confirmed<br><div style="font-size:13px;">[+'+ value.deltaconfirmed +']</div>' + value.confirmed + '</b><br></div>';			
+			updata += '<div class="active"><b>Active Cases<br><div style="font-size:13px;">[+'+ (value.deltaconfirmed - value.deltadeaths - value.deltarecovered) +']</div>' + value.active + '</b><br></div>';
+			updata += '<div class="deaths"><b>Total Deaths<br><div style="font-size:13px;">[+'+ value.deltadeaths +']</div>' + value.deaths + '</b><br></div>';
+			updata += '<div class="recover"><b>Recoveries<br><div style="font-size:13px;">[+'+ value.deltarecovered +']</div>' + value.recovered + '</b><br></div>';
+			updata += '</div>';
+			}	
+		});
+			$('#covid4').append(updata);
+	});
+});
+			
+</script>
+
+<script>
+$(document).ready(function(){
+	$.getJSON("https://covid19-server.chrismichael.now.sh/api/v1/AllReports", function(data){
+		var world = '';
+		$.each(data.reports, function(key, value){
+			world += '<div class="cases1"><b>Confirmed<br>' + value.cases + '</b><br></div>';			
+			world += '<div class="cases1"><b>Active Cases<br>' + (value.cases - value.deaths - value.recovered) + '</b><br></div>';
+			world += '<div class="cases1"><b>Total Deaths<br>' + value.deaths + '</b><br></div>';
+			world += '<div class="cases1"><b>Recoveries<br>' + value.recovered + '</b><br></div>';
+			world += '</div>';	
+		});
+			$('#world').append(world);
+	});
+});
+			
+</script>
+<script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.getElementById("table");
+  switching = true;
+  // Set the sorting direction to ascending:
+  dir = "asc";
+  /* Make a loop that will continue until
+  no switching has been done: */
+  while (switching) {
+    // Start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /* Loop through all table rows (except the
+    first, which contains table headers): */
+    for (i = 1; i < (rows.length - 1); i++) {
+      // Start by saying there should be no switching:
+      shouldSwitch = false;
+      /* Get the two elements you want to compare,
+      one from current row and one from the next: */
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      /* Check if the two rows should switch place,
+      based on the direction, asc or desc: */
+      if (dir == "asc") {
+        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+          // If so, mark as a switch and break the loop:
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark that a switch has been done: */
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      // Each time a switch is done, increase this count by 1:
+      switchcount ++;
+    } else {
+      /* If no switching has been done AND the direction is "asc",
+      set the direction to "desc" and run the while loop again. */
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
+</body>
+</html>
