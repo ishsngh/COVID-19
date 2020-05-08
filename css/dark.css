@@ -6,11 +6,16 @@
 }
 
 .dark .navbar {
-    background-color: #444;
+    background-color: #222;
+	border-color: #223;
 }
 
 .dark .navbar a {
     color: #e6e6e6;
+}
+
+.dark .bulb {
+	color: #90EE90;
 }
 
 .dark .navbar .icon {
@@ -131,11 +136,6 @@
 .dark tr .tdgrey2 {
 	background-color: rgba(189, 195, 199, .3);
 	color: rgba(189, 195, 199, 1);
-}
-
-.dark .bulb {
-	display: :hidden;
-	visibility:hidden;
 }
 
 .dark tr .tdpur {
