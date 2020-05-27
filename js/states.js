@@ -3,18 +3,18 @@ google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
 var data = google.visualization.arrayToDataTable([
   ['Stats', 'Covid-19 states'],
-  ['Maharashtra',     17974],
-  ['Delhi',     5980],
-  ['Tamil Nadu',     5409],
-  ['Rajasthan',     3427],
-  ['Madhya Pradesh',     3252],
-  ['Andhra Pradesh',     1833],
-  ['Gujarat',     7013],
-  ['Punjab',     1644],
-  ['West Bengal',     1548],
-  ['Telangana',      1122],
-  ['Uttar Pradesh',  3071],
-  ['Others',  4150]
+  ['Maharashtra',     52667],
+  ['Delhi',     14465],
+  ['Tamil Nadu',     17082],
+  ['Rajasthan',     7376],
+  ['Madhya Pradesh',     6859],
+  ['Andhra Pradesh',     2983],
+  ['Gujarat',     14468],
+  ['Punjab',     1942],
+  ['West Bengal',     3816],
+  ['Telangana',      1920],
+  ['Uttar Pradesh',  6497],
+  ['Others',  16133]
 ]);
 
 var options = {

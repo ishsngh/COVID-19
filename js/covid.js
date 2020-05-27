@@ -3,9 +3,9 @@ google.charts.load("current", {packages:["corechart"]});
   function drawChart() {
 	var data = google.visualization.arrayToDataTable([
 	  ['Stats', 'Covid-19', { role: 'style' }],
-	  ["Active cases",     37682, 'opacity: 0.5'],
-	  ['Recovered',      16776, 'opacity: 0.5'],
-	  ['Deaths',  1889, 'opacity: 0.5']
+	  ["Active cases",     80958, 'opacity: 0.5'],
+	  ['Recovered',      61052, 'opacity: 0.5'],
+	  ['Deaths',  4187, 'opacity: 0.5']
 	]);
 
 	var options = {
