@@ -1,6 +1,16 @@
 
 .dark,
 
+
+ 
+.dark ::-webkit-scrollbar-track {
+    background: #555;
+}
+ 
+.dark ::-webkit-scrollbar-thumb {
+    background: #f1f1f1;
+}
+
 .dark header .heading .text {
     color: #e6e6e6;
 }
