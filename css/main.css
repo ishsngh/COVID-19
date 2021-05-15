@@ -461,13 +461,12 @@ background-color: rgba(108,117,125,.3);
 }
 
 table {
-  display: block;
+  display: table;
   overflow-x: auto;
   position: relative;
   margin-top: 4rem;
   margin-bottom: -10rem;
-  width: fit-content;
-  max-width: 90%;
+  width: 90%;
   margin: 0 auto;
   border-radius: 3px;
   align-self: center;
@@ -485,7 +484,7 @@ table thead {
   color: #343a40;
   text-align: left;
   border-radius: 3px;
-  font-size: .75rem;
+  font-size: 1rem;
 }
 
 table thead th {
@@ -496,16 +495,12 @@ table thead th {
   cursor: pointer;
 }
 
-table thead th:hover {
-  background: rgba(108,117,125,.12549);
-}
-
 table thead th .heading-content {
   display: flex;
   justify-content: space-between;
   position: relative;
   flex-direction: row;
-  height: .9rem;
+  height: 1.2rem;
 }
 
 table tbody {
@@ -519,12 +514,36 @@ table tbody tr {
 }
 
 table tbody tr:hover {
+  background: rgba(108,117,125,.2);
+}
+
+.tdgrey2:hover {
+  background: rgba(108,117,125,.2);
+}
+
+.tdpur2:hover {
+  background: rgba(128,0,128,.2);
+}
+
+.tdred2:hover {
+  background: rgba(255,7,58,.2);
+}
+
+.tdbl2:hover {
+  background: rgba(0,123,255,.2);
+}
+
+.tdgr2:hover {
+  background: rgba(40,167,69,.2);
+}
+
+table tbody tr:hover {
   background: rgba(108,117,125,.12549);
 }
 
 table tbody td {
-  padding: .25rem;
-  font-size: .9rem;
+  padding: .5rem;
+  font-size: 1rem;
   text-align: right;
   border-radius: 3px;
 }
@@ -548,8 +567,8 @@ table tfoot tr:hover {
 }
 
 table tfoot td {
-  padding: .25rem;
-  font-size: .9rem;
+  padding: .5rem;
+  font-size: 1.2rem;
   text-align: right;
   border-radius: 3px;
 }
@@ -618,6 +637,25 @@ table .affected-count {
   }
 }
 
+@media screen and (max-width: 800px) {
+
+table {
+  display: block;
+  overflow-x: auto;
+  position: relative;
+  margin-top: 4rem;
+  margin-bottom: -10rem;
+  width: fit-content;
+  max-width: 95%;
+  margin: 0 auto;
+  border-radius: 3px;
+  align-self: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+	
+}
+
 @media screen and (max-width: 400px) {
   .info .cases {
   padding: 10px .7rem;
@@ -641,18 +679,10 @@ table .affected-count {
  float: left;
 }
   .mapsvg1 {
-    margin-top: -590px;
-    overflow-x: hidden;
+  margin-top: -590px;
+  overflow-x: hidden;
+}
 
-
-  }
-  table thead th {
-  padding-top: .5rem;
-  padding-bottom: :.5rem;
-  padding:.1rem;
-  cursor: pointer;
-  font-size: 10px;
-  }
 }
 .chart {
 	display: flex;
@@ -852,6 +882,21 @@ tr .tdpur2 {
 	color: #800080;;
 }
 
+tr .tdbl2 {
+	background-color: rgba(0,123,255,.3);
+	color: #007bff;
+}
+
+tr .tdgr2 {
+	background-color: rgba(40,167,69,.3); 
+	color: #28a745;
+}
+
+tr .tdred2 {
+	background-color: rgba(255,7,58,0.3); 
+	color: #ff073a;
+}
+
 .guide{ 
   margin-top: 100px;
   text-align: left;
@@ -861,5 +906,32 @@ tr .tdpur2 {
 #chart {
   max-width: 650px;
   margin: 35px auto;
+}
+
+.headerSortDown:after,
+.headerSortUp:after {
+  content: ' ';
+  position: relative;
+  left: 2px;
+  border: 8px solid transparent;
+}
+
+.headerSortDown:after {
+  top: 5px;
+  border-top-color: black;
+}
+
+.headerSortUp:after {
+  bottom: 5px;
+  border-bottom-color: black;
+}
+
+.headerSortDown,
+.headerSortUp {
+  padding-left: 10px;
+}
+
+.confirm {
+display: inline-block;
 }
 

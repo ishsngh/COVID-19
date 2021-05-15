@@ -50,7 +50,8 @@
 }
 
 .dark header p  {
-    color: #e6e6e6;
+    color: #e3e3e3;
+	font-family: Arial;
 }
 
 .dark  {
@@ -163,6 +164,14 @@
 	color: rgba(190, 144, 212,1);
 }
 
+.dark .tdgrey2:hover {
+  background: rgba(108,117,125,.2);
+}
+
+.dark .tdpur2:hover {
+  background: rgba(128,0,128,.2);
+}
+
 .dark .date {
 	background-color: rgba(255, 0, 0,0.3);
 	color: #f7a8a8;
@@ -182,6 +191,14 @@
 }
 
 .dark .cases1 {
-	color: #fff;
+	color: #e3e3e3;
+	font-family: sans-serif;
+}
 
+.dark .headerSortDown:after {
+  border-top-color: silver;
+}
+
+.dark .headerSortUp:after {
+  border-bottom-color: silver;
 }
