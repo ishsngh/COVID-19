@@ -54,7 +54,7 @@ function sortTable(n) {
 }
 
 function sorttable(n) {
-var table, rows, switching, i,x1,x2,y1,y2, x, y, shouldSwitch, dir, switchcount = 0;
+var table, rows, switching, i, x1, x2, y1, y2, x, y, shouldSwitch, dir, switchcount = 0;
 
 table = document.getElementById("table");
 switching = true;
@@ -66,9 +66,19 @@ while (switching) {
         shouldSwitch = false;
         x = rows[i].getElementsByTagName("TD")[n];
         y = rows[i + 1].getElementsByTagName("TD")[n];
-        if( $( "table" ).hasClass( "new" )) {
-            var cmpX=isNaN(parseInt(x.innerHTML.split('+')[1]))?x.innerHTML.toLowerCase():parseInt(x.innerHTML.split('+')[1]);
-            var cmpY=isNaN(parseInt(y.innerHTML.split('+')[1]))?y.innerHTML.toLowerCase():parseInt(y.innerHTML.split('+')[1]);
+        if( $( "table" ).hasClass( "today" )) {
+          x1 = x.innerHTML.split('+')[1];
+          if (x1 != undefined) {
+            var cmpX=parseInt(x1.split(' ')[0]);
+            } else {
+            var cmpX= -100000000; 
+            }
+          y1 = y.innerHTML.split('+')[1];
+          if (y.innerHTML.split('+')[1] != undefined) {
+            var cmpY=parseInt(y1.split(' ')[0]);
+            } else {
+            var cmpY= -100000000; 
+            }
         } else {
             var cmpX=isNaN(parseInt(x.innerHTML.split('<div class="confirm">')[1]))?x.innerHTML.toLowerCase():parseInt(x.innerHTML.split('<div class="confirm">')[1]);
             var cmpY=isNaN(parseInt(y.innerHTML.split('<div class="confirm">')[1]))?y.innerHTML.toLowerCase():parseInt(y.innerHTML.split('<div class="confirm">')[1]);
