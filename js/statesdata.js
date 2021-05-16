@@ -89,34 +89,42 @@ $.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data){
 		var updata = '';
 		updata += '<div class="info" id="test">';
 		updata +='<div style="font-size:28px; font-weight:bold;">'+ name +'</div>';
+		if (data[x].hasOwnProperty('delta')) {
 		if ((data[x].delta.confirmed - data[x].delta.recovered - data[x].delta.deceased) < 0) {
 		sign= ""; } else {
 		sign= '+'; }
 		if (data[x].delta.confirmed != undefined) {
-		updata += '<div class="cases2"><b>Confirmed<br><div style="font-size:13px;">[+'+ data[x].delta.confirmed +']</div>' + data[x].total.confirmed + '</b><br></div>';			
+		updata += '<div class="cases2"><b>Confirmed<br><div style="font-size:13px;">[+'+ data[x].delta.confirmed +']</div>' + parseInt(data[x].total.confirmed).toLocaleString('en-IN') + '</b><br></div>';			
 		} else {
-		updata += '<div class="cases2"><b>Confirmed<br><div style="font-size:13px;">[--]</div>' + data[x].total.confirmed + '</b><br></div>';	
+		updata += '<div class="cases2"><b>Confirmed<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.confirmed).toLocaleString('en-IN') + '</b><br></div>';	
 		}
 		if (isNaN(data[x].delta.confirmed - data[x].delta.recovered - data[x].delta.deceased) != true) {
-		updata += '<div class="cases3"><b>Active Cases<br><div style="font-size:13px;">[' + sign + (data[x].delta.confirmed - data[x].delta.recovered - data[x].delta.deceased) +']</div>' + (data[x].total.confirmed - data[x].total.recovered - data[x].total.deceased) + '</b><br></div>';
+		updata += '<div class="cases3"><b>Active Cases<br><div style="font-size:13px;">[' + sign + (data[x].delta.confirmed - data[x].delta.recovered - data[x].delta.deceased) +']</div>' + parseInt(data[x].total.confirmed - data[x].total.recovered - data[x].total.deceased).toLocaleString('en-IN') + '</b><br></div>';
 		} else {
-		updata += '<div class="cases3"><b>Active Cases<br><div style="font-size:13px;">[--]</div>' + (data[x].total.confirmed - data[x].total.recovered - data[x].total.deceased) + '</b><br></div>';
+		updata += '<div class="cases3"><b>Active Cases<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.confirmed - data[x].total.recovered - data[x].total.deceased).toLocaleString('en-IN') + '</b><br></div>';
 		}
 		if (data[x].delta.deceased != undefined) {
-		updata += '<div class="cases4"><b>Total Deaths<br><div style="font-size:13px;">[+'+ data[x].delta.deceased +']</div>' + data[x].total.deceased + '</b><br></div>';
+		updata += '<div class="cases4"><b>Total Deaths<br><div style="font-size:13px;">[+'+ data[x].delta.deceased +']</div>' + parseInt(data[x].total.deceased).toLocaleString('en-IN') + '</b><br></div>';
 		} else {
-		updata += '<div class="cases4"><b>Total Deaths<br><div style="font-size:13px;">[--]</div>' + data[x].total.deceased + '</b><br></div>';	
+		updata += '<div class="cases4"><b>Total Deaths<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.deceased).toLocaleString('en-IN') + '</b><br></div>';	
 		}
 		if (data[x].delta.recovered != undefined) {
-		updata += '<div class="cases5"><b>Recoveries<br><div style="font-size:13px;">[+'+ data[x].delta.recovered +']</div>' + data[x].total.recovered + '</b><br></div>';
+		updata += '<div class="cases5"><b>Recoveries<br><div style="font-size:13px;">[+'+ data[x].delta.recovered +']</div>' + parseInt(data[x].total.recovered) + '</b><br></div>';
 		} else {
-		updata += '<div class="cases5"><b>Recoveries<br><div style="font-size:13px;">[--]</div>' + data[x].total.recovered + '</b><br></div>';
+		updata += '<div class="cases5"><b>Recoveries<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.recovered) + '</b><br></div>';
 		}
 		updata += '</div></div>';
+		} else {
+		updata += '<div class="cases2"><b>Confirmed<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.confirmed).toLocaleString('en-IN') + '</b><br></div>';	
+		updata += '<div class="cases3"><b>Active Cases<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.confirmed - data[x].total.recovered - data[x].total.deceased).toLocaleString('en-IN') + '</b><br></div>';
+		updata += '<div class="cases4"><b>Total Deaths<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.deceased).toLocaleString('en-IN') + '</b><br></div>';				
+		updata += '<div class="cases5"><b>Recoveries<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.recovered) + '</b><br></div>';
+		updata += '</div></div>';
+		}
 		var title='';
 		title = name + ' Coronavirus Update (Live): ' + data[x].total.confirmed + ' Cases and '+ data[x].total.deceased +' Deaths from COVID-19 Virus Pandemic';
 	$.each(data[x].districts, function(key, value){
-	if (key != 'Other State' && key != 'Foreign Evacuees' && key != 'Capital Complex' && key != 'BSF Camp' && key != 'Evacuees' && key != 'Italians' && key != 'Airport Quarantine' && key != 'Railway Quarantine') {
+	if (data[x].districts[key].hasOwnProperty('delta')) {
     if ((data[x].districts[key].delta.confirmed - data[x].districts[key].delta.deceased - data[x].districts[key].delta.recovered) < 0) { 
     sign= ""; } else {
     sign= '+'; }

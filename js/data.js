@@ -60,10 +60,10 @@ var totaltest= 0;
 		if (value.state == "Total") {
 		updata += '<div class="info" id="test">';
 		updata +='<div style="font-size:28px; font-weight:bold;">INDIA</div>';
-		updata += '<div class="cases2"><b>Confirmed<br><div style="font-size:13px;">[+'+ value.deltaconfirmed +']</div>' + value.confirmed + '</b><br></div>';			
-		updata += '<div class="cases3"><b>Active Cases<br><div style="font-size:13px;">[' + sign + (value.deltaconfirmed - value.deltadeaths - value.deltarecovered) +']</div>' + value.active + '</b><br></div>';
-		updata += '<div class="cases4"><b>Total Deaths<br><div style="font-size:13px;">[+'+ value.deltadeaths +']</div>' + value.deaths + '</b><br></div>';
-		updata += '<div class="cases5"><b>Recoveries<br><div style="font-size:13px;">[+'+ value.deltarecovered +']</div>' + value.recovered + '</b><br></div>';
+		updata += '<div class="cases2"><b>Confirmed<br><div style="font-size:13px;">[+'+ value.deltaconfirmed +']</div>' + parseInt(value.confirmed).toLocaleString('en-IN') + '</b><br></div>';			
+		updata += '<div class="cases3"><b>Active Cases<br><div style="font-size:13px;">[' + sign + (value.deltaconfirmed - value.deltadeaths - value.deltarecovered) +']</div>' + parseInt(value.active).toLocaleString('en-IN') + '</b><br></div>';
+		updata += '<div class="cases4"><b>Total Deaths<br><div style="font-size:13px;">[+'+ value.deltadeaths +']</div>' + parseInt(value.deaths).toLocaleString('en-IN') + '</b><br></div>';
+		updata += '<div class="cases5"><b>Recoveries<br><div style="font-size:13px;">[+'+ value.deltarecovered +']</div>' + parseInt(value.recovered).toLocaleString('en-IN') + '</b><br></div>';
 		}
 	});
 
@@ -143,10 +143,8 @@ var totaltest= 0;
 	}
 	});
 	}
-
-
-		updata += '<div class="cases6"><b>Total tests<br><div style="font-size:13px;">[+' + todaytests +']</div>' + totaltest + '</b><br></div>';
-		updata += '<div class="cases7"><b>Vacine administered<br><div style="font-size:13px;">[+' + (totalvacine - yestvacine) +']</div>' + totalvacine + '</b><br></div>';
+		updata += '<div class="cases6"><b>Total tests<br><div style="font-size:13px;">[+' + todaytests +']</div>' + parseInt(totaltest).toLocaleString('en-IN') + '</b><br></div>';
+		updata += '<div class="cases7"><b>Vacine administered<br><div style="font-size:13px;">[+' + (totalvacine - yestvacine) +']</div>' + parseInt(totalvacine).toLocaleString('en-IN') + '</b><br></div>';
 		updata += '</div></div>';
 		$('#covid4').append(updata);
 	var updata = '';
@@ -168,16 +166,16 @@ $.getJSON("https://corona.lmao.ninja/v2/all", function(data){
 	var world = '';
 	$.each(data, function(key, value){
 	if (key == "cases") {
-		world += '<div class="cases1"><b>Confirmed<br><div id="worldc" style="font-size:13px;"></div>'+ value + '</b><br></div>';
+		world += '<div class="cases1"><b>Confirmed<br><div id="worldc" style="font-size:13px;"></div>'+ value.toLocaleString('en-IN') + '</b><br></div>';
 	}
 	if (key == "active") {
-		world += '<div class="cases1"><b>Active Cases<br><div style="font-size:13px;">[--]</div>' + value + '</b><br></div>';
+		world += '<div class="cases1"><b>Active Cases<br><div style="font-size:13px;">[--]</div>' + value.toLocaleString('en-IN') + '</b><br></div>';
 	}
 	if (key == "recovered") {
-		world += '<div class="cases1"><b>Recoveries<br><div style="font-size:13px;">[--]</div>' + value + '</b><br></div>';
+		world += '<div class="cases1"><b>Recoveries<br><div style="font-size:13px;">[--]</div>' + value.toLocaleString('en-IN') + '</b><br></div>';
 	}
 	if (key == "deaths") {
-		world += '<div class="cases1"><b>Total Deaths<br><div id="worldd" style="font-size:13px;"></div>' + value + '</b><br></div>';
+		world += '<div class="cases1"><b>Total Deaths<br><div id="worldd" style="font-size:13px;"></div>' + value.toLocaleString('en-IN') + '</b><br></div>';
 	}
 	});
 	$('#world').append(world);
@@ -196,11 +194,12 @@ $.getJSON("https://corona.lmao.ninja/v2/all", function(data){
 	var world = '';
 	$.each(data, function(key, value){
 		if (key == "tests") {
-		world += '<div class="cases1"><b>Total Tests<br><div style="font-size:13px;">(Worldometers)</div>' + value + '</b><br></div>';
+		world += '<div class="cases1"><b>Total Tests<br><div style="font-size:13px;">(Worldometers)</div>' + value.toLocaleString('en-IN') + '</b><br></div>';
 }
 		if (key == "testsPerOneMillion") {
-		world += '<div class="cases1"><b>Tests /1M<br><div style="font-size:13px;">(Million)</div>' + value + '</b><br></div>';
+		world += '<div class="cases1"><b>Tests /1M<br><div style="font-size:13px;">(Million)</div>' + value.toLocaleString('en-IN') + '</b><br></div>';
 }			
 	});
 		$('#tests').append(world);
 });
+
