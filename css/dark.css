@@ -1,7 +1,5 @@
 
 .dark,
-
-
  
 .dark ::-webkit-scrollbar-track {
     background: #555;
@@ -201,4 +199,8 @@
 
 .dark .headerSortUp:after {
   border-bottom-color: silver;
+}
+
+.dark .slider:before {
+	background-color: black;
 }

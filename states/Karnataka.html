@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="dark KA">
 
 <head>
     <meta charset="UTF-8">
@@ -8,9 +8,9 @@
     <link href="https://fonts.googleapis.com/css?family=Product+Sans" rel="stylesheet" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="./css/main.css">
-	<link rel="stylesheet" href="./css/dark.css">
-	<link rel="stylesheet" href="./css/bt.css">
+    <link rel="stylesheet" href="../css/main.css">
+	<link rel="stylesheet" href="../css/dark.css">
+	<link rel="stylesheet" href="../css/bt.css">
 	<meta name="title" content="COVID-19 Updates | India">
 	<meta name="keywords" content="coronavirus,corona,covid,covid19,covid-19,covidindia,india,virus,china,wuhan,stats,live">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
@@ -22,10 +22,10 @@
 </head>
 	<header>
 		<div class="navbar" style="animation-delay: 0.0s; transition: all 0.2s ease-in-out 0s;"><b>
-		  <a href="index.html" class="now" >Home</a>
-		  <a href="sources.html"  >Sources</a>
-		  <a href="who.html"  >WHO</a>
-		  <a href="faqs.html" >FAQs</a>            
+		  <a href="../index.html" class="now" >Home</a>
+		  <a href="../sources.html"  >Sources</a>
+		  <a href="../who.html"  >WHO</a>
+		  <a href="../faqs.html" >FAQs</a>            
 		  <span class="inner-switch"></span>
 		</div></header>
 <body style="animation-delay: 0.0s; transition: all .1s ease-in-out 0.1s;" class="dark">
@@ -60,21 +60,12 @@
 				<div class="ico"><svg xmlns="http://www.w3.org/2000/svg" width="66px" height="66px" style="margin-bottom: -2.3rem;" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"><path d="M483.55 227.55H462c-50.68 0-76.07-61.27-40.23-97.11L437 115.19A28.44 28.44 0 0 0 396.8 75l-15.24 15.22c-35.84 35.83-97.11 10.45-97.11-40.23V28.44a28.45 28.45 0 0 0-56.9 0V50c0 50.68-61.27 76.06-97.11 40.23L115.2 75A28.44 28.44 0 0 0 75 115.19l15.25 15.25c35.84 35.84 10.45 97.11-40.23 97.11H28.45a28.45 28.45 0 1 0 0 56.89H50c50.68 0 76.07 61.28 40.23 97.12L75 396.8a28.45 28.45 0 0 0 40.2 40.2l15.24-15.25c35.84-35.84 97.11-10.45 97.11 40.23v21.54a28.45 28.45 0 0 0 56.9 0V462c0-50.68 61.27-76.07 97.11-40.23L396.8 437a28.45 28.45 0 0 0 40.2-40.2l-15.25-15.24c-35.84-35.84-10.45-97.12 40.23-97.12h21.54a28.45 28.45 0 1 0 0-56.89zM224 272a48 48 0 1 1 48-48a48 48 0 0 1-48 48zm80 56a24 24 0 1 1 24-24a24 24 0 0 1-24 24z"/></svg></div>
 				<div class="text1">INDIA </div>
 			</div><br>
-		<div id="covid3" class="date"><b> </b></div>
-		<br><br>
+		<!-- <div id="covid3" class="date"><b> </b></div> 
+		<br><br> -->
 		<div id="covid4" class="Level fadeInUp" style="animation-delay: 0.6s;">
-		</div><br>
-	<div class="Level fadeInUp" style="animation-delay: 0.4s; overflow-x: hidden;">
-			<div class="info" style="border-radius: 3px;overflow-x: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); background: linear-gradient(90deg, rgba(153,0,255,.3) 0%, rgba(55,55,255,.3) 32%, rgba(0,255,243,.3) 100%);">
-			<h1 align="center">World</h1><div id="world" style="display: inline-block;"></div><div style="display: inline-block;" id="tests"></div>
-		</div></div>
-		<!--<div class="Level fadeInUp" style="animation-delay: 0.4s; overflow-x: hidden;">
-			<div id="free" class="info" style="justify-content: center; margin: 0 auto; position: relative; text-align: center; border-radius: 3px;overflow-x: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); background: linear-gradient(90deg, rgba(153,0,255,.3) 0%, rgba(55,55,255,.3) 32%, rgba(0,255,243,.3) 100%);">
-			<h1 align="center">States Without Any Cases</h1><br><div class="Level fadeInUp" style="animation-delay: 0.4s; overflow-x: hidden;">
-		</div></div>-->
-	</header>
-	<br>
-	<h1 align="center" style="margin-top: -25px;">Statistics by State</h1><br>
+		</div>
+	</header><br><br>
+	<h1 align="center" style="margin-top: -25px;">Statistics by district</h1><br>
 	<h3 align="center" style="margin-top: -20px;">Click on Column name to Sort</h3><br>
 	<h3 align="center">Sort by Today's cases &nbsp; <label class="switch1">
 	  <input type="checkbox">
@@ -85,7 +76,7 @@
 		<thead>
 			<tr>
 				<th class="tdgrey2" onclick="sortTable(0,'#sort')">
-					<div id="sort" class="sticky heading-content">State/UT&nbsp;&nbsp;</div>
+					<div id="sort" class="sticky heading-content">Districts&nbsp;&nbsp;</div>
 				</th>
 				<th class="tdpur2" onclick="sorttable(1,'#sort1')">
 					<div id="sort1" class="sticky heading-content headerSortDown">Confirmed&nbsp;&nbsp;</div>
@@ -203,7 +194,8 @@
 			<div id="curve_chart" style="width: 500px; height: 500px"></div>
 		</div>
 	<br>
-</div>--> <br><br>
+</div>-->
+<br><br>
 	
 	<section class="help">
       <div class="help__inner container">
@@ -227,10 +219,7 @@
     </div>
   </section>
  </body>
-<script src="./js/darkmode.js"></script>
-<script src="./js/sort.js"></script>
-<script src="./js/data.js"></script>
-<script src="./js/states.js"></script>
-<script src="./js/covid.js"></script>
-<script src="./js/line.js"></script>
+<script src="../js/darkmode.js"></script>
+<script src="../js/sort.js"></script>
+<script src="../js/statesdata.js"></script>
 </html>

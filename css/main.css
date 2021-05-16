@@ -49,8 +49,8 @@ a {
 }
 h1 {
   font-family: "Product Sans";
-  font-size: 24px!important;
-  font-weight: 900;
+  font-size: 18px!important;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
@@ -145,9 +145,9 @@ body {
 	background-color: #fff;
 	font-size: 1rem;
 	line-height: 1.6;
-  overflow-x: hidden;
+    overflow-x: hidden;
 	color: #4a5568;
-	font-family: "Product Sans" , "Archia";
+	font-family: "Product Sans";
 }
 
 header {
@@ -548,8 +548,25 @@ table tbody td {
   border-radius: 3px;
 }
 
+table tbody td:nth-child(2) {
+  white-space: nowrap;
+}
+
+table tbody td:nth-child(3) {
+  white-space: nowrap;
+}
+
+table tbody td:nth-child(4) {
+  white-space: nowrap;
+}
+
+table tbody td:nth-child(5) {
+  white-space: nowrap;
+}
+
 table tbody td:first-child {
   text-align: left;
+
 }
 
 table tfoot {
@@ -939,8 +956,8 @@ display: inline-block;
   position: relative;
   margin: 0 auto;
   display: inline-block;
-  width: 48px;
-  height: 23px;
+  width: 44px;
+  height: 19px;
 }
 
 .switch1 input { 
@@ -964,8 +981,8 @@ display: inline-block;
 .slider:before {
   position: absolute;
   content: "";
-  height: 20px;
-  width: 20px;
+  height: 16px;
+  width: 16px;
   left: 1px;
   bottom: 1.5px;
   background-color: white;
