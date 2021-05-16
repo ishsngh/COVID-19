@@ -173,7 +173,6 @@
 .dark .date {
 	background-color: rgba(255, 0, 0,0.3);
 	color: #f7a8a8;
-
 }
 
 .dark .deaths {
@@ -201,6 +200,6 @@
   border-bottom-color: silver;
 }
 
-/* .dark .slider:before { */
-	/* background-color: black; */
-/* } */
+/* .dark .slider:before {
+	 background-color: black;
+ } */

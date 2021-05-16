@@ -144,7 +144,7 @@ var totaltest= 0;
 	});
 	}
 		updata += '<div class="cases6"><b>Total tests<br><div style="font-size:13px;">[+' + todaytests +']</div>' + parseInt(totaltest).toLocaleString('en-IN') + '</b><br></div>';
-		updata += '<div class="cases7"><b>Vacine administered<br><div style="font-size:13px;">[+' + (totalvacine - yestvacine) +']</div>' + parseInt(totalvacine).toLocaleString('en-IN') + '</b><br></div>';
+		updata += '<div class="cases7"><b>Vaccination<br><div style="font-size:13px;">[+' + (totalvacine - yestvacine) +']</div>' + parseInt(totalvacine).toLocaleString('en-IN') + '</b><br></div>';
 		updata += '</div></div>';
 		$('#covid4').append(updata);
 	var updata = '';
