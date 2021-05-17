@@ -82,6 +82,7 @@ function states() {
             } else if (x == "WB") {
                 name = "West Bengal";
             }
+			
             tabledata1 += '<td class="tdgrey" style="font-weight: 600;">' + name + '</td>';
             tabledata1 += '<td class="tdpur">' + data[x].total.confirmed + '</td>';
             tabledata1 += '<td style="background-color: rgba(0,123,255,.1); color: #007bff;">' + (data[x].total.confirmed - data[x].total.recovered - data[x].total.deceased) + '</td>';
@@ -149,8 +150,6 @@ function states() {
                     } else {
                         sign = '+';
                     }
-                    console.log(key);
-                    console.log(x);
                     tabledata += '<tr>';
                     tabledata += '<td class="tdgrey" style="font-weight: 600;">' + key + '</td>';
                     if (data[x].districts[key].delta.confirmed > 0) {
@@ -243,6 +242,8 @@ function states() {
             }
         });
     });
+	
+	
 
 
     var tabletitle = ''

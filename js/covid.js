@@ -1,3 +1,4 @@
+function covidpie() {
 $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
     $.each(coviddata.statewise, function(key, value) {
         if (value.state == "Total") {
@@ -64,3 +65,7 @@ $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
         chart.draw(data, options);
     }
 });
+}
+
+covidpie();
+

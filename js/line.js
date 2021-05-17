@@ -1,3 +1,4 @@
+function chartline2() {
 $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
     var arrValues = [
         ['Date', 'Confirmed', 'active', 'recovered', 'deaths']
@@ -118,3 +119,6 @@ $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
         chart.draw(data, options);
     }
 });
+}
+
+chartline2();

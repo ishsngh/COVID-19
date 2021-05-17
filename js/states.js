@@ -1,3 +1,4 @@
+function chartstates(){ 
 $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
     var arrValues1 = [
         ['Stats', 'Covid-19 states']
@@ -114,3 +115,6 @@ $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
 
     }
 });
+}
+
+chartstates();

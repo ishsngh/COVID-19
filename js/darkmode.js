@@ -83,7 +83,14 @@ function getdata(state) {
     $("#table").empty();
     $("#title").empty();
     $("#tests").empty();
+	$("#covid").empty();
+	$("#covid19").empty();
+	$('#covidcases').empty();
+	chartlinestate();
+	chartlinestate1();
     states();
+	$('#curvetext').empty();
+	$('#curve_chart').empty();
 }
 
 $("#goback").on("click", function() {
@@ -101,5 +108,12 @@ $("#goback").on("click", function() {
     $("#covid3").empty();
     $("#foot").empty();
     $("#tabletitle").empty();
+	$("#covid").empty();
+	$('#covidcases').empty();
+	$("#covid19").empty();
     data();
+	covidpie();
+	chartline2();
+	$('#curvetext').empty();
+	$('#curve_chart').empty();
 });
