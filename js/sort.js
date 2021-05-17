@@ -1,4 +1,16 @@
 function sortTable(n,id) {
+  $( "#sort1" ).removeClass( "headerSortDown" );
+  $( "#sort1" ).removeClass( "headerSortUp" );
+  $( "#sort2" ).removeClass( "headerSortDown" );
+  $( "#sort2" ).removeClass( "headerSortUp" );
+  $( "#sort3" ).removeClass( "headerSortDown" );
+  $( "#sort3" ).removeClass( "headerSortUp" );
+  $( "#sort4" ).removeClass( "headerSortDown" );
+  $( "#sort4" ).removeClass( "headerSortUp" );
+  $( "#sort5" ).removeClass( "headerSortDown" );
+  $( "#sort5" ).removeClass( "headerSortUp" );
+  $( "#sort6" ).removeClass( "headerSortDown" );
+  $( "#sort6" ).removeClass( "headerSortUp" );  
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("table");
   switching = true;
@@ -59,6 +71,99 @@ function sortTable(n,id) {
 
 function sorttable(n,id) {
 var table, rows, switching, i, x1, x2, y1, y2, x, y, shouldSwitch, dir, switchcount = 0;
+
+if (id == '#sort') {
+  $( "#sort1" ).removeClass( "headerSortDown" );
+  $( "#sort1" ).removeClass( "headerSortUp" );
+  $( "#sort2" ).removeClass( "headerSortDown" );
+  $( "#sort2" ).removeClass( "headerSortUp" );
+  $( "#sort3" ).removeClass( "headerSortDown" );
+  $( "#sort3" ).removeClass( "headerSortUp" );
+  $( "#sort4" ).removeClass( "headerSortDown" );
+  $( "#sort4" ).removeClass( "headerSortUp" );
+  $( "#sort5" ).removeClass( "headerSortDown" );
+  $( "#sort5" ).removeClass( "headerSortUp" );
+  $( "#sort6" ).removeClass( "headerSortDown" );
+  $( "#sort6" ).removeClass( "headerSortUp" );  
+} else if (id == '#sort1') {
+  $( "#sort" ).removeClass( "headerSortDown" );
+  $( "#sort" ).removeClass( "headerSortUp" );
+  $( "#sort2" ).removeClass( "headerSortDown" );
+  $( "#sort2" ).removeClass( "headerSortUp" );
+  $( "#sort3" ).removeClass( "headerSortDown" );
+  $( "#sort3" ).removeClass( "headerSortUp" );
+  $( "#sort4" ).removeClass( "headerSortDown" );
+  $( "#sort4" ).removeClass( "headerSortUp" );
+  $( "#sort5" ).removeClass( "headerSortDown" );
+  $( "#sort5" ).removeClass( "headerSortUp" );
+  $( "#sort6" ).removeClass( "headerSortDown" );
+  $( "#sort6" ).removeClass( "headerSortUp" );
+} else if (id == '#sort2') {
+  $( "#sort1" ).removeClass( "headerSortDown" );
+  $( "#sort1" ).removeClass( "headerSortUp" );
+  $( "#sort" ).removeClass( "headerSortDown" );
+  $( "#sort" ).removeClass( "headerSortUp" );
+  $( "#sort3" ).removeClass( "headerSortDown" );
+  $( "#sort3" ).removeClass( "headerSortUp" );
+  $( "#sort4" ).removeClass( "headerSortDown" );
+  $( "#sort4" ).removeClass( "headerSortUp" );
+  $( "#sort5" ).removeClass( "headerSortDown" );
+  $( "#sort5" ).removeClass( "headerSortUp" );
+  $( "#sort6" ).removeClass( "headerSortDown" );
+  $( "#sort6" ).removeClass( "headerSortUp" );
+} else if (id == '#sort3') {
+  $( "#sort1" ).removeClass( "headerSortDown" );
+  $( "#sort1" ).removeClass( "headerSortUp" );
+  $( "#sort2" ).removeClass( "headerSortDown" );
+  $( "#sort2" ).removeClass( "headerSortUp" );
+  $( "#sort" ).removeClass( "headerSortDown" );
+  $( "#sort" ).removeClass( "headerSortUp" );
+  $( "#sort4" ).removeClass( "headerSortDown" );
+  $( "#sort4" ).removeClass( "headerSortUp" );
+  $( "#sort5" ).removeClass( "headerSortDown" );
+  $( "#sort5" ).removeClass( "headerSortUp" );
+  $( "#sort6" ).removeClass( "headerSortDown" );
+  $( "#sort6" ).removeClass( "headerSortUp" );
+} else if (id == '#sort4') {
+  $( "#sort1" ).removeClass( "headerSortDown" );
+  $( "#sort1" ).removeClass( "headerSortUp" );
+  $( "#sort2" ).removeClass( "headerSortDown" );
+  $( "#sort2" ).removeClass( "headerSortUp" );
+  $( "#sort3" ).removeClass( "headerSortDown" );
+  $( "#sort3" ).removeClass( "headerSortUp" );
+  $( "#sort" ).removeClass( "headerSortDown" );
+  $( "#sort" ).removeClass( "headerSortUp" );
+  $( "#sort5" ).removeClass( "headerSortDown" );
+  $( "#sort5" ).removeClass( "headerSortUp" );
+  $( "#sort6" ).removeClass( "headerSortDown" );
+  $( "#sort6" ).removeClass( "headerSortUp" );
+} else if (id == '#sort5') {
+  $( "#sort1" ).removeClass( "headerSortDown" );
+  $( "#sort1" ).removeClass( "headerSortUp" );
+  $( "#sort2" ).removeClass( "headerSortDown" );
+  $( "#sort2" ).removeClass( "headerSortUp" );
+  $( "#sort3" ).removeClass( "headerSortDown" );
+  $( "#sort3" ).removeClass( "headerSortUp" );
+  $( "#sort" ).removeClass( "headerSortDown" );
+  $( "#sort" ).removeClass( "headerSortUp" );
+  $( "#sort4" ).removeClass( "headerSortDown" );
+  $( "#sort4" ).removeClass( "headerSortUp" );
+  $( "#sort6" ).removeClass( "headerSortDown" );
+  $( "#sort6" ).removeClass( "headerSortUp" );
+} else if (id == '#sort6') {
+  $( "#sort1" ).removeClass( "headerSortDown" );
+  $( "#sort1" ).removeClass( "headerSortUp" );
+  $( "#sort2" ).removeClass( "headerSortDown" );
+  $( "#sort2" ).removeClass( "headerSortUp" );
+  $( "#sort3" ).removeClass( "headerSortDown" );
+  $( "#sort3" ).removeClass( "headerSortUp" );
+  $( "#sort" ).removeClass( "headerSortDown" );
+  $( "#sort" ).removeClass( "headerSortUp" );
+  $( "#sort5" ).removeClass( "headerSortDown" );
+  $( "#sort5" ).removeClass( "headerSortUp" );
+  $( "#sort4" ).removeClass( "headerSortDown" );
+  $( "#sort4" ).removeClass( "headerSortUp" );
+}
 
 table = document.getElementById("table");
 switching = true;
