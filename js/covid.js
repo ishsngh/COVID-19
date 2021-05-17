@@ -1,16 +1,34 @@
+$.getJSON("https://api.covid19india.org/data.json", function(coviddata){
+$.each(coviddata.statewise, function(key, value){
+	if (value.state == "Total") {
+	active= parseInt(value.active);
+	recovered= parseInt(value.recovered);
+	deaths= parseInt(value.deaths);
+	}	
+});
+
 google.charts.load("current", {packages:["corechart"]});
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
 	var data = google.visualization.arrayToDataTable([
 	  ['Stats', 'Covid-19', { role: 'style' }],
-	  ["Active cases",     80958, 'opacity: 0.5'],
-	  ['Recovered',      61052, 'opacity: 0.5'],
-	  ['Deaths',  4187, 'opacity: 0.5']
+	  ["Active cases",     active, "opacity: 0.5"],
+	  ['Recovered',      recovered, 'opacity: 0.5'],
+	  ['Deaths',  deaths, 'opacity: 0.5']
 	]);
 
+var width1= parseInt($(window).width()*0.9);
+if (width1 > 400) {
+width1=400 }
 	var options = {
-	  width:"350",
-      height:"350",
+  width: width1,
+  height: width1,
+  	  title: 'Total Cases',
+	    titleTextStyle: {
+		color: "#ffffff",
+		font: 'archia',
+		// fontSize: 20,
+	},
 	  pieHole: 0.5,
 	  backgroundColor: { fill:'transparent'},
 	  chartArea:{
@@ -26,20 +44,10 @@ google.charts.load("current", {packages:["corechart"]});
 	  },
 	  legend: {position: 'bottom', textStyle: {color: 'gray'}},
 	     
-	  pieSliceText: 'none',
+	  pieSliceText: 'label',
 	};
 
 	var chart = new google.visualization.PieChart(document.getElementById('covid19'));
 	chart.draw(data, options);
   }
-
-$(document).ready(function(){
-	$.getJSON("https://api.covid19india.org/data.json", function(data){
-		var stats = '';
-		$.each(data.statewise, function(key, value){
-			if (value.state == "Total") {
-			stats += '["stats",' + value.confirmed + '],';
-			}	
-		});
-	});
 });	

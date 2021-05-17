@@ -1,4 +1,5 @@
 var lightmode = document.getElementById('inner-switch');
+var stateclass = {};
 
 $( ".inner-switch" ).on("click", function() {
     if( $( "body" ).hasClass( "dark" )) {
@@ -172,3 +173,38 @@ if (localStorage.getItem('lightmode') === 'true') {
 	  $( "body" ).removeClass( "dark" );
       $( "html" ).removeClass( "dark" );
 }
+
+function getdata(state) {
+stateclass = state.id;
+$( "html" ).addClass(state.id);
+$( "#world1" ).addClass('hide');
+$( "#mainback" ).removeClass('hide');
+$( "#statetext" ).addClass('hide');
+$( "#space" ).addClass('hide');
+$("#table").empty();
+$("#foot").empty();
+$("#covid4").empty();
+$("#covid3").addClass('hide');
+$("#table").empty();
+$("#title").empty();
+$("#tests").empty();
+states();
+}
+
+$( "#goback" ).on("click", function() {
+$( "#mainback" ).addClass('hide');
+$( "#space" ).removeClass('hide');
+$( "#statetext" ).removeClass('hide');
+$( "#world1" ).removeClass('hide');
+$( "#covid3" ).removeClass('hide');
+$( "html" ).removeClass(stateclass);
+$("#table").empty();
+$("#title").empty();
+$("#tests").empty();
+$("#world").empty();
+$("#covid4").empty();
+$("#covid3").empty();
+$("#foot").empty();
+$("#tabletitle").empty();
+data();
+});

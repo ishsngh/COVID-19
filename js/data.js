@@ -1,3 +1,4 @@
+function data() {
 $.getJSON("https://api.covid19india.org/data.json", function(data){
 var sign= "+";
 	var tabledata = '';
@@ -8,7 +9,7 @@ var sign= "+";
 		if (value.confirmed > 0) {
 		tabledata += '<tr>';
 		if (value.state != "Total") {
-		tabledata += '<td class="tdgrey" style="font-weight: 600;"><a href="states/'+ value.state+ '.html">' + value.state+'</a></td>';
+		tabledata += '<td class="tdgrey click" style="font-weight: 600;" id="'+ value.statecode+'" onclick="getdata(this)">' + value.state+'</td>';
 		if (value.deltaconfirmed > 0) {
 		tabledata += '<td class="tdpur"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">+'+ value.deltaconfirmed + '&nbsp;</div><div class="confirm">' + value.confirmed+'</td>';}
 		else {
@@ -202,4 +203,24 @@ $.getJSON("https://corona.lmao.ninja/v2/all", function(data){
 	});
 		$('#tests').append(world);
 });
+var tabletitle=''
+tabletitle += '<th class="tdgrey2" onclick="sortTable(0,\'#sort\')">';
+tabletitle += '<div id="sort" class="sticky heading-content">State/UT&nbsp;&nbsp;</div>';
+tabletitle += '</th>';
+tabletitle += '<th class="tdpur2" onclick="sorttable(1,\'#sort1\')">';
+tabletitle += '<div id="sort1" class="sticky heading-content headerSortDown">Confirmed&nbsp;&nbsp;</div>';
+tabletitle += '</th>';
+tabletitle += '<th class="tdbl2" onclick="sorttable(2,\'#sort2\')">';
+tabletitle += '<div id="sort2" class="sticky heading-content">Active&nbsp;&nbsp;</div>';
+tabletitle += '</th>';
+tabletitle += '<th class="tdgr2" onclick="sorttable(3,\'#sort3\')">';
+tabletitle += '<div id="sort3" class="sticky heading-content">Recovered&nbsp;&nbsp;</div>';
+tabletitle += '</th>';
+tabletitle += '<th class="tdred2" onclick="sorttable(4,\'#sort4\')">';
+tabletitle += '<div id="sort4" class="sticky heading-content">Deaths&nbsp;&nbsp;</div>';
+tabletitle += '</th>';
 
+$('#tabletitle').append(tabletitle);
+}
+
+data();

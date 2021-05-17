@@ -1,88 +1,104 @@
+$.getJSON("https://api.covid19india.org/data.json", function(coviddata){
+var arrValues = [['Date', 'Confirmed','active','recovered','deaths']];
+var take=0;
+var today = new Date();
+var dd = today.getDate();
+
+var mm = today.getMonth(); 
+var yyyy = today.getFullYear();
+if(dd<10) 
+{
+	dd='0'+dd;
+} 
+
+if(mm<10) 
+{
+	mm='0'+mm;
+} 
+month = yyyy + '-' + mm + '-' + dd;
+$.each(coviddata.cases_time_series, function(key, value){
+if (value.dateymd == month || take == 1) {
+	arrValues.push([value.date, parseInt(value.dailyconfirmed),parseInt(value.dailyconfirmed - value.dailyrecovered - value.dailydeceased),parseInt(value.dailyrecovered),parseInt(value.dailydeceased)]);
+	take=1
+}
+});
 google.charts.load('current', {'packages':['corechart']});
 google.charts.setOnLoadCallback(drawChart);
 
 function drawChart() {
-var data = google.visualization.arrayToDataTable([
-  ['Date', 'Cases'],
-  ['24/03',74],
-  ['25/03',86],
-  ['26/03',78],
-  ['27/03',160],
-  ['28/03',143],
-  ['29/03',110],
-  ['30/03',208],
-  ['31/03',272],
-  ['1/04',379],
-  ['2/04',477],
-  ['3/04',563],
-  ['4/04',566],
-  ['5/04',605],
-  ['6/04',489],
-  ['7/04',573],
-  ['8/04',565],
-  ['9/04',813],
-  ['10/04',869],
-  ['11/04',854],
-  ['12/04',758],
-  ['13/04',1243],
-  ['14/04',1035],
-  ['15/04',886],
-  ['16/04',1061],
-  ['17/04',922],
-  ['18/04',1371],
-  ['19/04',1580],
-  ['20/04',1239],
-  ['21/04',1537],
-  ['22/04',1292],
-  ['23/04',1667],
-  ['24/04',1408],
-  ['25/04',1835],
-  ['26/04',1607],
-  ['27/04',1568],
-  ['28/04',1902],
-  ['29/04',1705],
-  ['30/04',1801],
-  ['1/05',2396],
-  ['2/05',2564],
-  ['3/05',2952],
-  ['4/05',3656],
-  ['5/05',2971],
-  ['6/05',3602],
-  ['7/05',3344],
-  ['8/05',3339],
-  ['9/05',3175],
-  ['10/05',4311],
-  ['11/05',3592],
-  ['12/05',3526],
-  ['13/05',3726],
-  ['14/05',3991],
-  ['15/05',3808],
-  ['16/05',4794],
-  ['17/05',5049],
-  ['18/05',4628],
-  ['19/05',6154],
-  ['20/05',5720],
-  ['21/05',6023],
-  ['22/05',6536],
-  ['23/05',6663],
-  ['24/05',7113],
-  ['25/05',6414],
-  
-]);
+var data = google.visualization.arrayToDataTable(arrValues);
+
+var width1= parseInt($(window).width()*0.9);
+if (width1 > 400 * 16 / 9) {
+width1=400 * 16 / 9; }
+
+var h1= parseInt($(window).height()*0.9);
+if (h1 > 400) {
+h1=400; }
 
 var options = {
   backgroundColor: { fill: 'transparent' },
   curveType: 'function',
+  width: width1,
+  height: h1,
   hAxis: {
+	textPosition: 'none',
+	baseline: 1,
+		  gridlines: {
+    count: 1
+  },
     textStyle:{color: 'gray'}
 },
+ gridlines: {
+                color: 'none'
+            },
   vAxis: {
-    textStyle:{color: 'gray'}
+    textStyle:{color: 'gray'},
+	baseline: 0,
+	  gridlines: {
+    count: 1
+  }
 },
   legend: {position: 'bottom', textStyle: {color: 'gray'}},
+  tooltip: { trigger: 'none' },
 };
 
 var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
+	  google.visualization.events.addListener(chart, 'select', function () {
+var selection = chart.getSelection();
+$.getJSON("https://api.covid19india.org/data.json", function(coviddata){
+if (selection.length) {
+  var name = data.getValue(selection[0].row, 0);
+  var value1 = data.getValue(selection[0].row, 1);
+  var dats='';
+	dats += 'Date: ' + name;
+	dats += '<br>Confirmed: ' + value1;
+  $( "#curvetext" ).addClass('curve');
+  $('#curvetext').empty().append(dats);
+}
+});
+});
+
+    google.visualization.events.addListener(chart, 'onmouseover', function(entry) {
+$.getJSON("https://api.covid19india.org/data.json", function(coviddata){
+  var name = data.getValue(entry.row, 0);
+  var value1 = data.getValue(entry.row, 1);
+  var value2 = data.getValue(entry.row, 2);
+  var value3 = data.getValue(entry.row, 3);
+  var value4 = data.getValue(entry.row, 4);
+  var dats='';
+	dats += 'Date: ' + name;
+	dats += '<br>Confirmed: ' + value1;
+	dats += '<br>Active: ' + value2;
+	dats += '<br>Recovered: ' + value3;
+	dats += '<br>Deaths: ' + value4;
+  $( "#curvetext" ).addClass('curve');
+  $('#curvetext').empty().append(dats);
+});
+})
+
 chart.draw(data, options);
 }
+});
+
