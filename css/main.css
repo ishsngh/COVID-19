@@ -472,7 +472,7 @@ background-color: rgba(108,117,125,.3);
 table {
   display: table;
   overflow-x: auto;
-  position: relative;
+  table-layout: fixed;
   margin-top: 4rem;
   margin-bottom: -10rem;
   width: 90%;
@@ -494,12 +494,23 @@ table thead {
   text-align: left;
   border-radius: 3px;
   font-size: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+tbody tr:nth-child(1){
+  position: sticky;
+  left: 0;
+  z-index: 10;
 }
 
 table thead th {
   padding: .5rem;
   padding-left: .5rem;
   padding-right: .5rem;
+  position: sticky;
+  top: 30;
   border-radius: 3px;
   cursor: pointer;
   white-space: nowrap;
@@ -508,7 +519,6 @@ table thead th {
 table thead th .heading-content {
   display: flex;
   justify-content: space-between;
-  position: relative;
   flex-direction: row;
   height: 1.2rem;
 }
@@ -568,6 +578,12 @@ table tbody td {
 
 table tbody td:nth-child(2) {
   white-space: nowrap;
+}
+
+table thead td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 2;
 }
 
 table tbody td:nth-child(3) {
@@ -636,6 +652,9 @@ table .affected-count {
 	.active {
 		font-size: 1rem;
 	}
+	.dis .data {
+		font-size: 1rem;
+	}
 	.recover {
 		font-size: 1rem;
 	}
@@ -697,6 +716,10 @@ table {
 }
 
 .info .active {
+ padding: 10px .7rem;
+}
+
+.dis .data {
  padding: 10px .7rem;
 }
 
@@ -1073,3 +1096,91 @@ input:checked + .slider:before {
 	display: inline-block;
 }
 
+#searchbar {
+  width: 100%;
+  font-size: 16px;
+  box-shadow: 0 8px 12px 0 rgba(0,0,0,0.3);
+  padding: 12px 20px 12px 20px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#search {
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 0;
+}
+
+#search li {
+  border: 1px solid #ddd;
+  cursor: pointer;
+  text-align: left;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#searchbar:focus {
+   outline: none;
+}
+
+
+#search li a:hover:not(.header) {
+  background-color: #eee;
+}
+
+.dis {
+	display: inline-block;
+	padding: 10px 2rem;
+	align-items: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.dis .data {
+	border-radius: 5pc;
+	padding: 10px 2rem;
+	align-items: center;
+	border-radius: 5px;
+	padding-bottom: -10px;
+}
+
+.bor {
+	border-radius: 5px;
+	border: 1px solid #ccc;
+}
+
+.dishead {
+	padding: 10px;
+	font-size: 20px;
+}
+
+.disbut {
+	display: inline-block;
+	font-size: 1rem;
+	margin-top: 5px;
+	border: 1px solid #ccc;
+	padding-right: 6px; 
+	padding-left: 6px; 
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.dispin {
+	font-size: 1rem;
+	margin-top: 5px;
+	border: 1px solid #ccc;
+	padding-right: 6px; 
+	padding-left: 6px; 
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.disin {
+	display: inline-block;
+}

@@ -171,16 +171,16 @@ function data() {
         var world = '';
         $.each(data, function(key, value) {
             if (key == "cases") {
-                world += '<div class="cases1"><b>Confirmed<br><div id="worldc" style="font-size:13px;"></div>' + value.toLocaleString('en-IN') + '</b><br></div>';
+                world += '<div class="cases1">Confirmed<br><div id="worldc" style="font-size:13px;"></div>' + value.toLocaleString('en-IN') + '<br></div>';
             }
             if (key == "active") {
-                world += '<div class="cases1"><b>Active Cases<br><div style="font-size:13px;">[--]</div>' + value.toLocaleString('en-IN') + '</b><br></div>';
+                world += '<div class="cases1">Active Cases<br><div style="font-size:13px;">[--]</div>' + value.toLocaleString('en-IN') + '<br></div>';
             }
             if (key == "recovered") {
-                world += '<div class="cases1"><b>Recoveries<br><div style="font-size:13px;">[--]</div>' + value.toLocaleString('en-IN') + '</b><br></div>';
+                world += '<div class="cases1">Recoveries<br><div style="font-size:13px;">[--]</div>' + value.toLocaleString('en-IN') + '<br></div>';
             }
             if (key == "deaths") {
-                world += '<div class="cases1"><b>Total Deaths<br><div id="worldd" style="font-size:13px;"></div>' + value.toLocaleString('en-IN') + '</b><br></div>';
+                world += '<div class="cases1">Total Deaths<br><div id="worldd" style="font-size:13px;"></div>' + value.toLocaleString('en-IN') + '<br></div>';
             }
         });
         $('#world').append(world);
@@ -201,28 +201,28 @@ function data() {
         var world = '';
         $.each(data, function(key, value) {
             if (key == "tests") {
-                world += '<div class="cases1"><b>Total Tests<br><div style="font-size:13px;">(Worldometers)</div>' + value.toLocaleString('en-IN') + '</b><br></div>';
+                world += '<div class="cases1">Total Tests<br><div style="font-size:13px;">(Worldometers)</div>' + value.toLocaleString('en-IN') + '<br></div>';
             }
             if (key == "testsPerOneMillion") {
-                world += '<div class="cases1"><b>Tests /1M<br><div style="font-size:13px;">(Million)</div>' + value.toLocaleString('en-IN') + '</b><br></div>';
+                world += '<div class="cases1">Tests /1M<br><div style="font-size:13px;">(Million)</div>' + value.toLocaleString('en-IN') + '<br></div>';
             }
         });
         $('#tests').append(world);
     });
     var tabletitle = ''
-    tabletitle += '<th class="tdgrey2" onclick="sortTable(0,\'#sort\')">';
+    tabletitle += '<th class="tdgrey2 sticky" onclick="sortTable(0,\'#sort\')">';
     tabletitle += '<div id="sort" class="sticky heading-content">State/UT&nbsp;&nbsp;</div>';
     tabletitle += '</th>';
-    tabletitle += '<th class="tdpur2" onclick="sorttable(1,\'#sort1\')">';
+    tabletitle += '<th class="tdpur2 sticky" onclick="sorttable(1,\'#sort1\')">';
     tabletitle += '<div id="sort1" class="sticky heading-content headerSortDown">Confirmed&nbsp;&nbsp;</div>';
     tabletitle += '</th>';
-    tabletitle += '<th class="tdbl2" onclick="sorttable(2,\'#sort2\')">';
+    tabletitle += '<th class="tdbl2 sticky" onclick="sorttable(2,\'#sort2\')">';
     tabletitle += '<div id="sort2" class="sticky heading-content">Active&nbsp;&nbsp;</div>';
     tabletitle += '</th>';
-    tabletitle += '<th class="tdgr2" onclick="sorttable(3,\'#sort3\')">';
+    tabletitle += '<th class="tdgr2 sticky" onclick="sorttable(3,\'#sort3\')">';
     tabletitle += '<div id="sort3" class="sticky heading-content">Recovered&nbsp;&nbsp;</div>';
     tabletitle += '</th>';
-    tabletitle += '<th class="tdred2" onclick="sorttable(4,\'#sort4\')">';
+    tabletitle += '<th class="tdred2 sticky onclick="sorttable(4,\'#sort4\')">';
     tabletitle += '<div id="sort4" class="sticky heading-content">Deaths&nbsp;&nbsp;</div>';
     tabletitle += '</th>';
 

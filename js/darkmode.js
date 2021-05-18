@@ -90,10 +90,11 @@ function getdata(state) {
 	chartlinestate1();
     states();
 	$('#curvetext').empty();
+	$("#curvetext").removeClass('curve');
 	$('#curve_chart').empty();
 }
 
-$("#goback").on("click", function() {
+function dataempty() {
     $("#mainback").addClass('hide');
     $("#space").removeClass('hide');
     $("#statetext").removeClass('hide');
@@ -114,6 +115,90 @@ $("#goback").on("click", function() {
     data();
 	covidpie();
 	chartline2();
+	chartstates();
 	$('#curvetext').empty();
+	$("#curvetext").removeClass('curve');
 	$('#curve_chart').empty();
-});
+}
+
+function search() {
+	var tr=0;
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("searchbar");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("search");
+    li = ul.getElementsByTagName("li");
+    for (i = 0; i < li.length; i++) {
+        txtValue = li[i].textContent || li[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+		if ((filter != '') && (tr < 11)) {
+            li[i].style.display = "";
+			tr += 1;
+		} else {
+            li[i].style.display = "none";
+        }		
+        } else {
+            li[i].style.display = "none";
+        }
+    }
+}
+
+function dataempty1() {
+    $("#mainback").addClass('hide');
+    $("#space").removeClass('hide');
+    $("#statetext").removeClass('hide');
+    $("#world1").removeClass('hide');
+    $("#covid3").removeClass('hide');
+    $("#table").empty();
+    $("#title").empty();
+    $("#tests").empty();
+    $("#world").empty();
+    $("#covid4").empty();
+    $("#covid3").empty();
+    $("#foot").empty();
+	$("#covid").empty();
+	$('#covidcases').empty();
+	$("#covid19").empty();
+	$('#curvetext').empty();
+	$("#curvetext").removeClass('curve');
+	$('#curve_chart').empty();
+}
+
+function closedis() {
+    if ($(".dis .data").hasClass("hide")) {
+        $(".dis .data").removeClass("hide");
+		$(".dis .data").addClass("disin");
+		$("#dispin").removeClass("hide");
+		$("#dispin").addClass("disin");
+		document.getElementById("disclose").innerHTML = "ᐃ";
+    } else {
+        $(".dis .data").addClass("hide");
+		$(".dis .data").removeClass("disin");
+		$("#dispin").addClass("hide");
+		$("#dispin").removeClass("disin");
+		document.getElementById("disclose").innerHTML = "ᐁ";
+    }
+}
+
+function pin(x) {
+	var district=x.getAttribute("dis");
+	var state=x.getAttribute("sta");
+    if ($("body").hasClass("pin")) {
+        window.localStorage.setItem('pind', '');
+		//window.localStorage.setitem('pins', '');
+		$("body").removeClass("pin");
+		document.getElementById("dispin").innerHTML = "📌 pin";
+    } else {
+        $("body").addClass("pin");
+        window.localStorage.setItem('pind', String(district+' '+state));
+		//window.localStorage.setitem('pins', String(state));
+		document.getElementById("dispin").innerHTML = "📌 unpin";
+    }
+}
+
+var width1 = parseInt($(window).width() * 0.8);
+if (width1 > 500) {
+	width1 = 500
+}
+$("#searchbar").width(width1);
+$("#search").width(width1);

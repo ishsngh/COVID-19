@@ -55,6 +55,9 @@
 			    </div>
 			</div>
 				</b></div>
+<br><br><input type="text" id="searchbar" onkeyup="search()" placeholder="Search for States , District.." title="Search Bar">
+<ul id="search">
+</ul>
 	<br>
 	<br>
 	<div class="text"> COVID-19 </div>
@@ -71,8 +74,10 @@
 		<br>
 	</div>
 	<div id="mainback" class="hide">
-		<div id="goback" class="Level fadeInUp click back" style="animation-delay: 0.6s;">Go Back</div>
+		<div id="goback" class="Level fadeInUp click back" onclick="dataempty()" style="animation-delay: 0.6s;">Go Back</div>
 	</div>
+	<div class='dis'>
+	<div id="coviddis" class="Level fadeInUp" style="animation-delay: 0.6s;"> </div></div>
 	<div id="covid4" class="Level fadeInUp" style="animation-delay: 0.6s;"> </div>
 	<br>
 	<div id="world1" class="Level fadeInUp" style="animation-delay: 0.4s; overflow-x: hidden;">
@@ -100,7 +105,7 @@
 <br>
 <table id="covid5">
 	<thead>
-		<tr id="tabletitle"> </tr>
+		<tr id="tabletitle" class="sticky"> </tr>
 	</thead>
 	<tbody id="table"> </tbody>
 	<tfoot id="foot"> </tfoot>
@@ -196,9 +201,9 @@
 </div>
 <h1 align="center">Line Chart</h1>
 <h2 align="center">Total cases</h2>
-<div class="chart" style="margin-top: -10px; display: flex;">
-	<div id="curve_chart"></div>
-	<div id="curvetext"></div>
+<div class="chart" style="margin-top: -10px; display: flex; position: relative;">
+	<div id="curve_chart" style="position: static;"></div>
+	<div id="curvetext" style="overflow-x: auto;"></div>
 </div>
 </div>
 <section class="help">

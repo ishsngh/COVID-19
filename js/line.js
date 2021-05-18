@@ -85,17 +85,21 @@ $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
 
         google.visualization.events.addListener(chart, 'select', function() {
             var selection = chart.getSelection();
-            $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
                 if (selection.length) {
                     var name = data.getValue(selection[0].row, 0);
                     var value1 = data.getValue(selection[0].row, 1);
+					var value2 = data.getValue(selection[0].row, 2);
+					var value3 = data.getValue(selection[0].row, 3);
+					var value4 = data.getValue(selection[0].row, 4);
                     var dats = '';
-                    dats += 'Date: ' + name;
-                    dats += '<br>Confirmed: ' + value1;
+                dats += 'Date: ' + name;
+                dats += '<br>Confirmed: ' + value1;
+                dats += '<br>Active: ' + value2;
+                dats += '<br>Recovered: ' + value3;
+                dats += '<br>Deaths: ' + value4;
                     $("#curvetext").addClass('curve');
                     $('#curvetext').empty().append(dats);
                 }
-            });
         });
 
         google.visualization.events.addListener(chart, 'onmouseover', function(entry) {

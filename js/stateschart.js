@@ -8,15 +8,22 @@ $.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data1) {
     ];
 	$.each(data1, function(x, y) {
 	if (x == stateclass) {
+	try {
 	arrValues2.push(['Active Cases', parseInt(data1[x].total.confirmed - data1[x].total.recovered - data1[x].total.deceased)]);
 	arrValues2.push(['Recovered', data1[x].total.recovered]);
 	arrValues2.push(['Deaths', data1[x].total.deceased]);
+        } catch(e) {
+		  console.log("Cannot Load information of " + x)
+		}
 	}
     $.each(data1[x].districts, function(key, value) {
         if (x == stateclass) {
-		if (key != 'Other State') {
+		try {
             arrValues1.push([key, parseInt(data1[x].districts[key].total.confirmed)]);
-        }}
+        } catch(e) {
+		  console.log("Cannot Load information of " + key)
+		}
+		}
     });
 	});
 
@@ -74,19 +81,20 @@ $.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data1) {
             $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
                 if (selection.length) {
                     var name = data.getValue(selection[0].row, 0);
-                    var dats = '';
-                    $.each(coviddata.statewise, function(key, value) {
-                        if (value.state == name) {
-                            dats += 'State: ' + name;
-                            dats += '<br>Confirmed: ' + parseInt(value.confirmed);
-                            dats += '<br>Active: ' + parseInt(value.active);
-                            dats += '<br>Recovered: ' + parseInt(value.recovered);
-                            dats += '<br>Deaths: ' + parseInt(value.deaths);
-                        }
-                    });
-                    $("#covidcases").addClass('back');
-                    $('#covidcases').empty().append(dats);
-                }
+                 var dats = '';
+				$.each(data1, function(x, y) {
+				$.each(data1[x].districts, function(key, value) {
+                    if (key == name) {
+                        dats += 'District: ' + name;
+                        dats += '<br>Confirmed: ' + parseInt(data1[x].districts[key].total.confirmed);
+						dats += '<br>Recovered: ' + parseInt(data1[x].districts[key].total.recovered);
+						dats += '<br>Deaths: ' + parseInt(data1[x].districts[key].total.deceased);
+                    }
+                });
+				});
+                $("#covidcases").addClass('back');
+                $('#covidcases').empty().append(dats);
+				}
             });
         });
 
@@ -186,9 +194,14 @@ $.getJSON("https://api.covid19india.org/v4/min/timeseries.min.json", function(da
 		$.each(data2[x].dates, function(key, value) {
 		if (x == stateclass) {
         if (key == month || take == 1) {
-            arrValues.push([key, data2[x].dates[key].delta.confirmed, parseInt(data2[x].dates[key].delta.confirmed - data2[x].dates[key].delta.recovered - data2[x].dates[key].delta.deceased), parseInt(data2[x].dates[key].delta.recovered), parseInt(data2[x].dates[key].delta.deceased)]);
-            take = 1
-        }}
+		take = 1;
+		try {
+		arrValues.push([key, parseInt(data2[x].dates[key].delta.confirmed), parseInt(data2[x].dates[key].delta.confirmed - data2[x].dates[key].delta.recovered - data2[x].dates[key].delta.deceased), parseInt(data2[x].dates[key].delta.recovered), parseInt(data2[x].dates[key].delta.deceased)]);
+        } catch(e) {
+		  console.log("Cannot Load information of " + key)
+		}
+        }
+		}
     });
 	});
     google.charts.load('current', {
@@ -253,17 +266,21 @@ $.getJSON("https://api.covid19india.org/v4/min/timeseries.min.json", function(da
 
         google.visualization.events.addListener(chart, 'select', function() {
             var selection = chart.getSelection();
-            $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
                 if (selection.length) {
                     var name = data.getValue(selection[0].row, 0);
                     var value1 = data.getValue(selection[0].row, 1);
+					var value2 = data.getValue(selection[0].row, 2);
+					var value3 = data.getValue(selection[0].row, 3);
+					var value4 = data.getValue(selection[0].row, 4);
                     var dats = '';
-                    dats += 'Date: ' + name;
-                    dats += '<br>Confirmed: ' + value1;
+                dats += 'Date: ' + name;
+                dats += '<br>Confirmed: ' + value1;
+                dats += '<br>Active: ' + value2;
+                dats += '<br>Recovered: ' + value3;
+                dats += '<br>Deaths: ' + value4;
                     $("#curvetext").addClass('curve');
                     $('#curvetext').empty().append(dats);
                 }
-            });
         });
 
         google.visualization.events.addListener(chart, 'onmouseover', function(entry) {
