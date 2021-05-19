@@ -169,10 +169,10 @@ function states() {
 			}
             });
             if ($("html").hasClass(x)) {
-                $('#covid4').append(updata);
-                $('#foot').append(tabledata1);
-                $('#table').append(tabledata);
-                $('#title').append(title);
+                $('#covid4').empty().append(updata);
+                $('#foot').empty().append(tabledata1);
+                $('#table').empty().append(tabledata);
+                $('#title').empty().append(title);
                 sorttable(1);
                 return true;
             }
@@ -183,6 +183,21 @@ function states() {
 
 
     var tabletitle = ''
+    tabletitle += '<th class="tdgrey2 sticky" onclick="sortTable(0,\'#sort\')">';
+    tabletitle += '<div id="sort" class="sticky heading-content">State/UT&nbsp;&nbsp;</div>';
+    tabletitle += '</th>';
+    tabletitle += '<th class="tdpur2 sticky" onclick="sorttable(1,\'#sort1\')">';
+    tabletitle += '<div id="sort1" class="sticky heading-content headerSortDown">Confirmed&nbsp;&nbsp;</div>';
+    tabletitle += '</th>';
+    tabletitle += '<th class="tdbl2 sticky" onclick="sorttable(2,\'#sort2\')">';
+    tabletitle += '<div id="sort2" class="sticky heading-content">Active&nbsp;&nbsp;</div>';
+    tabletitle += '</th>';
+    tabletitle += '<th class="tdgr2 sticky" onclick="sorttable(3,\'#sort3\')">';
+    tabletitle += '<div id="sort3" class="sticky heading-content">Recovered&nbsp;&nbsp;</div>';
+    tabletitle += '</th>';
+    tabletitle += '<th class="tdred2 sticky onclick="sorttable(4,\'#sort4\')">';
+    tabletitle += '<div id="sort4" class="sticky heading-content">Deaths&nbsp;&nbsp;</div>';
+    tabletitle += '</th>';
     tabletitle += '<th class="tdpk2" onclick="sorttable(5,\'#sort5\')">';
     tabletitle += '<div id="sort5" class="sticky heading-content">Total Tests&nbsp;&nbsp;</div>';
     tabletitle += '</th>';
@@ -190,7 +205,7 @@ function states() {
     tabletitle += '<div id="sort6" class="sticky heading-content">Vaccination&nbsp;&nbsp;</div>';
     tabletitle += '</th>';
 
-    $('#tabletitle').append(tabletitle);
+    $('#tabletitle').empty().append(tabletitle);
 }
 
 function name(x) {
@@ -275,9 +290,9 @@ function finddata() {
 $.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data) {
 	var search=''
 	$.each(data, function(x, y) {
-		search += '<li class="state" onclick="searchdata(this)" id="'+ x +'">'+name(x)+'</li>'
+		search += '<li class="state" value="'+name(x)+'" onclick="searchdata(this)" id="'+ x +'">'+name(x)+'</li>'
 		$.each(data[x].districts, function(key, value) {
-			search += '<li class="district" state="'+ name(x) +'" stateid="'+ x +'" onclick="searchdata(this)" id="'+ key +'">'+key +'</li>'
+			search += '<li class="district" value="'+key+'" state="'+ name(x) +'" stateid="'+ x +'" onclick="searchdata(this)" id="'+ key +'">'+key +', '+ name(x) +'</li>'
 		});
 	});
 	$('#search').append(search);
@@ -300,7 +315,6 @@ function searchdata(data) {
 		$("body").removeClass("pin");
 		district(data.id,data.getAttribute("stateid"));
 	}
-	$('#search').append(search);
 }
 
 function district(y,x) {
@@ -334,7 +348,7 @@ $.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data) {
 			updata += '<div class="data">Total Deaths<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].districts[y].total.deceased).toLocaleString('en-IN') + '<br></div>';
 		}
 		if (data[x].districts[y].delta.recovered != undefined) {
-			updata += '<div class="cases5">Recoveries<br><div style="font-size:13px;">[+' + data[x].districts[y].delta.recovered + ']</div>' + parseInt(data[x].districts[y].total.recovered).toLocaleString('en-IN') + '<br></div>';
+			updata += '<div class="data">Recoveries<br><div style="font-size:13px;">[+' + data[x].districts[y].delta.recovered + ']</div>' + parseInt(data[x].districts[y].total.recovered).toLocaleString('en-IN') + '<br></div>';
 		} else {
 			updata += '<div class="data">Recoveries<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].districts[y].total.recovered).toLocaleString('en-IN') + '<br></div>';
 		}
@@ -366,14 +380,15 @@ $.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data) {
 	li = ul.getElementsByTagName("li");
 	for (i = 0; i < li.length; i++) {
 	li[i].style.display = "none";
-	}	
+	}
+	document.getElementById("searchbar").value = '';
 });
 }
 
 $(document).ready(function(){
 var go1 = localStorage.getItem('pind');
 if (go1 != '') {
-	sp=go1.split(" ")
+	sp=go1.split(",")
 	district(sp[0],sp[1]);
 	$("body").addClass("pin");
 }

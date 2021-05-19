@@ -4,10 +4,17 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title id="title"></title>
+	<title id="title">COVID-19 India</title>
 	<link href="https://fonts.googleapis.com/css?family=Product+Sans" rel="stylesheet" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'bn,en,hi,mr,ml,pa,sd,ta,ur', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+}
+</script>
+	<script type="text/javascript" src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+	<meta name="google-translate-customization" content="cf4fd9d6a9e017d5-7c969e45eba53879-g303b6a4c71095c23-1c"></meta>
 	<link rel="stylesheet" href="./css/main.css">
 	<link rel="stylesheet" href="./css/dark.css">
 	<link rel="stylesheet" href="./css/bt.css">
@@ -21,13 +28,27 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <header>
-	<div class="navbar" style="animation-delay: 0.0s; transition: all 0.2s ease-in-out 0s;"><b>
-		  <a href="index.html" class="now" >Home</a>
-		  <a href="sources.html"  >Sources</a>
-		  <a href="who.html"  >WHO</a>
-		  <a href="faqs.html" >FAQs</a>            
-		  <span class="inner-switch"></span>
-		</div></header>
+  <nav class="navbar">
+      <span class="inner-switch"></span>
+	  <li style="list-style-type: none; float: right;" id="google_translate_element"></li>
+    <div class="sitenavigation">
+      <span class="menu-icon">
+  <a href="#" class="menu example5"><span></span></a>
+      <div id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      </span>
+      <ul style="height: 60px;">
+        <li><a href="/">Home</a></li>
+        <li><a href="sources">Sources</a></li>
+        <li><a href="who">WHO</a></li>
+        <li><a href="faqs">FAQs</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
 <body style="animation-delay: 0.0s; transition: all .1s ease-in-out 0.1s;" class="dark">
 	<header>
 		<div class="Level fadeInUp" style="animation-delay: 0.5s;">
@@ -87,10 +108,6 @@
 			<div style="display: inline-block;" id="tests"></div>
 		</div>
 	</div>
-	<!--<div class="Level fadeInUp" style="animation-delay: 0.4s; overflow-x: hidden;">
-			<div id="free" class="info" style="justify-content: center; margin: 0 auto; position: relative; text-align: center; border-radius: 3px;overflow-x: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); background: linear-gradient(90deg, rgba(153,0,255,.3) 0%, rgba(55,55,255,.3) 32%, rgba(0,255,243,.3) 100%);">
-			<h1 align="center">States Without Any Cases</h1><br><div class="Level fadeInUp" style="animation-delay: 0.4s; overflow-x: hidden;">
-		</div></div>-->
 </header>
 <br>
 <h1 align="center" style="margin-top: -25px;">Statistics by state</h1>
@@ -110,82 +127,6 @@
 	<tbody id="table"> </tbody>
 	<tfoot id="foot"> </tfoot>
 </table>
-<!--<h1 align="center">Map Stats</h1><br>
-	<h2 align="center"><b>Cases in India</b></h2>
-<canvas id="bar-chart" width="800" height="450"></canvas>
-<img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/COVID-19_Outbreak_Cases_in_India.svg" alt="map" style="width: 500px; height: 500px; display: flex; margin: auto; overflow-x:hidden">
-
-<div class="mapsvg1">
-   <svg id="chart" width="400" height="750" viewBox="0 0 650 750" preserveAspectRatio="xMidYMid meet">
-      <g class="legendLinear" transform="translate(1, 450)">
-         <g class="legendCells" transform="translate(0,33.0625)">
-            <g class="cell" transform="translate(0, 0)">
-               <rect class="swatch" height="15" width="50" style="fill: rgb(255, 214, 214);"></rect>
-               <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">1 - 99</text>
-            </g>
-            <g class="cell" transform="translate(0, 18.25)">
-               <rect class="swatch" height="15" width="50" style="fill: rgb(255, 128, 128);"></rect>
-               <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">100 - 499</text>
-            </g>
-            <g class="cell" transform="translate(0, 36.5)">
-               <rect class="swatch" height="15" width="50" style="fill: rgb(255, 85, 85);"></rect>
-               <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">500 - 999</text>
-            </g>
-            <g class="cell" transform="translate(0, 54.75)">
-               <rect class="swatch" height="15" width="50" style="fill: rgb(255, 59, 59);"></rect>
-               <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">1000 - 4999</text>
-            </g>
-			<g class="cell" transform="translate(0, 73)">
-               <rect class="swatch" height="15" width="50" style="fill: rgb(255,42,42);"></rect>
-               <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">5000 - 9999</text>
-            </g>
-            <g class="cell" transform="translate(0, 91.25)">
-               <rect class="swatch" height="15" width="50" style="fill: rgb(212,0,0);"></rect>
-               <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">10000+</text>
-            </g>
-         </g>
-         <text style="font-size: 18px; font-weight: bold;">
-            <tspan x="0" dy="0em">Confirmed</tspan>
-            <tspan x="0" dy="1.2em">Cases</tspan>
-         </text>
-      </g>
-    </svg>
-  </div>
-  <h2 align="center" style="margin-top: -240px;"><b>Total Deaths</b></h2>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/COVID-19_Death_Cases_in_India.png/562px-COVID-19_Death_Cases_in_India.png" alt="map" style="width: 410px; height: 500px; display: flex; margin: auto; overflow-x:hidden">
-	<div class="mapsvg">
-	   <svg id="chart" width="400" height="750" viewBox="0 0 650 750" preserveAspectRatio="xMidYMid meet">
-		  <g class="legendLinear" transform="translate(1, 450)">
-			 <g class="legendCells" transform="translate(0,33.0625)">
-				<g class="cell" transform="translate(0, 0)">
-				   <rect class="swatch" height="15" width="50" style="fill: rgb(128, 128, 128);"></rect>
-				   <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">0</text>
-				</g>
-				<g class="cell" transform="translate(0, 18.25)">
-				   <rect class="swatch" height="15" width="50" style="fill: #ffd5d5ff;"></rect>
-				   <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">1-9</text>
-				</g>
-				<g class="cell" transform="translate(0, 36.50)">
-				   <rect class="swatch" height="15" width="50" style="fill: #ffacac;"></rect>
-				   <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">10-49</text>
-				</g>
-				<g class="cell" transform="translate(0, 54.75)">
-				   <rect class="swatch" height="15" width="50" style="fill: #ff8080;"></rect>
-				   <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">50-99</text>
-				</g>
-				<g class="cell" transform="translate(0, 73)">
-				   <rect class="swatch" height="15" width="50" style="fill: #ff5454;"></rect>
-				   <text style="font-size: 18px; font-weight: bold;" transform="translate( 60, 12.5)">100+</text>
-				</g>
-			 </g>
-			 <text  style="font-size: 18px; font-weight: bold;" class="legendTitle">
-				<tspan x="0" dy="1.5em">Deaths</tspan>
-			 </text>
-		  </g>
-		</svg>
-	  </div>
-	  <h2 align="center" style="margin-top: -240px;"><b>Timeline of World's cases</b></h2>
-  <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Trakectproes-Covid-confirmed-cases-since-100th-case.svg" alt="map" style="width: 550px; height: 400px; display: flex; margin: auto; overflow-x:hidden">-->
 <h1 align="center">Donut Graphs</h1>
 <h4 align="center">Tap For the Data</h4>
 <br>
@@ -250,9 +191,7 @@
 <script src="./js/darkmode.js"></script>
 <script src="./js/sort.js"></script>
 <script src="./js/data.js"></script>
-<script src="./js/states.js"></script>
-<script src="./js/stateschart.js"></script>
+<script src="./js/charts.js"></script>
+<script src="./js/statescharts.js"></script>
 <script src="./js/statesdata.js"></script>
-<script src="./js/covid.js"></script>
-<script src="./js/line.js"></script>
 </html>

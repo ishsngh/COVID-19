@@ -157,7 +157,7 @@ function data() {
                 updata += 'Coronavirus Update (Live): ' + value.confirmed + ' Cases and ' + value.deaths + ' Deaths from COVID-19 Virus Pandemic in India';
             }
         });
-        $('#title').append(updata);
+        $('#title').empty().append(updata);
         var world = '';
         $.each(data.statewise, function(key, value) {
             if (value.active == 0) {

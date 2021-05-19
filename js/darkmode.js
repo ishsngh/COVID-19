@@ -92,6 +92,11 @@ function getdata(state) {
 	$('#curvetext').empty();
 	$("#curvetext").removeClass('curve');
 	$('#curve_chart').empty();
+	ul = document.getElementById("search");
+    li = ul.getElementsByTagName("li");
+	for (i = 0; i < li.length; i++) {
+	li[i].style.display = "none";}
+	document.getElementById("searchbar").value = '';
 }
 
 function dataempty() {
@@ -129,7 +134,7 @@ function search() {
     ul = document.getElementById("search");
     li = ul.getElementsByTagName("li");
     for (i = 0; i < li.length; i++) {
-        txtValue = li[i].textContent || li[i].innerText;
+        txtValue = li[i].getAttribute("value");
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
 		if ((filter != '') && (tr < 11)) {
             li[i].style.display = "";
@@ -190,11 +195,25 @@ function pin(x) {
 		document.getElementById("dispin").innerHTML = "📌 pin";
     } else {
         $("body").addClass("pin");
-        window.localStorage.setItem('pind', String(district+' '+state));
+        window.localStorage.setItem('pind', String(district+','+state));
 		//window.localStorage.setitem('pins', String(state));
 		document.getElementById("dispin").innerHTML = "📌 unpin";
     }
 }
+
+$(document).click(function (e)
+{
+    var container = $("#searchbar");
+
+    if (!container.is(e.target))
+    {
+	ul = document.getElementById("search");
+    li = ul.getElementsByTagName("li");
+	for (i = 0; i < li.length; i++) {
+	li[i].style.display = "none";}
+	document.getElementById("searchbar").value = '';
+    }
+});
 
 var width1 = parseInt($(window).width() * 0.8);
 if (width1 > 500) {
@@ -202,3 +221,135 @@ if (width1 > 500) {
 }
 $("#searchbar").width(width1);
 $("#search").width(width1);
+
+// on document ready
+$(document).ready(function() {
+
+    // show/hide the mobile menu based on class added to container
+    $('.menu-icon').click(function() {
+        $(this).parent().toggleClass('is-tapped');
+        $('#hamburger').toggleClass('open');
+    });
+
+    // handle touch device events on drop down, first tap adds class, second navigates
+    $('.touch .sitenavigation li.nav-dropdown > a').on('touchend',
+        function(e) {
+            if ($('.menu-icon').is(':hidden')) {
+                var parent = $(this).parent();
+                $(this).find('.clicked').removeClass('clicked');
+                if (parent.hasClass('clicked')) {
+                    window.location.href = $(this).attr('href');
+                } else {
+                    $(this).addClass('linkclicked');
+
+                    // close other open menus at this level
+                    $(this).parent().parent().find('.clicked').removeClass('clicked');
+
+                    parent.addClass('clicked');
+                    e.preventDefault();
+                }
+            }
+        });
+
+    // handle the expansion of mobile menu drop down nesting
+    $('.sitenavigation li.nav-dropdown').click(
+        function(event) {
+            if (event.stopPropagation) {
+                event.stopPropagation();
+            } else {
+                event.cancelBubble = true;
+            }
+
+            if ($('.menu-icon').is(':visible')) {
+                $(this).find('> ul').toggle();
+                $(this).toggleClass('expanded');
+            }
+        }
+    );
+
+    // prevent links for propagating click/tap events that may trigger hiding/unhiding
+    $('.sitenavigation a.nav-dropdown, .sitenavigation li.nav-dropdown a').click(
+        function(event) {
+            if (event.stopPropagation) {
+                event.stopPropagation();
+            } else {
+                event.cancelBubble = true;
+            }
+        }
+    );
+
+    // javascript fade in and out of dropdown menu
+    $('.no-touch .sitenavigation li').hover(
+        function() {
+            if (!$('.menu-icon').is(':visible')) {
+                $(this).find('> ul').fadeIn(100);
+            }
+        },
+        function() {
+            if (!$('.menu-icon').is(':visible')) {
+                $(this).find('> ul').fadeOut(100);
+            }
+        }
+    );
+});
+
+$('document').ready(function () {
+
+
+		// RESTYLE THE DROPDOWN MENU
+    $('#google_translate_element').on("click", function () {
+
+        // Change font family and color
+        $("iframe").contents().find(".goog-te-menu2-item div, .goog-te-menu2-item:link div, .goog-te-menu2-item:visited div, .goog-te-menu2-item:active div, .goog-te-menu2 *")
+            .css({
+                'color': '#544F4B',
+                'font-family': 'Roboto',
+				'width':'100%'
+            });
+        // Change menu's padding
+        $("iframe").contents().find('.goog-te-menu2-item-selected').css ('display', 'none');
+			
+		// Change menu's padding
+        $("iframe").contents().find('.goog-te-menu2').css ('padding', '0px');
+      
+        // Change the padding of the languages
+        $("iframe").contents().find('.goog-te-menu2-item div').css('padding', '20px');
+      
+        // Change the width of the languages
+        $("iframe").contents().find('.goog-te-menu2-item').css('width', '100%');
+        $("iframe").contents().find('td').css('width', '100%');
+      
+        // Change hover effects
+        $("iframe").contents().find(".goog-te-menu2-item div").hover(function () {
+            $(this).css('background-color', '#4385F5').find('span.text').css('color', 'white');
+        }, function () {
+            $(this).css('background-color', 'white').find('span.text').css('color', '#544F4B');
+        });
+
+        // Change Google's default blue border
+        $("iframe").contents().find('.goog-te-menu2').css('border', 'none');
+
+        // Change the iframe's box shadow
+        $(".goog-te-menu-frame").css('box-shadow', '0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3)');
+        
+      
+      
+        // Change the iframe's size and position?
+        $(".goog-te-menu-frame").css({
+            'height': '70%',
+            'width': 'auto',
+			'position': 'relative !important',
+            'top': '63px !important',
+        });
+        // Change iframes's size
+        $("iframe").contents().find('.goog-te-menu2').css({
+            'height': '100%',
+            'width': '100%'
+        });
+        $("iframe").contents().find('.skiptranslate').css({
+            'visibility': 'none',
+        });
+    });
+});
+
+$($('span:contains("Select Language")')[1]).html('English')
