@@ -313,6 +313,8 @@ function searchdata(data) {
 	} else {
 		window.localStorage.setItem('pind', '');
 		$("body").removeClass("pin");
+		state=data.getAttribute("stateid");
+		$("html").addClass(state);
 		districtpage(data);
 	}
 }
@@ -560,6 +562,7 @@ $("#vacinetext").removeClass('hide');
 
 function districtpage(x) {
 	state=x.getAttribute("stateid");
+	stateclass = state;
 	id=x.id;
 	$("#dispage3").removeClass('hide');
 	$('#tabletitle').empty();
