@@ -235,3 +235,15 @@
 .dark .goog-te-gadget-simple  {
   background-color: #222!important;
 }
+
+.dark text.highcharts-title {
+	fill: #fff!important;
+}
+
+.dark table tbody {
+  color: #fff;
+}
+
+.dark table thead {
+  color: #fff;
+}

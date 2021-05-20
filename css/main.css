@@ -2,12 +2,18 @@ html {
 	height: 100%;
 	box-sizing: border-box;
 	-webkit-text-size-adjust: 100%;
-	-webkit-tap-highlight-color: transparent
+	-webkit-tap-highlight-color: transparent;
+	overflow-x: hidden;	
 }
 
 @font-face {
   font-family: archia;
   src: url(../fonts/archia.woff);
+}
+
+@font-face {
+  font-family: gsans;
+  src: url(../fonts/gsans.ttf);
 }
 
 ::-webkit-scrollbar {
@@ -21,7 +27,7 @@ html {
 }
 
 * {
-    font-family: "archia";
+    font-family: "KoHo";
 }
  
 ::-webkit-scrollbar-thumb {
@@ -147,7 +153,7 @@ object {
 	cursor: not-allowed
 }
 html {
-	font-size: 15px
+	font-size: 15px;
 }
 
 body {
@@ -426,7 +432,6 @@ background-color: rgba(108,117,125,.3);
 table {
   display: table;
   overflow-x: auto;
-  table-layout: fixed;
   margin-top: 4rem;
   margin-bottom: -10rem;
   width: 90%;
@@ -449,14 +454,15 @@ table thead {
   border-radius: 3px;
   font-size: 1rem;
   position: sticky;
-  top: 0;
+  top: 60px;
   z-index: 1;
 }
 
-tbody tr:nth-child(1){
+tbody td:nth-child(1){
   position: sticky;
-  left: 0;
+  /* left: 0; */
   z-index: 10;
+  font-weight: 900;
 }
 
 table thead th {
@@ -478,7 +484,7 @@ table thead th .heading-content {
 }
 
 table tbody {
-  color: #6c757d;
+  color: #343a40;
   border-radius: 3px;
 }
 
@@ -576,6 +582,7 @@ table tfoot td {
   font-size: 1.2rem;
   text-align: right;
   border-radius: 3px;
+  font-weight: 600;
 }
 
 table tfoot td:first-child {
@@ -950,6 +957,7 @@ tr .tdyl2 {
 
 .confirm {
 display: inline-block;
+font-weight: 900;
 }
 
 .switch1 {
@@ -1011,7 +1019,7 @@ input:checked + .slider:before {
 }
 
 .hide {
-	display:none;
+	display:none!important;
 }
 
 .click {
@@ -1101,6 +1109,7 @@ input:checked + .slider:before {
 	align-items: center;
 	border-radius: 5px;
 	padding-bottom: -10px;
+	font-weight: bold;
 }
 
 .bor {
@@ -1111,6 +1120,7 @@ input:checked + .slider:before {
 .dishead {
 	padding: 10px;
 	font-size: 20px;
+	font-weight: 900;
 }
 
 .disbut {
@@ -1506,4 +1516,21 @@ body {
 
 #goog-gt-tt {
 	display: none !important;
+}
+
+.goog-tooltip {
+    display: none !important;
+}
+.goog-tooltip:hover {
+    display: none !important;
+}
+.goog-text-highlight {
+    background-color: transparent !important;
+    border: none !important; 
+    box-shadow: none !important;
+}
+
+text.highcharts-title {
+	fill: #000!important;
+	font-weight: bold;
 }

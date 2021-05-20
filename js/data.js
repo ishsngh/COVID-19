@@ -72,7 +72,7 @@ function data() {
                 updata += '<div style="font-size:28px; font-weight:bold;">INDIA</div>';
                 updata += '<div class="cases2"><b>Confirmed<br><div style="font-size:13px;">[+' + parseInt(value.deltaconfirmed).toLocaleString('en-IN') + ']</div>' + parseInt(value.confirmed).toLocaleString('en-IN') + '</b><br></div>';
                 updata += '<div class="cases3"><b>Active Cases<br><div style="font-size:13px;">[' + sign + parseInt(value.deltaconfirmed - value.deltadeaths - value.deltarecovered).toLocaleString('en-IN') + ']</div>' + parseInt(value.active).toLocaleString('en-IN') + '</b><br></div>';
-                updata += '<div class="cases4"><b>Total Deaths<br><div style="font-size:13px;">[+' + parseInt(value.deltadeaths) + ']</div>' + parseInt(value.deaths).toLocaleString('en-IN').toLocaleString('en-IN') + '</b><br></div>';
+                updata += '<div class="cases4"><b>Total Deaths<br><div style="font-size:13px;">[+' + parseInt(value.deltadeaths).toLocaleString('en-IN') + ']</div>' + parseInt(value.deaths).toLocaleString('en-IN') + '</b><br></div>';
                 updata += '<div class="cases5"><b>Recoveries<br><div style="font-size:13px;">[+' + parseInt(value.deltarecovered).toLocaleString('en-IN') + ']</div>' + parseInt(value.recovered).toLocaleString('en-IN') + '</b><br></div>';
             }
         });
