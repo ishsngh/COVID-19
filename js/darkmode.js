@@ -1,5 +1,7 @@
 var lightmode = document.getElementById('inner-switch');
 var stateclass = {};
+var dispinned = {};
+dispinned = false;
 
 $(".inner-switch").on("click", function() {
     if ($("body").hasClass("dark")) {
@@ -71,10 +73,18 @@ if (localStorage.getItem('lightmode') === 'true') {
 
 function getdata(state) {
     stateclass = state.id;
+	$("#goback1").addClass('hide');
+$("#vacinetext").addClass('hide');
+$("#tabletext").removeClass('hide');
+$("#dispage3").addClass('hide');
+if (dispinned == true) {
+	$('#coviddis').removeClass('hide');
+	$('#coviddis').addClass('bor');
+}
     $("html").addClass(state.id);
     $("#world1").addClass('hide');
     $("#mainback").removeClass('hide');
-    $("#statetext").addClass('hide');
+    document.getElementById("statetext").innerHTML = "Click on district name for more details";
     $("#space").addClass('hide');
     $("#table").empty();
     $("#foot").empty();
@@ -86,6 +96,46 @@ function getdata(state) {
 	$("#covid").empty();
 	$("#covid19").empty();
 	$('#covidcases').empty();
+	$("#coviddis1").empty();
+	chartlinestate();
+	chartlinestate1();
+    states();
+	$('#curvetext').empty();
+	$("#curvetext").removeClass('curve');
+	$('#curve_chart').empty();
+	ul = document.getElementById("search");
+    li = ul.getElementsByTagName("li");
+	for (i = 0; i < li.length; i++) {
+	li[i].style.display = "none";}
+	document.getElementById("searchbar").value = '';
+}
+
+function getdataid(state) {
+    stateclass = state;
+$("#goback1").addClass('hide');
+$("#vacinetext").addClass('hide');
+$("#dispage3").addClass('hide');
+if (dispinned == true) {
+	$('#coviddis').removeClass('hide');
+	$('#coviddis').addClass('bor');
+}
+$("#tabletext").removeClass('hide');
+    $("html").addClass(state);
+    $("#world1").addClass('hide');
+    $("#mainback").removeClass('hide');
+    document.getElementById("statetext").innerHTML = "Click on district name for more details";
+    $("#space").addClass('hide');
+    $("#table").empty();
+    $("#foot").empty();
+    $("#covid4").empty();
+    $("#covid3").addClass('hide');
+    $("#table").empty();
+    $("#title").empty();
+    $("#tests").empty();
+	$("#covid").empty();
+	$("#covid19").empty();
+	$('#covidcases').empty();
+	$("#coviddis1").empty();
 	chartlinestate();
 	chartlinestate1();
     states();
@@ -100,9 +150,17 @@ function getdata(state) {
 }
 
 function dataempty() {
+$("#goback1").addClass('hide');
+$("#vacinetext").addClass('hide');
+$("#dispage3").addClass('hide');
+if (dispinned == true) {
+	$('#coviddis').removeClass('hide');
+	$('#coviddis').addClass('bor');
+}
+$("#tabletext").removeClass('hide');
     $("#mainback").addClass('hide');
     $("#space").removeClass('hide');
-    $("#statetext").removeClass('hide');
+    document.getElementById("statetext").innerHTML = "Click on state name for more details";
     $("#world1").removeClass('hide');
     $("#covid3").removeClass('hide');
     $("html").removeClass(stateclass);
@@ -117,6 +175,7 @@ function dataempty() {
 	$("#covid").empty();
 	$('#covidcases').empty();
 	$("#covid19").empty();
+	$("#coviddis1").empty();
     data();
 	covidpie();
 	chartline2();
@@ -151,7 +210,7 @@ function search() {
 function dataempty1() {
     $("#mainback").addClass('hide');
     $("#space").removeClass('hide');
-    $("#statetext").removeClass('hide');
+	document.getElementById("statetext").innerHTML = "Click on state name for more details";
     $("#world1").removeClass('hide');
     $("#covid3").removeClass('hide');
     $("#table").empty();

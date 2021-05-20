@@ -1,3 +1,8 @@
+var width1 = parseInt($(window).width() * 0.9);
+if (width1 > 400) {
+	width1 = 400
+}
+
 function covidpie() {
 $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
     $.each(coviddata.statewise, function(key, value) {
@@ -8,181 +13,109 @@ $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
         }
     });
 
-    google.charts.load("current", {
-        packages: ["corechart"]
-    });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Stats', 'Covid-19', {
-                role: 'style'
-            }],
-            ["Active cases", active, "opacity: 0.5"],
-            ['Recovered', recovered, 'opacity: 0.5'],
-            ['Deaths', deaths, 'opacity: 0.5']
-        ]);
-
-        var width1 = parseInt($(window).width() * 0.9);
-        if (width1 > 400) {
-            width1 = 400
-        }
-        var options = {
-            width: width1,
-            height: width1,
-            title: 'Total Cases',
-            titleTextStyle: {
-                color: "#ffffff",
-                font: 'archia',
-                // fontSize: 20,
+let chart = new Highcharts.Chart({
+	
+	chart: {
+		renderTo: 'covid19',
+		defaultSeriesType: 'pie',
+		backgroundColor: 'transparent',
+		height: width1,
+		width: width1
+	},
+	
+	title: {
+    text: 'Total Cases',
+	fontWeight: 'bold'
+	},
+	
+	 plotOptions: {
+      pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
             },
-            pieHole: 0.5,
-            backgroundColor: {
-                fill: 'transparent'
-            },
-            chartArea: {
-                left: 10,
-                right: 10, // !!! works !!!
-                bottom: 20, // !!! works !!!
-                top: 20,
-                width: "100%",
-                height: "100%"
-            },
-            pieSliceTextStyle: {
-                color: 'white',
-            },
-            legend: {
-                position: 'bottom',
-                textStyle: {
-                    color: 'gray'
-                }
-            },
-
-            pieSliceText: 'label',
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('covid19'));
-        chart.draw(data, options);
-    }
+            showInLegend: false,
+        // borderWidth: 0
+	 }
+	 },
+  series: [{
+    type: 'pie',
+	name: 'Cases',
+    data: [{
+        name: 'Active Cases',
+        y: active,
+        color: 'rgba(66,133,244,1)' //opacity 0.3
+      }, {
+        name: 'Recovered',
+        y: recovered,
+        color: 'rgba(219,68,55,1)' //opacity 0.2
+      }, {
+        name: 'Deaths',
+        y: deaths,
+        color: 'rgba(244,160,0,1)' //opacity 0.3
+      }
+    ]
+  }]
+  
+});
 });
 }
 
 function chartstates(){ 
 $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
-    var arrValues1 = [
-        ['Stats', 'Covid-19 states']
-    ];
-    var arrValues2 = [
-        ['Stats', 'Covid-19 states']
-    ];
-    var arrValues3 = [
-        ['Stats', 'Covid-19 states']
-    ];
-    var arrValues4 = [
-        ['Stats', 'Covid-19 states']
-    ];
+	var jsonArr = [];
     $.each(coviddata.statewise, function(key, value) {
         if (value.state != "Total") {
-            arrValues1.push([value.state, parseInt(value.confirmed)]);
-            arrValues2.push([value.state, parseInt(value.active)]);
-            arrValues3.push([value.state, parseInt(value.recovered)]);
-            arrValues4.push([value.state, parseInt(value.deaths)]);
+			jsonArr.push({
+				name: value.state,
+				y: parseInt(value.confirmed),
+				confirmed: parseInt(value.confirmed),
+				active: parseInt(value.active),
+				deaths: parseInt(value.deaths),
+				recovered: parseInt(value.recovered),
+			});
         }
     });
 
-    google.charts.load("current", {
-        packages: ["corechart"]
-    });
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable(arrValues1)
-        var data1 = google.visualization.arrayToDataTable(arrValues2)
-        var data2 = google.visualization.arrayToDataTable(arrValues3)
-        var data3 = google.visualization.arrayToDataTable(arrValues4)
-
-        var width1 = parseInt($(window).width() * 0.9);
-        if (width1 > 400) {
-            width1 = 400
+let chart = new Highcharts.Chart({
+	
+	chart: {
+		renderTo: 'covid',
+		defaultSeriesType: 'pie',
+		backgroundColor: 'transparent',
+		height: width1,
+		width: width1
+	},
+	
+	title: {
+    text: 'Cases by states',
+	fontWeight: 'bold'
+	},
+	
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: false,
+			//borderWidth: 0
         }
+    },
+	
+	tooltip: {
+        pointFormat: 'Percentage: <b>{point.percentage:.1f}%</b><br>{series.name}: <b>{point.confirmed}</b><br>Active: <b>{point.active}</b><br>Recovered: <b>{point.recovered}</b><br>Deaths: <b>{point.deaths}</b>'
+    },
 
-        var options = {
-            width: width1,
-            titleTextStyle: {
-                color: "#ffffff",
-                font: 'archia',
-                // fontSize: 20,
-            },
-            title: 'Total Cases Statewise',
-            height: width1,
-            pieHole: 0.5,
-            legend: 'none',
-            backgroundColor: {
-                fill: 'transparent'
-            },
-            options: {
-                theme: 'maximized'
-            },
-            chartArea: {
-                left: 10,
-                right: 10, // !!! works !!!
-                bottom: 20, // !!! works !!!
-                top: 20,
-                width: "100%",
-                height: "100%"
-            },
-            pieSliceTextStyle: {
-                color: 'white',
-            },
-            legend: 'none',
-
-            tooltip: {
-                trigger: 'selection'
-            },
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('covid'));
-        google.visualization.events.addListener(chart, 'select', function() {
-            var selection = chart.getSelection();
-            $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
-                if (selection.length) {
-                    var name = data.getValue(selection[0].row, 0);
-                    var dats = '';
-                    $.each(coviddata.statewise, function(key, value) {
-                        if (value.state == name) {
-                            dats += 'State: ' + name;
-                            dats += '<br>Confirmed: ' + parseInt(value.confirmed);
-                            dats += '<br>Active: ' + parseInt(value.active);
-                            dats += '<br>Recovered: ' + parseInt(value.recovered);
-                            dats += '<br>Deaths: ' + parseInt(value.deaths);
-                        }
-                    });
-                    $("#covidcases").addClass('back');
-                    $('#covidcases').empty().append(dats);
-                }
-            });
-        });
-
-        google.visualization.events.addListener(chart, 'onmouseover', function(entry) {
-            $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
-                var name = data.getValue(entry.row, 0);
-                var dats = '';
-                $.each(coviddata.statewise, function(key, value) {
-                    if (value.state == name) {
-                        dats += 'State: ' + name;
-                        dats += '<br>Confirmed: ' + parseInt(value.confirmed);
-                        dats += '<br>Active: ' + parseInt(value.active);
-                        dats += '<br>Recovered: ' + parseInt(value.recovered);
-                        dats += '<br>Deaths: ' + parseInt(value.deaths);
-                    }
-                });
-                $("#covidcases").addClass('back');
-                $('#covidcases').empty().append(dats);
-            });
-        });
-        chart.draw(data, options);
-
-    }
+  series: [{
+    type: 'pie',
+	name: 'Confirmed',
+    data: jsonArr,
+  }]
+  
+});
 });
 }
 
@@ -264,50 +197,9 @@ $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
                     color: 'gray'
                 }
             },
-            tooltip: {
-                trigger: 'none'
-            },
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        google.visualization.events.addListener(chart, 'select', function() {
-            var selection = chart.getSelection();
-                if (selection.length) {
-                    var name = data.getValue(selection[0].row, 0);
-                    var value1 = data.getValue(selection[0].row, 1);
-					var value2 = data.getValue(selection[0].row, 2);
-					var value3 = data.getValue(selection[0].row, 3);
-					var value4 = data.getValue(selection[0].row, 4);
-                    var dats = '';
-                dats += 'Date: ' + name;
-                dats += '<br>Confirmed: ' + value1;
-                dats += '<br>Active: ' + value2;
-                dats += '<br>Recovered: ' + value3;
-                dats += '<br>Deaths: ' + value4;
-                    $("#curvetext").addClass('curve');
-                    $('#curvetext').empty().append(dats);
-                }
-        });
-
-        google.visualization.events.addListener(chart, 'onmouseover', function(entry) {
-            $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
-                var name = data.getValue(entry.row, 0);
-                var value1 = data.getValue(entry.row, 1);
-                var value2 = data.getValue(entry.row, 2);
-                var value3 = data.getValue(entry.row, 3);
-                var value4 = data.getValue(entry.row, 4);
-                var dats = '';
-                dats += 'Date: ' + name;
-                dats += '<br>Confirmed: ' + value1;
-                dats += '<br>Active: ' + value2;
-                dats += '<br>Recovered: ' + value3;
-                dats += '<br>Deaths: ' + value4;
-                $("#curvetext").addClass('curve');
-                $('#curvetext').empty().append(dats);
-            });
-        })
-
         chart.draw(data, options);
 		
     }

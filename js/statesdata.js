@@ -86,7 +86,7 @@ function states() {
                         sign = '+';
                     }
                     tabledata += '<tr>';
-                    tabledata += '<td class="tdgrey" style="font-weight: 600;">' + key + '</td>';
+                    tabledata += '<td class="tdgrey" style="cursor: pointer;" id="'+key+'" stateid="'+x+'" onclick="districtpage(this)" style="font-weight: 600;">' + key + '</td>';
                     if (data[x].districts[key].delta.confirmed > 0) {
                         tabledata += '<td class="tdpur"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">+' + data[x].districts[key].delta.confirmed + '&nbsp;</div><div class="confirm">' + data[x].districts[key].total.confirmed + '</td>';
                     } else if (data[x].districts[key].total.hasOwnProperty('confirmed')) {
@@ -134,7 +134,7 @@ function states() {
                 } else {
 					if (error == 0) {
                     tabledata += '<tr>';
-                    tabledata += '<td class="tdgrey" style="font-weight: 600;">' + key + '</td>';
+                    tabledata += '<td class="tdgrey" style="cursor: pointer;" id="'+key+'" stateid="'+x+'" onclick="districtpage(this)"  style="font-weight: 600;">' + key + '</td>';
                     if (data[x].districts[key].total.hasOwnProperty('confirmed')) {
                         tabledata += '<td class="tdpur"><div class="confirm">' + data[x].districts[key].total.confirmed + '</td>';
                     } else {
@@ -313,7 +313,7 @@ function searchdata(data) {
 	} else {
 		window.localStorage.setItem('pind', '');
 		$("body").removeClass("pin");
-		district(data.id,data.getAttribute("stateid"));
+		districtpage(data);
 	}
 }
 
@@ -322,10 +322,10 @@ $.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data) {
 	var updata="";
 	var pin ='pin';
 	var go1 = localStorage.getItem('pind');
-	if (go1 != '') {
+	if (go1 != '' && dispinned == false) {
 	pin= 'unpin';
 	}
-	updata += '<div class="dishead"><div id="disrem" onclick="$(\'#coviddis\').empty();" class="disbut" style="float: right; text-align: right;">x</div><div class="disbut" id="disclose" onclick="closedis()" style="float: right; margin-right:5px; margin-left:5px; text-align: right;">ᐃ</div>'+y+'<div id="dispin" onclick="pin(this)" class="dispin" sta="'+x+'" dis="'+y+'" style="float: left; text-align: left;"> 📌'+ pin+'</div></div>'
+	updata += '<div class="dishead"><div id="disrem" onclick="$(\'#coviddis\').empty(); $(\'#coviddis\').removeClass(\'bor\');" class="disbut" style="float: right; text-align: right;">x</div><div class="disbut" id="disclose" onclick="closedis()" style="float: right; margin-right:5px; margin-left:5px; text-align: right;">ᐃ</div>'+y+'<div id="dispin" onclick="pin(this)" class="dispin" sta="'+x+'" dis="'+y+'" style="float: left; text-align: left;"> 📌'+ pin+'</div></div>'
 	if (data[x].hasOwnProperty('delta')) {
 		if ((data[x].districts[y].delta.confirmed - data[x].districts[y].delta.recovered - data[x].districts[y].delta.deceased) < 0) {
 			sign = "";
@@ -385,6 +385,74 @@ $.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data) {
 });
 }
 
+function districtinfo(y,x) {
+$.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data) {
+	var updata="";
+	var pin ='pin';
+	var go1 = localStorage.getItem('pind');
+	if (go1 != '') {
+	sp=go1.split(",")
+	if (sp[0] == y && sp[1] == x){
+		$('#coviddis').addClass('hide');
+		$('#coviddis').removeClass('bor');
+		dispinned = true;
+		pin= 'unpin';
+	}
+	}
+	
+	updata += '<div class="dishead">'+y+'&nbsp<div id="dispin1" style="display: inline-block;" onclick="pin1(this)" class="dispin" sta="'+x+'" dis="'+y+'"> 📌'+ pin+'</div></div>'
+	if (data[x].hasOwnProperty('delta')) {
+		if ((data[x].districts[y].delta.confirmed - data[x].districts[y].delta.recovered - data[x].districts[y].delta.deceased) < 0) {
+			sign = "";
+		} else {
+			sign = '+';
+		}
+		if (data[x].districts[y].delta.confirmed != undefined) {
+			updata += '<div class="data">Confirmed<br><div style="font-size:13px;">[+' + data[x].districts[y].delta.confirmed + ']</div>' + parseInt(data[x].districts[y].total.confirmed).toLocaleString('en-IN') + '<br></div>';
+		} else {
+			updata += '<div class="data">Confirmed<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].districts[y].total.confirmed).toLocaleString('en-IN') + '<br></div>';
+		}
+		if (isNaN(data[x].districts[y].delta.confirmed - data[x].districts[y].delta.recovered - data[x].districts[y].delta.deceased) != true) {
+			updata += '<div class="data">Active Cases<br><div style="font-size:13px;">[' + sign + (data[x].districts[y].delta.confirmed - data[x].districts[y].delta.recovered - data[x].districts[y].delta.deceased) + ']</div>' + parseInt(data[x].districts[y].total.confirmed - data[x].districts[y].total.recovered - data[x].districts[y].total.deceased).toLocaleString('en-IN') + '<br></div>';
+		} else {
+			updata += '<div class="data">Active Cases<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].districts[y].total.confirmed - data[x].districts[y].total.recovered - data[x].districts[y].total.deceased).toLocaleString('en-IN') + '<br></div>';
+		}
+		if (data[x].districts[y].delta.deceased != undefined) {
+			updata += '<div class="data">Total Deaths<br><div style="font-size:13px;">[+' + data[x].districts[y].delta.deceased + ']</div>' + parseInt(data[x].districts[y].total.deceased).toLocaleString('en-IN') + '<br></div>';
+		} else {
+			updata += '<div class="data">Total Deaths<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].districts[y].total.deceased).toLocaleString('en-IN') + '<br></div>';
+		}
+		if (data[x].districts[y].delta.recovered != undefined) {
+			updata += '<div class="data">Recoveries<br><div style="font-size:13px;">[+' + data[x].districts[y].delta.recovered + ']</div>' + parseInt(data[x].districts[y].total.recovered).toLocaleString('en-IN') + '<br></div>';
+		} else {
+			updata += '<div class="data">Recoveries<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].districts[y].total.recovered).toLocaleString('en-IN') + '<br></div>';
+		}
+		if (data[x].districts[y].delta.tested != undefined) {
+			updata += '<div class="data">Total Tests<br><div style="font-size:13px;">[+' + data[x].districts[y].delta.tested + ']</div>' + parseInt(data[x].districts[y].total.tested).toLocaleString('en-IN') + '<br></div>';
+		} else {
+			updata += '<div class="data">Total Tests<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].districts[y].total.tested).toLocaleString('en-IN') + '<br></div>';
+		}
+		if (data[x].districts[y].delta.vaccinated != undefined) {
+			updata += '<div class="data">Vaccination<br><div style="font-size:13px;">[+' + data[x].districts[y].delta.vaccinated + ']</div>' + parseInt(data[x].districts[y].total.vaccinated).toLocaleString('en-IN') + '<br></div>';
+		} else {
+			updata += '<div class="data">Vaccination<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].districts[y].total.vaccinated).toLocaleString('en-IN') + '<br></div>';
+		}
+		updata += '</div></div>';
+	} else {
+		updata += '<div class="data">Confirmed<br>' + parseInt(data[x].districts[y].total.confirmed).toLocaleString('en-IN') + '<br></div>';
+		updata += '<div class="data">Active Cases<br>' + parseInt(data[x].districts[y].total.confirmed - data[x].districts[y].total.recovered - data[x].districts[y].total.deceased).toLocaleString('en-IN') + '<br></div>';
+		updata += '<div class="data">Total Deaths<br>' + parseInt(data[x].districts[y].total.deceased).toLocaleString('en-IN') + '<br></div>';
+		updata += '<div class="data">Recoveries<br>' + parseInt(data[x].districts[y].total.recovered).toLocaleString('en-IN') + '<br></div>';
+		updata += '<div class="data">Total Tests<br>' + parseInt(data[x].districts[y].total.tested).toLocaleString('en-IN') + '<br></div>';
+		updata += '<div class="data">Vaccination<br>' + parseInt(data[x].districts[y].total.vaccinated).toLocaleString('en-IN') + '<br></div>';
+		updata += '</div></div>';
+	}
+	$('#coviddis1').empty().append(updata);
+	$(".dis .data").addClass("disin");
+	$('#dispin').addClass("disin");
+});
+}
+
 $(document).ready(function(){
 var go1 = localStorage.getItem('pind');
 if (go1 != '' && go1 !== null) {
@@ -408,4 +476,145 @@ $(document).click(function (e)
     }
 });
 
+function stateid(x,y) {
+$.getJSON("https://cdn-api.co-vin.in/api/v2/admin/location/states", function(data) {
+$.each(data.states, function(key, value) {
+	if (x == value.state_name) {
+		districtid(value.state_id,y);
+	} 
+});
+});
+}
 
+function districtid(x,y) {
+$.getJSON('https://cdn-api.co-vin.in/api/v2/admin/location/districts/' + x, function(data) {
+$.each(data.districts, function(key, value) {
+	if (y == value.district_name) {
+		vacinnation(value.district_id);
+	} 
+});
+});
+}
+
+function vacinnation(x) {
+var today = new Date();
+var dd = today.getDate();
+
+var mm = today.getMonth() + 1;
+var yyyy = today.getFullYear();
+if (dd < 10) {
+	dd = '0' + dd;
+}
+
+if (mm < 10) {
+	mm = '0' + mm;
+}
+today = dd + '-' + mm + '-' + yyyy;
+	var tabledata = '';
+	tabledata += '<tr>';
+	tabledata += '</tr>';
+	var tfoot = '<tr></tr>';
+	var found=0;
+	var total=2;
+    var tabletitle = '';
+    tabletitle += '<th style="background-color: rgba(127,127,127,0.1);" onclick="sortTable(0,\'#sort\')">';
+    tabletitle += '<div id="sort" class="sticky heading-content">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>';
+    tabletitle += '</th>';
+    tabletitle += '<th style="background-color: rgba(127,127,127,0.1);" onclick="sorttable(1,\'#sort1\')">';
+    tabletitle += '<div id="sort1" class="sticky heading-content">Block Name&nbsp;&nbsp;</div>';
+    tabletitle += '</th>';
+    tabletitle += '<th style="background-color: rgba(127,127,127,0.1);" onclick="sorttable(2,\'#sort2\')">';
+    tabletitle += '<div id="sort2" class="sticky heading-content">Min Age</div>';
+    tabletitle += '</th>';
+    tabletitle += '<th style="background-color: rgba(127,127,127,0.1);" onclick="sorttable(3,\'#sort3\')">';
+    tabletitle += '<div id="sort3" class="sticky heading-content">Available Vaccines&nbsp;&nbsp;</div>';
+    tabletitle += '</th>';
+    tabletitle += '<th style="background-color: rgba(127,127,127,0.1);" onclick="sorttable(4,\'#sort4\')">';
+    tabletitle += '<div id="sort4" class="sticky heading-content">Pin Code&nbsp;&nbsp;</div>';
+    tabletitle += '</th>';
+    tabletitle += '<th style="background-color: rgba(127,127,127,0.1);">';
+    tabletitle += '<div class="sticky heading-content">Timings&nbsp;&nbsp;</div>';
+    tabletitle += '</th>';
+$.getJSON('https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id='+x+'&date='+today, function(data) {
+$.each(data.sessions, function(key, value) {
+if (value.available_capacity > 0) {
+tabledata += '<tr>';
+tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600;">' + value.name + '</td>';
+tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600;">' + value.block_name + '</td>';
+tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600!important;"><div class="confirm">' + value.min_age_limit + '</td>';
+tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600!important;"><div class="confirm">' + value.available_capacity + '</td>';
+tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600!important;"><div class="confirm">' + value.pincode + '</td>';
+tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600;">' + value.from + '-' + value.to +'</td>';
+tabledata += '</tr>';
+found=1;
+}
+});
+if (found == 1) {
+$('#table').append(tabledata);
+$('#tabletitle').append(tabletitle);
+$('#tfoot').append(tabletitle);
+$("#vacinetext").removeClass('hide');
+}
+});
+}
+
+function districtpage(x) {
+	state=x.getAttribute("stateid");
+	id=x.id;
+	$("#dispage3").removeClass('hide');
+	$('#tabletitle').empty();
+	dataempty1();
+	$("#covid3").addClass('hide');
+	$("#world1").addClass('hide');
+	$("#tabletext").addClass('hide');
+	$("#mainback").removeClass('hide');
+	$("#goback1").removeClass('hide');
+	$('#table').empty();
+	districttitle(id,state);
+	districtinfo(id,state);
+	stateid(name(state),id);
+	chartlinedis(id,state);
+	chartlinedis1(id,state);
+}
+
+function gostate() {
+var stateid = stateclass;
+$("#goback1").addClass('hide');
+$("#vacinetext").addClass('hide');
+$("#tabletext").removeClass('hide');
+$("#dispage3").addClass('hide');
+if (dispinned == true) {
+	$('#coviddis').removeClass('hide');
+	$('#coviddis').addClass('bor');
+}
+dataempty1();
+getdataid(stateid);
+}
+
+function pin1(x) {
+	var district1=x.getAttribute("dis");
+	var state=x.getAttribute("sta");
+    if (document.getElementById("dispin1").innerHTML == "📌 unpin") {
+		dispinned = false;
+        window.localStorage.setItem('pind', '');
+		//window.localStorage.setitem('pins', '');
+		$("body").removeClass("pin");
+		document.getElementById("dispin1").innerHTML = "📌 pin";
+    } else {
+		district(district1,state);
+		$('#coviddis').addClass('hide');
+		$('#coviddis').removeClass('bor');
+		dispinned = true;
+        $("body").addClass("pin");
+        window.localStorage.setItem('pind', String(district1+','+state));
+		//window.localStorage.setitem('pins', String(state));
+		document.getElementById("dispin1").innerHTML = "📌 unpin";
+    }
+}
+
+function districttitle(y,x) {
+$.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data) {
+var title = y + ' Coronavirus Update (Live): ' + data[x].districts[y].total.confirmed + ' Cases from COVID-19 Virus Pandemic';
+$('#title').empty().append(title);
+});
+}

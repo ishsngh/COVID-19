@@ -7,7 +7,10 @@
 	<title id="title">COVID-19 India</title>
 	<link href="https://fonts.googleapis.com/css?family=Product+Sans" rel="stylesheet" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=KoHo&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="https://code.highcharts.com/highcharts.js"></script>
 <script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'bn,en,hi,mr,ml,pa,sd,ta,ur', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
@@ -28,7 +31,7 @@ function googleTranslateElementInit() {
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <header>
-  <nav class="navbar">
+  <nav class="navbar"><b>
       <span class="inner-switch"></span>
 	  <li style="list-style-type: none; float: right;" id="google_translate_element"></li>
     <div class="sitenavigation">
@@ -47,7 +50,7 @@ function googleTranslateElementInit() {
         <li><a href="faqs">FAQs</a></li>
       </ul>
     </div>
-  </nav>
+  </nav></b>
 </header>
 <body style="animation-delay: 0.0s; transition: all .1s ease-in-out 0.1s;" class="dark">
 	<header>
@@ -92,13 +95,15 @@ function googleTranslateElementInit() {
 	<div id="covid3" class="date"><b> </b></div>
 	<div id="space">
 		<br>
-		<br>
 	</div>
 	<div id="mainback" class="hide">
-		<div id="goback" class="Level fadeInUp click back" onclick="dataempty()" style="animation-delay: 0.6s;">Go Back</div>
+		<div id="goback" class="Level fadeInUp click back" onclick="dataempty()" style="animation-delay: 0.6s;">Go Home</div>
+		<div id="goback1" class="Level fadeInUp click back hide" onclick="gostate()" style="animation-delay: 0.6s;">Go Back</div>
 	</div>
 	<div class='dis'>
-	<div id="coviddis" class="Level fadeInUp" style="animation-delay: 0.6s;"> </div></div>
+	<div id="coviddis" class="Level fadeInUp" style="animation-delay: 0.6s;"> </div></div><br>
+	<div id="dispage3" class='dis hide'>
+	<div id="coviddis1" class="Level fadeInUp" style="animation-delay: 0.6s;"> </div></div>
 	<div id="covid4" class="Level fadeInUp" style="animation-delay: 0.6s;"> </div>
 	<br>
 	<div id="world1" class="Level fadeInUp" style="animation-delay: 0.4s; overflow-x: hidden;">
@@ -109,6 +114,7 @@ function googleTranslateElementInit() {
 		</div>
 	</div>
 </header>
+<div id="tabletext">
 <br>
 <h1 align="center" style="margin-top: -25px;">Statistics by state</h1>
 <br>
@@ -120,12 +126,19 @@ function googleTranslateElementInit() {
 	  <span id="sortswitch" class="slider round"></span>
 	</label></h3>
 <br>
+</div>
+<div id="vacinetext" class="hide">
+<br>
+<h1 align="center" style="margin-top: -25px;">Today's vaccination info</h1>
+<br>
+<h3 align="center" style="margin-top: -20px;">Click on column name to sort</h3><br>
+</div>
 <table id="covid5">
 	<thead>
 		<tr id="tabletitle" class="sticky"> </tr>
 	</thead>
-	<tbody id="table"> </tbody>
-	<tfoot id="foot"> </tfoot>
+	<tbody id="table"></tbody>
+	<tfoot id="foot"></tfoot>
 </table>
 <h1 align="center">Donut Graphs</h1>
 <h4 align="center">Tap For the Data</h4>
@@ -138,13 +151,14 @@ function googleTranslateElementInit() {
 	<div class="chart">
 		<div id="covid"></div>
 	</div>
-	<div id="covidcases" class="Level fadeInUp" style="vertical-align: top;"></div>
 </div>
+<div>
+<div>
 <h1 align="center">Line Chart</h1>
 <h2 align="center">Total cases</h2>
+</div>
 <div class="chart" style="margin-top: -10px; display: flex; position: relative;">
 	<div id="curve_chart" style="position: static;"></div>
-	<div id="curvetext" style="overflow-x: auto;"></div>
 </div>
 </div>
 <section class="help">
