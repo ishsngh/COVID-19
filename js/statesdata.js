@@ -311,8 +311,6 @@ function searchdata(data) {
 		dataempty1();
 		getdata(data);
 	} else {
-		window.localStorage.setItem('pind', '');
-		$("body").removeClass("pin");
 		state=data.getAttribute("stateid");
 		$("html").addClass(state);
 		districtpage(data);
@@ -323,8 +321,8 @@ function district(y,x) {
 $.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data) {
 	var updata="";
 	var pin ='pin';
-	var go1 = localStorage.getItem('pind');
-	if (go1 != '' && dispinned == false) {
+	var go1 = window.localStorage.getItem('pind');
+	if (go1 != '' && go1 != null) {
 	pin= 'unpin';
 	}
 	updata += '<div class="dishead"><div id="disrem" onclick="$(\'#coviddis\').empty(); $(\'#coviddis\').removeClass(\'bor\');" class="disbut" style="float: right; text-align: right;">x</div><div class="disbut" id="disclose" onclick="closedis()" style="float: right; margin-right:5px; margin-left:5px; text-align: right;">ᐃ</div>'+y+'<div id="dispin" onclick="pin(this)" class="dispin" sta="'+x+'" dis="'+y+'" style="float: left; text-align: left;"> 📌'+ pin+'</div></div>'
@@ -391,9 +389,9 @@ function districtinfo(y,x) {
 $.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data) {
 	var updata="";
 	var pin ='pin';
-	var go1 = localStorage.getItem('pind');
-	if (go1 != '') {
-	sp=go1.split(",")
+	var go1 = window.localStorage.getItem('pind');
+	if (go1 != '' && go1 != null) {
+	sp=go1.split(",");
 	if (sp[0] == y && sp[1] == x){
 		$('#coviddis').addClass('hide');
 		$('#coviddis').removeClass('bor');
@@ -402,7 +400,7 @@ $.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data) {
 	}
 	}
 	
-	updata += '<div class="dishead">'+y+'&nbsp<div id="dispin1" style="display: inline-block;" onclick="pin1(this)" class="dispin" sta="'+x+'" dis="'+y+'"> 📌'+ pin+'</div></div>'
+	updata += '<div class="dishead">'+y+'&nbsp<div id="dispin1" style="display: inline-block;" onclick="pin1(this)" class="dispin" sta1="'+x+'" dis1="'+y+'"> 📌'+ pin+'</div></div>'
 	if (data[x].hasOwnProperty('delta')) {
 		if ((data[x].districts[y].delta.confirmed - data[x].districts[y].delta.recovered - data[x].districts[y].delta.deceased) < 0) {
 			sign = "";
@@ -595,8 +593,8 @@ getdataid(stateid);
 }
 
 function pin1(x) {
-	var district1=x.getAttribute("dis");
-	var state=x.getAttribute("sta");
+	var district1=x.getAttribute("dis1");
+	var state=x.getAttribute("sta1");
     if (document.getElementById("dispin1").innerHTML == "📌 unpin") {
 		dispinned = false;
         window.localStorage.setItem('pind', '');
