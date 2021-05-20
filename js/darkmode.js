@@ -201,20 +201,6 @@ function pin(x) {
     }
 }
 
-$(document).click(function (e)
-{
-    var container = $("#searchbar");
-
-    if (!container.is(e.target))
-    {
-	ul = document.getElementById("search");
-    li = ul.getElementsByTagName("li");
-	for (i = 0; i < li.length; i++) {
-	li[i].style.display = "none";}
-	document.getElementById("searchbar").value = '';
-    }
-});
-
 var width1 = parseInt($(window).width() * 0.8);
 if (width1 > 500) {
 	width1 = 500

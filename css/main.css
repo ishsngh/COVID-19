@@ -1178,6 +1178,7 @@ input:checked + .slider:before {
   height: 5px;
   width: 100%;
   background: #333;
+  margin-top: 5px;
   border-radius: 9px;
   opacity: 1;
   left: 7px;

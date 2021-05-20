@@ -24,32 +24,32 @@ function states() {
                     sign = '+';
                 }
                 if (data[x].delta.confirmed != undefined) {
-                    updata += '<div class="cases2"><b>Confirmed<br><div style="font-size:13px;">[+' + data[x].delta.confirmed + ']</div>' + parseInt(data[x].total.confirmed).toLocaleString('en-IN') + '</b><br></div>';
+                    updata += '<div class="cases2"><b>Confirmed<br><div style="font-size:13px;">[+' + parseInt(data[x].delta.confirmed).toLocaleString('en-IN') + ']</div>' + parseInt(data[x].total.confirmed).toLocaleString('en-IN') + '</b><br></div>';
                 } else {
                     updata += '<div class="cases2"><b>Confirmed<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.confirmed).toLocaleString('en-IN') + '</b><br></div>';
                 }
                 if (isNaN(data[x].delta.confirmed - data[x].delta.recovered - data[x].delta.deceased) != true) {
-                    updata += '<div class="cases3"><b>Active Cases<br><div style="font-size:13px;">[' + sign + (data[x].delta.confirmed - data[x].delta.recovered - data[x].delta.deceased) + ']</div>' + parseInt(data[x].total.confirmed - data[x].total.recovered - data[x].total.deceased).toLocaleString('en-IN') + '</b><br></div>';
+                    updata += '<div class="cases3"><b>Active Cases<br><div style="font-size:13px;">[' + sign + parseInt(data[x].delta.confirmed - data[x].delta.recovered - data[x].delta.deceased).toLocaleString('en-IN') + ']</div>' + parseInt(data[x].total.confirmed - data[x].total.recovered - data[x].total.deceased).toLocaleString('en-IN') + '</b><br></div>';
                 } else {
                     updata += '<div class="cases3"><b>Active Cases<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.confirmed - data[x].total.recovered - data[x].total.deceased).toLocaleString('en-IN') + '</b><br></div>';
                 }
                 if (data[x].delta.deceased != undefined) {
-                    updata += '<div class="cases4"><b>Total Deaths<br><div style="font-size:13px;">[+' + data[x].delta.deceased + ']</div>' + parseInt(data[x].total.deceased).toLocaleString('en-IN') + '</b><br></div>';
+                    updata += '<div class="cases4"><b>Total Deaths<br><div style="font-size:13px;">[+' + parseInt(data[x].delta.deceased).toLocaleString('en-IN') + ']</div>' + parseInt(data[x].total.deceased).toLocaleString('en-IN') + '</b><br></div>';
                 } else {
                     updata += '<div class="cases4"><b>Total Deaths<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.deceased).toLocaleString('en-IN') + '</b><br></div>';
                 }
                 if (data[x].delta.recovered != undefined) {
-                    updata += '<div class="cases5"><b>Recoveries<br><div style="font-size:13px;">[+' + data[x].delta.recovered + ']</div>' + parseInt(data[x].total.recovered).toLocaleString('en-IN') + '</b><br></div>';
+                    updata += '<div class="cases5"><b>Recoveries<br><div style="font-size:13px;">[+' + parseInt(data[x].delta.recovered).toLocaleString('en-IN') + ']</div>' + parseInt(data[x].total.recovered).toLocaleString('en-IN') + '</b><br></div>';
                 } else {
                     updata += '<div class="cases5"><b>Recoveries<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.recovered).toLocaleString('en-IN') + '</b><br></div>';
                 }
                 if (data[x].delta.tested != undefined) {
-                    updata += '<div class="cases6"><b>Total Tests<br><div style="font-size:13px;">[+' + data[x].delta.tested + ']</div>' + parseInt(data[x].total.tested).toLocaleString('en-IN') + '</b><br></div>';
+                    updata += '<div class="cases6"><b>Total Tests<br><div style="font-size:13px;">[+' + parseInt(data[x].delta.tested).toLocaleString('en-IN') + ']</div>' + parseInt(data[x].total.tested).toLocaleString('en-IN') + '</b><br></div>';
                 } else {
                     updata += '<div class="cases6"><b>Total Tests<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.tested).toLocaleString('en-IN') + '</b><br></div>';
                 }
                 if (data[x].delta.vaccinated != undefined) {
-                    updata += '<div class="cases7"><b>Vaccination<br><div style="font-size:13px;">[+' + data[x].delta.vaccinated + ']</div>' + parseInt(data[x].total.vaccinated).toLocaleString('en-IN') + '</b><br></div>';
+                    updata += '<div class="cases7"><b>Vaccination<br><div style="font-size:13px;">[+' + parseInt(data[x].delta.vaccinated).toLocaleString('en-IN') + ']</div>' + parseInt(data[x].total.vaccinated).toLocaleString('en-IN') + '</b><br></div>';
                 } else {
                     updata += '<div class="cases7"><b>Vaccination<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.vaccinated).toLocaleString('en-IN') + '</b><br></div>';
                 }
@@ -195,7 +195,7 @@ function states() {
     tabletitle += '<th class="tdgr2 sticky" onclick="sorttable(3,\'#sort3\')">';
     tabletitle += '<div id="sort3" class="sticky heading-content">Recovered&nbsp;&nbsp;</div>';
     tabletitle += '</th>';
-    tabletitle += '<th class="tdred2 sticky onclick="sorttable(4,\'#sort4\')">';
+    tabletitle += '<th class="tdred2 sticky" onclick="sorttable(4,\'#sort4\')">';
     tabletitle += '<div id="sort4" class="sticky heading-content">Deaths&nbsp;&nbsp;</div>';
     tabletitle += '</th>';
     tabletitle += '<th class="tdpk2" onclick="sorttable(5,\'#sort5\')">';
@@ -387,11 +387,25 @@ $.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data) {
 
 $(document).ready(function(){
 var go1 = localStorage.getItem('pind');
-if (go1 != '') {
+if (go1 != '' && go1 !== null) {
 	sp=go1.split(",")
 	district(sp[0],sp[1]);
 	$("body").addClass("pin");
 }
+});
+
+$(document).click(function (e)
+{
+    var container = $("#searchbar");
+
+    if (!container.is(e.target))
+    {
+	ul = document.getElementById("search");
+    li = ul.getElementsByTagName("li");
+	for (i = 0; i < li.length; i++) {
+	li[i].style.display = "none";}
+	document.getElementById("searchbar").value = '';
+    }
 });
 
 
