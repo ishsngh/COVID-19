@@ -439,7 +439,7 @@ table {
   border-radius: 3px;
   align-self: center;
   align-items: center;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .sticky {
@@ -453,9 +453,6 @@ table thead {
   text-align: left;
   border-radius: 3px;
   font-size: 1rem;
-  position: sticky;
-  top: 60px;
-  z-index: 1;
 }
 
 tbody td:nth-child(1){
@@ -666,7 +663,7 @@ table {
   border-radius: 3px;
   align-self: center;
   align-items: center;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 	
 }

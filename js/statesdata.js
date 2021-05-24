@@ -309,6 +309,7 @@ finddata();
 function searchdata(data) {
 	if ($("#"+data.id).hasClass("state")) {
 		dataempty1();
+		$("html").removeClass(stateclass);
 		getdata(data);
 	} else {
 		state=data.getAttribute("stateid");
@@ -326,7 +327,14 @@ $.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data) {
 	pin= 'unpin';
 	}
 	updata += '<div class="dishead"><div id="disrem" onclick="$(\'#coviddis\').empty(); $(\'#coviddis\').removeClass(\'bor\');" class="disbut" style="float: right; text-align: right;">x</div><div class="disbut" id="disclose" onclick="closedis()" style="float: right; margin-right:5px; margin-left:5px; text-align: right;">ᐃ</div>'+y+'<div id="dispin" onclick="pin(this)" class="dispin" sta="'+x+'" dis="'+y+'" style="float: left; text-align: left;"> 📌'+ pin+'</div></div>'
-	if (data[x].hasOwnProperty('delta')) {
+	try {
+		console.log(data[x].districts[y].delta.confirmed)
+		var error = 0
+	}
+	catch (e) {
+		var error = 1
+	}
+	if (error == 0) {
 		if ((data[x].districts[y].delta.confirmed - data[x].districts[y].delta.recovered - data[x].districts[y].delta.deceased) < 0) {
 			sign = "";
 		} else {
@@ -401,7 +409,14 @@ $.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data) {
 	}
 	
 	updata += '<div class="dishead">'+y+'&nbsp<div id="dispin1" style="display: inline-block;" onclick="pin1(this)" class="dispin" sta1="'+x+'" dis1="'+y+'"> 📌'+ pin+'</div></div>'
-	if (data[x].hasOwnProperty('delta')) {
+	try {
+		console.log(data[x].districts[y].delta.confirmed)
+		var error = 0
+	}
+	catch (e) {
+		var error = 1
+	}
+	if (error == 0) {
 		if ((data[x].districts[y].delta.confirmed - data[x].districts[y].delta.recovered - data[x].districts[y].delta.deceased) < 0) {
 			sign = "";
 		} else {
@@ -497,19 +512,7 @@ $.each(data.districts, function(key, value) {
 }
 
 function vacinnation(x) {
-var today = new Date();
-var dd = today.getDate();
-
-var mm = today.getMonth() + 1;
-var yyyy = today.getFullYear();
-if (dd < 10) {
-	dd = '0' + dd;
-}
-
-if (mm < 10) {
-	mm = '0' + mm;
-}
-today = dd + '-' + mm + '-' + yyyy;
+	today = date(0,'-');
 	var tabledata = '';
 	tabledata += '<tr>';
 	tabledata += '</tr>';
@@ -520,34 +523,62 @@ today = dd + '-' + mm + '-' + yyyy;
     tabletitle += '<th style="background-color: rgba(127,127,127,0.1);" onclick="sortTable(0,\'#sort\')">';
     tabletitle += '<div id="sort" class="sticky heading-content">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>';
     tabletitle += '</th>';
-    tabletitle += '<th style="background-color: rgba(127,127,127,0.1);" onclick="sorttable(1,\'#sort1\')">';
-    tabletitle += '<div id="sort1" class="sticky heading-content">Block Name&nbsp;&nbsp;</div>';
-    tabletitle += '</th>';
-    tabletitle += '<th style="background-color: rgba(127,127,127,0.1);" onclick="sorttable(2,\'#sort2\')">';
-    tabletitle += '<div id="sort2" class="sticky heading-content">Min Age</div>';
-    tabletitle += '</th>';
-    tabletitle += '<th style="background-color: rgba(127,127,127,0.1);" onclick="sorttable(3,\'#sort3\')">';
-    tabletitle += '<div id="sort3" class="sticky heading-content">Available Vaccines&nbsp;&nbsp;</div>';
-    tabletitle += '</th>';
-    tabletitle += '<th style="background-color: rgba(127,127,127,0.1);" onclick="sorttable(4,\'#sort4\')">';
-    tabletitle += '<div id="sort4" class="sticky heading-content">Pin Code&nbsp;&nbsp;</div>';
-    tabletitle += '</th>';
+for (var i = 0; i < 7; i++) {
     tabletitle += '<th style="background-color: rgba(127,127,127,0.1);">';
-    tabletitle += '<div class="sticky heading-content">Timings&nbsp;&nbsp;</div>';
+    tabletitle += '<div class="sticky heading-content">'+date(i,'/')+'</div>';
     tabletitle += '</th>';
-$.getJSON('https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id='+x+'&date='+today, function(data) {
-$.each(data.sessions, function(key, value) {
-if (value.available_capacity > 0) {
-tabledata += '<tr>';
-tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600;">' + value.name + '</td>';
-tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600;">' + value.block_name + '</td>';
-tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600!important;"><div class="confirm">' + value.min_age_limit + '</td>';
-tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600!important;"><div class="confirm">' + value.available_capacity + '</td>';
-tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600!important;"><div class="confirm">' + value.pincode + '</td>';
-tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600;">' + value.from + '-' + value.to +'</td>';
-tabledata += '</tr>';
-found=1;
 }
+$.getJSON('https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id='+x+'&date='+today, function(data) {
+$.getJSON('https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id='+x+'&date='+date(1,'-'), function(data1) {
+$.getJSON('https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id='+x+'&date='+date(2,'-'), function(data2) {
+$.getJSON('https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id='+x+'&date='+date(3,'-'), function(data3) {
+$.getJSON('https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id='+x+'&date='+date(4,'-'), function(data4) {
+$.getJSON('https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id='+x+'&date='+date(5,'-'), function(data5) {
+$.getJSON('https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id='+x+'&date='+date(6,'-'), function(data6) {
+$.each(data.sessions, function(key, value) {
+var name = value.name;
+tabledata += '<tr>';
+if (value.fee == 0) {
+tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600;">' + value.name+ '<br><div style="font-weight: 500!important; font-size: 0.8rem;">' + value.address+', '+ value.block_name+', '+ value.state_name+' ('+ value.pincode + ')</div></td>';
+} else {
+tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600;">' + value.name+ '<br>Price: ' +value.fee + ' Rs<br><div style="font-weight: 500!important; font-size: 0.8rem;">' + value.address+', '+ value.block_name+', '+ value.state_name+' ('+ value.pincode + ')</div></td>';
+}
+
+tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600!important;" value="'+value.available_capacity+'" age="'+value.min_age_limit+'"><div style="text-align: center;">' + value.available_capacity +'<br>Age: '+ value.min_age_limit + '+</div></td>';
+
+for (var i = 1; i < 7; i++) {
+if (i == 1) {
+	var data = data1.sessions
+} else if (i == 2) {
+	var data = data2.sessions
+} else if (i == 3) {
+	var data = data3.sessions
+} else if (i == 4) {
+	var data = data4.sessions
+} else if (i == 5) {
+	var data = data5.sessions
+} else if (i == 6) {
+	var data = data6.sessions
+}
+var yes = 0;
+$.each(data, function(x, value1) {
+if (value.center_id == value1.center_id && value1.min_age_limit == value.min_age_limit && value1.fee == value.fee ) {
+yes = 1;
+tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600!important;" value="'+value1.available_capacity+'" age="'+value1.min_age_limit+'"><div style="text-align: center;">' + value1.available_capacity +'<br>Age: '+ value1.min_age_limit + '+</div></td>';
+}
+});
+if (yes == 0) {
+tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600!important;"><div style="text-align: center;">-</td>';	
+}
+}
+tabledata += '</tr>';
+// tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600;">' + value.block_name + '</td>';
+// tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600!important;"><div class="confirm">' + value.min_age_limit + '</td>';
+// tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600!important;"><div class="confirm">' + value.available_capacity + '</td>';
+// tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600!important;"><div class="confirm">' + value.pincode + '</td>';
+// tabledata += '<td style="background-color: rgba(127,127,127,0.1); font-weight: 600;">' + value.from + '-' + value.to +'</td>';
+// tabledata += '</tr>';
+found=1;
 });
 if (found == 1) {
 $('#table').append(tabledata);
@@ -556,9 +587,16 @@ $('#tfoot').append(tabletitle);
 $("#vacinetext").removeClass('hide');
 }
 });
+});
+});
+});
+});
+});
+});
 }
 
 function districtpage(x) {
+	$("html").removeClass(stateclass);
 	state=x.getAttribute("stateid");
 	stateclass = state;
 	id=x.id;
@@ -618,4 +656,23 @@ $.getJSON("https://api.covid19india.org/v4/min/data.min.json", function(data) {
 var title = y + ' Coronavirus Update (Live): ' + data[x].districts[y].total.confirmed + ' Cases from COVID-19 Virus Pandemic';
 $('#title').empty().append(title);
 });
+}
+
+// +n days,  format
+function date(x,y) {
+var today = new Date();
+today.setDate(today.getDate() + parseInt(x));
+var dd = today.getDate();
+
+
+var mm = today.getMonth() + 1;
+var yyyy = today.getFullYear();
+if (dd < 10) {
+	dd = '0' + dd;
+}
+
+if (mm < 10) {
+	mm = '0' + mm;
+}
+return (dd + y + mm + y + yyyy);	
 }
