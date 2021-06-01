@@ -247,3 +247,32 @@
 .dark table thead {
   color: #fff;
 }
+
+.dark #covidcol1 .highcharts-yaxis-labels text, .dark #covidcol1 .highcharts-xaxis-labels text, .dark #covidcol1 .highcharts-title text {
+	fill: #fff!important;
+}
+
+.dark #covidcol2 .highcharts-yaxis-labels text, .dark #covidcol2 .highcharts-xaxis-labels text, .dark #covidcol2 .highcharts-title text {
+	fill: #fff!important;
+}
+.dark #covidcol3 .highcharts-yaxis-labels text, .dark #covidcol3 .highcharts-xaxis-labels text, .dark #covidcol3 .highcharts-title text {
+	fill: #fff!important;
+}
+.dark #covidcol4 .highcharts-yaxis-labels text, .dark #covidcol4 .highcharts-xaxis-labels text, .dark #covidcol4 .highcharts-title text {
+	fill: #fff!important;
+}
+
+.dark .highcharts-axis-title {
+	fill: #fff!important;
+}
+
+.dark .highcharts-range-selector-buttons text {
+	fill: #fff!important;
+}
+
+.dark .highcharts-button rect {
+	fill: #111!important;
+}
+.dark .highcharts-axis-labels text {
+	fill: #fff!important;
+}

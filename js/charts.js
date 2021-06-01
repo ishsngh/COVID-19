@@ -3,6 +3,11 @@ if (width1 > 400) {
 	width1 = 400
 }
 
+var width2 = parseInt($(window).width() * 0.9);
+if (width2 > 450) {
+	width2 = 450
+}
+
 function covidpie() {
 $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
     $.each(coviddata.statewise, function(key, value) {
@@ -119,94 +124,293 @@ let chart = new Highcharts.Chart({
 });
 }
 
+function chartstates5(){ 
+$.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
+	var name = [];
+	var confirmed = [];
+	var recovered = [];
+	var active = [];
+	var deaths = [];
+    $.each(coviddata.statewise, function(key, value) {
+        if (value.state != "Total") {
+			name.push(value.state);
+			confirmed.push(parseInt(value.confirmed));
+			active.push(parseInt(value.active));
+			recovered.push(parseInt(value.recovered));
+			deaths.push(parseInt(value.deaths));
+        }
+    });
+
+let chart1 = new Highcharts.Chart({
+	
+	chart: {
+		renderTo: 'covidcol1',
+		type: 'column',
+		backgroundColor: 'transparent',
+		height: width2,
+		width: width2,
+	},
+	
+	title: {
+    text: 'Confirmed',
+	fontWeight: 'bold'
+	},
+	
+	xAxis: {
+        categories: name
+    },
+	
+    yAxis: {
+        min: 0,
+        title: {
+            text: '',
+        },
+	},
+	
+      legend: {
+        enabled:false
+      },
+
+    series: [{
+        name: 'Confirmed',
+        data: confirmed
+    }]
+});
+
+let chart2 = new Highcharts.Chart({
+	
+	chart: {
+		renderTo: 'covidcol2',
+		type: 'column',
+		backgroundColor: 'transparent',
+		height: width2,
+		width: width2,
+	},
+	
+	title: {
+    text: 'Deaths',
+	fontWeight: 'bold'
+	},
+	
+	xAxis: {
+        categories: name
+    },
+	
+    yAxis: {
+        min: 0,
+        title: {
+            text: ' '
+        },
+	},
+
+      legend: {
+        enabled:false
+      },
+
+    series: [{
+        name: 'Deaths',
+        data: deaths
+    }]
+});
+let chart3 = new Highcharts.Chart({
+	
+	chart: {
+		renderTo: 'covidcol3',
+		type: 'column',
+		backgroundColor: 'transparent',
+		height: width2,
+		width: width2,
+	},
+	
+      legend: {
+        enabled:false
+      },
+	title: {
+    text: 'Recovered',
+	fontWeight: 'bold'
+	},
+	
+	xAxis: {
+        categories: name
+    },
+	
+    yAxis: {
+        min: 0,
+        title: {
+            text: ' '
+        },
+	},
+
+    series: [{
+        name: 'Recovered',
+        data: recovered
+    }]
+});
+let chart4 = new Highcharts.Chart({
+	
+	chart: {
+		renderTo: 'covidcol4',
+		type: 'column',
+		backgroundColor: 'transparent',
+		height: width2,
+		width: width2,
+	},
+	
+      legend: {
+        enabled:false
+      },
+	title: {
+    text: 'Active',
+	fontWeight: 'bold'
+	},
+	
+	xAxis: {
+        categories: name
+    },
+	
+    yAxis: {
+        min: 0,
+        title: {
+            text: ' '
+        },
+		},
+
+    series: [{
+        name: 'Active',
+        data: active
+    }]
+});
+});
+}
+
 function chartline2() {
 $.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
-    var arrValues = [
-        ['Date', 'Confirmed', 'active', 'recovered', 'deaths']
-    ];
-    var take = 0;
-    var today = new Date();
-    var dd = today.getDate();
-
-    var mm = today.getMonth();
-    var yyyy = today.getFullYear();
-    if (dd < 10) {
-        dd = '0' + dd;
-    }
-
-    if (mm < 10) {
-        mm = '0' + mm;
-    }
-    month = yyyy + '-' + mm + '-' + dd;
+var width2 = parseInt($(window).width() * 0.9);
+if (width2 > 450) {
+	width2 = 450
+}
+    var arrValues = [];
+    var arrValues1 = [];
+    var arrValues2 = [];
+    var arrValues3 = [];
     $.each(coviddata.cases_time_series, function(key, value) {
-        if (value.dateymd == month || take == 1) {
-            arrValues.push([value.date, parseInt(value.dailyconfirmed), parseInt(value.dailyconfirmed - value.dailyrecovered - value.dailydeceased), parseInt(value.dailyrecovered), parseInt(value.dailydeceased)]);
-            take = 1
-        }
+		arrValues.push([Date.parse(value.dateymd), parseInt(value.dailyconfirmed)]);
+		arrValues2.push([Date.parse(value.dateymd), parseInt(value.dailyconfirmed - value.dailyrecovered - value.dailydeceased)]);
+		arrValues3.push([Date.parse(value.dateymd), parseInt(value.dailyrecovered)]);
+		arrValues1.push([Date.parse(value.dateymd), parseInt(value.dailydeceased)]);
     });
-    google.charts.load('current', {
-        'packages': ['corechart']
-    });
-    google.charts.setOnLoadCallback(drawChart);
+	
+    Highcharts.stockChart({
 
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable(arrValues);
+		chart: {
+			renderTo: 'curve_chart',
+			backgroundColor: 'transparent',
+			height: width2,
+			width: width2,
+		},
 
-        var width1 = parseInt($(window).width() * 0.9);
-        if (width1 > 400 * 16 / 9) {
-            width1 = 400 * 16 / 9;
-        }
+        rangeSelector: {
+            selected: 1
+        },
 
-        var h1 = parseInt($(window).height() * 0.9);
-        if (h1 > 400) {
-            h1 = 400;
-        }
-
-        var options = {
-            backgroundColor: {
-                fill: 'transparent'
-            },
-            curveType: 'function',
-            width: width1,
-            height: h1,
-            hAxis: {
-                textPosition: 'none',
-                baseline: 1,
-                gridlines: {
-                    count: 1
-                },
-                textStyle: {
-                    color: 'gray'
-                }
-            },
-            gridlines: {
-                color: 'none'
-            },
-            vAxis: {
-                textStyle: {
-                    color: 'gray'
-                },
-                baseline: 0,
-                gridlines: {
-                    count: 1
-                }
-            },
-            legend: {
-                position: 'bottom',
-                textStyle: {
-                    color: 'gray'
-                }
-            },
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-        chart.draw(data, options);
+        title: {
+            text: 'Confirmed'
+        },
 		
-    }
+		xAxis: {
+		  type: 'datetime',
+		},
+
+        series: [{
+            name: 'Confirmed',
+            data: arrValues,
+        }]
+    });
+
+    Highcharts.stockChart({
+
+		chart: {
+			renderTo: 'curve_chart1',
+			backgroundColor: 'transparent',
+			height: width2,
+			width: width2,
+		},
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        title: {
+            text: 'Active'
+        },
+		
+		xAxis: {
+		  type: 'datetime',
+		},
+
+        series: [{
+            name: 'Active',
+            data: arrValues2,
+        }]
+    });
+
+    Highcharts.stockChart({
+
+		chart: {
+			renderTo: 'curve_chart2',
+			backgroundColor: 'transparent',
+			height: width2,
+			width: width2,
+		},
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        title: {
+            text: 'Recovered'
+        },
+		
+		xAxis: {
+		  type: 'datetime',
+		},
+
+        series: [{
+            name: 'Recovered',
+            data: arrValues3,
+        }]
+    });
+
+    Highcharts.stockChart({
+
+		chart: {
+			renderTo: 'curve_chart3',
+			backgroundColor: 'transparent',
+			height: width2,
+			width: width2,
+		},
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        title: {
+            text: 'Deaths'
+        },
+		
+		xAxis: {
+		  type: 'datetime',
+		},
+
+        series: [{
+            name: 'Deaths',
+            data: arrValues1,
+        }]
+    });
 });
 }
 
 chartline2();
 covidpie();
 chartstates();
-
+chartstates5();

@@ -83,6 +83,7 @@ if (dispinned == true) {
 }
     $("html").addClass(state.id);
     $("#world1").addClass('hide');
+	$("#bar").addClass('hide');
     $("#mainback").removeClass('hide');
     document.getElementById("statetext").innerHTML = "Click on district name for more details";
     $("#space").addClass('hide');
@@ -123,6 +124,7 @@ $("#tabletext").removeClass('hide');
     $("html").addClass(state);
     $("#world1").addClass('hide');
     $("#mainback").removeClass('hide');
+	$("#bar").addClass('hide');
     document.getElementById("statetext").innerHTML = "Click on district name for more details";
     $("#space").addClass('hide');
     $("#table").empty();
@@ -163,6 +165,7 @@ $("#tabletext").removeClass('hide');
     document.getElementById("statetext").innerHTML = "Click on state name for more details";
     $("#world1").removeClass('hide');
     $("#covid3").removeClass('hide');
+	$("#bar").removeClass('hide');
     $("html").removeClass(stateclass);
     $("#table").empty();
     $("#title").empty();
@@ -221,6 +224,7 @@ function dataempty1() {
     $("#covid3").empty();
     $("#foot").empty();
 	$("#covid").empty();
+	$("#bar").addClass('hide');
 	$('#covidcases').empty();
 	$("#covid19").empty();
 	$('#curvetext').empty();

@@ -8,9 +8,10 @@
 	<link href="https://fonts.googleapis.com/css?family=Product+Sans" rel="stylesheet" type="text/css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=KoHo&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=KoHo&display=swap" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<!-- <script src="https://code.highcharts.com/highcharts.js"></script> -->
+	<script src="https://code.highcharts.com/stock/highstock.js"></script>
 <script type="text/javascript">
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'bn,en,hi,mr,ml,pa,sd,ta,ur', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
@@ -94,9 +95,9 @@ function googleTranslateElementInit() {
 	</div>
 	<div id="covid3" class="date"><b> </b></div>
 	<div id="space">
-		<br>
 	</div>
 	<div id="mainback" class="hide">
+	<br>
 		<div id="goback" class="Level fadeInUp click back" onclick="dataempty()" style="animation-delay: 0.6s;">Go Home</div>
 		<div id="goback1" class="Level fadeInUp click back hide" onclick="gostate()" style="animation-delay: 0.6s;">Go Back</div>
 	</div>
@@ -152,15 +153,41 @@ function googleTranslateElementInit() {
 		<div id="covid"></div>
 	</div>
 </div>
-<div>
-<div>
+<div id="bar">
+<h1 align="center">Bar Gaphs</h1>
+<h4 align="center">Tap For the Data</h4>
+<div class="info" style="display: block; align-items: center; justify-content: center">
+	<div class="chart">
+		<div id="covidcol1"></div>
+	</div>
+	<div class="chart">
+		<div id="covidcol4"></div>
+	</div>
+	<div class="chart">
+		<div id="covidcol3"></div>
+	</div>
+	<div class="chart">
+		<div id="covidcol2"></div>
+	</div>
+</div>
+</div>
 <h1 align="center">Line Chart</h1>
 <h2 align="center">Total cases</h2>
+<div class="info" style="display: block; align-items: center; justify-content: center">
+	<div class="chart">
+		<div id="curve_chart"></div>
+	</div>
+	<div class="chart">
+		<div id="curve_chart1"></div>
+	</div>
+	<div class="chart">
+		<div id="curve_chart2"></div>
+	</div>
+	<div class="chart">
+		<div id="curve_chart3"></div>
+	</div>
 </div>
-<div class="chart" style="margin-top: -10px; display: flex; position: relative;">
-	<div id="curve_chart" style="position: static;"></div>
-</div>
-</div>
+<div>
 <section class="help">
 	<div class="help__inner container"> <b>Would love your feedback/suggestions! Just click the button given below.</b>
 		<br> <a href="formpage.html" class="join">Feedback</a> </div>

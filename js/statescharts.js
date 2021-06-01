@@ -118,95 +118,134 @@ let chart1 = new Highcharts.Chart({
 
 function chartlinestate1() {
 $.getJSON("https://api.covid19india.org/v4/min/timeseries.min.json", function(data2) {
-    var arrValues = [
-        ['Date', 'Confirmed', 'active', 'recovered', 'deaths']
-    ];
-    var take = 0;
-    var today = new Date();
-    var dd = today.getDate();
-
-    var mm = today.getMonth();
-    var yyyy = today.getFullYear();
-    if (dd < 10) {
-        dd = '0' + dd;
-    }
-
-    if (mm < 10) {
-        mm = '0' + mm;
-    }
-    month = yyyy + '-' + mm + '-' + dd;
+    var arrValues = [];
+    var arrValues1 = [];
+    var arrValues2 = [];
+    var arrValues3 = [];
     $.each(data2, function(x, y) {
 		$.each(data2[x].dates, function(key, value) {
 		if (x == stateclass) {
-        if (key == month || take == 1) {
-		take = 1;
 		try {
-		arrValues.push([key, parseInt(data2[x].dates[key].delta.confirmed), parseInt(data2[x].dates[key].delta.confirmed - data2[x].dates[key].delta.recovered - data2[x].dates[key].delta.deceased), parseInt(data2[x].dates[key].delta.recovered), parseInt(data2[x].dates[key].delta.deceased)]);
+		arrValues.push([Date.parse(key), parseInt(data2[x].dates[key].delta.confirmed)]);
+		arrValues1.push([Date.parse(key), parseInt(data2[x].dates[key].delta.confirmed - data2[x].dates[key].delta.recovered - data2[x].dates[key].delta.deceased)]);
+		arrValues2.push([Date.parse(key), parseInt(data2[x].dates[key].delta.recovered)]);
+		arrValues3.push([Date.parse(key), parseInt(data2[x].dates[key].delta.deceased)]);
         } catch(e) {
 		  console.log("Cannot Load information of " + key)
 		}
         }
-		}
     });
 	});
-    google.charts.load('current', {
-        'packages': ['corechart']
+	
+    Highcharts.stockChart({
+
+		chart: {
+			renderTo: 'curve_chart',
+			backgroundColor: 'transparent',
+			height: width2,
+			width: width2,
+		},
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        title: {
+            text: 'Confirmed'
+        },
+		
+		xAxis: {
+		  type: 'datetime',
+		},
+
+        series: [{
+            name: 'Confirmed',
+            data: arrValues,
+        }]
     });
-    google.charts.setOnLoadCallback(drawChart);
 
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable(arrValues);
+    Highcharts.stockChart({
 
-        var width1 = parseInt($(window).width() * 0.9);
-        if (width1 > 400 * 16 / 9) {
-            width1 = 400 * 16 / 9;
-        }
+		chart: {
+			renderTo: 'curve_chart1',
+			backgroundColor: 'transparent',
+			height: width2,
+			width: width2,
+		},
 
-        var h1 = parseInt($(window).height() * 0.9);
-        if (h1 > 400) {
-            h1 = 400;
-        }
+        rangeSelector: {
+            selected: 1
+        },
 
-        var options = {
-            backgroundColor: {
-                fill: 'transparent'
-            },
-            curveType: 'function',
-            width: width1,
-            height: h1,
-            hAxis: {
-                textPosition: 'none',
-                baseline: 1,
-                gridlines: {
-                    count: 1
-                },
-                textStyle: {
-                    color: 'gray'
-                }
-            },
-            gridlines: {
-                color: 'none'
-            },
-            vAxis: {
-                textStyle: {
-                    color: 'gray'
-                },
-                baseline: 0,
-                gridlines: {
-                    count: 1
-                }
-            },
-            legend: {
-                position: 'bottom',
-                textStyle: {
-                    color: 'gray'
-                }
-            },
-        };
+        title: {
+            text: 'Active'
+        },
+		
+		xAxis: {
+		  type: 'datetime',
+		},
 
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-        chart.draw(data, options);
-    }
+        series: [{
+            name: 'Active',
+            data: arrValues1,
+        }]
+    });
+
+    Highcharts.stockChart({
+
+		chart: {
+			renderTo: 'curve_chart2',
+			backgroundColor: 'transparent',
+			height: width2,
+			width: width2,
+		},
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        title: {
+            text: 'Recovered'
+        },
+		
+		xAxis: {
+		  type: 'datetime',
+		},
+
+        series: [{
+            name: 'Recovered',
+            data: arrValues2,
+        }]
+    });
+
+    Highcharts.stockChart({
+
+		chart: {
+			renderTo: 'curve_chart3',
+			backgroundColor: 'transparent',
+			height: width2,
+			width: width2,
+		},
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        title: {
+            text: 'Deaths'
+        },
+		
+		xAxis: {
+		  type: 'datetime',
+		},
+
+        series: [{
+            name: 'Deaths',
+            data: arrValues3,
+        }]
+    });
+	
+
 });
 }
 
@@ -264,91 +303,127 @@ let chart = new Highcharts.Chart({
 
 function chartlinedis1(y,x) {
 $.getJSON("https://api.covid19india.org/v4/min/data-all.min.json", function(data2) {
-    var arrValues = [
-        ['Date', 'Confirmed', 'active', 'recovered', 'deaths']
-    ];
-    var take = 0;
-    var today = new Date();
-    var dd = today.getDate();
-
-    var mm = today.getMonth();
-    var yyyy = today.getFullYear();
-    if (dd < 10) {
-        dd = '0' + dd;
-    }
-
-    if (mm < 10) {
-        mm = '0' + mm;
-    }
-    month = yyyy + '-' + mm + '-' + dd;
+    var arrValues = [];
+    var arrValues1 = [];
+    var arrValues2 = [];
+    var arrValues3 = [];
     $.each(data2, function(key, value) {
-        if (key == month || take == 1) {
-		take = 1;
 		try {
-		arrValues.push([key, parseInt(data2[key][x].districts[y].total.confirmed), parseInt(data2[key][x].districts[y].total.confirmed - data2[key][x].districts[y].total.recovered - data2[key][x].districts[y].total.deceased), parseInt(data2[key][x].districts[y].total.recovered), parseInt(data2[key][x].districts[y].total.deceased)]);
+		arrValues.push([Date.parse(key), parseInt(data2[key][x].districts[y].total.confirmed)]);
+		arrValues1.push([Date.parse(key), parseInt(data2[key][x].districts[y].total.confirmed - data2[key][x].districts[y].total.recovered - data2[key][x].districts[y].total.deceased)]);
+		arrValues2.push([Date.parse(key), parseInt(data2[key][x].districts[y].total.recovered)]);
+		arrValues3.push([Date.parse(key), parseInt(data2[key][x].districts[y].total.deceased)]);
         } catch(e) {
 		  console.log("Cannot Load information of " + key)
 		}
-        }
 	});
-    google.charts.load('current', {
-        'packages': ['corechart']
+
+    Highcharts.stockChart({
+		chart: {
+			renderTo: 'curve_chart',
+			backgroundColor: 'transparent',
+			height: width2,
+			width: width2,
+		},
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        title: {
+            text: 'Confirmed'
+        },
+		
+		xAxis: {
+		  type: 'datetime',
+		},
+
+        series: [{
+            name: 'Confirmed',
+            data: arrValues,
+        }]
     });
-    google.charts.setOnLoadCallback(drawChart);
 
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable(arrValues);
+    Highcharts.stockChart({
 
-        var width1 = parseInt($(window).width() * 0.9);
-        if (width1 > 400 * 16 / 9) {
-            width1 = 400 * 16 / 9;
-        }
+		chart: {
+			renderTo: 'curve_chart1',
+			backgroundColor: 'transparent',
+			height: width2,
+			width: width2,
+		},
 
-        var h1 = parseInt($(window).height() * 0.9);
-        if (h1 > 400) {
-            h1 = 400;
-        }
+        rangeSelector: {
+            selected: 1
+        },
 
-        var options = {
-            backgroundColor: {
-                fill: 'transparent'
-            },
-            curveType: 'function',
-            width: width1,
-            height: h1,
-            hAxis: {
-                textPosition: 'none',
-                baseline: 1,
-                gridlines: {
-                    count: 1
-                },
-                textStyle: {
-                    color: 'gray'
-                }
-            },
-            gridlines: {
-                color: 'none'
-            },
-            vAxis: {
-                textStyle: {
-                    color: 'gray'
-                },
-                baseline: 0,
-                gridlines: {
-                    count: 1
-                }
-            },
-            legend: {
-                position: 'bottom',
-                textStyle: {
-                    color: 'gray'
-                }
-            },
-        };
+        title: {
+            text: 'Active'
+        },
+		
+		xAxis: {
+		  type: 'datetime',
+		},
 
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-        chart.draw(data, options);
-    }
+        series: [{
+            name: 'Active',
+            data: arrValues1,
+        }]
+    });
+
+    Highcharts.stockChart({
+
+		chart: {
+			renderTo: 'curve_chart2',
+			backgroundColor: 'transparent',
+			height: width2,
+			width: width2,
+		},
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        title: {
+            text: 'Recovered'
+        },
+		
+		xAxis: {
+		  type: 'datetime',
+		},
+
+        series: [{
+            name: 'Recovered',
+            data: arrValues2,
+        }]
+    });
+
+    Highcharts.stockChart({
+
+		chart: {
+			renderTo: 'curve_chart3',
+			backgroundColor: 'transparent',
+			height: width2,
+			width: width2,
+		},
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        title: {
+            text: 'Deaths'
+        },
+		
+		xAxis: {
+		  type: 'datetime',
+		},
+
+        series: [{
+            name: 'Deaths',
+            data: arrValues3,
+        }]
+    });
 });
 }
 
