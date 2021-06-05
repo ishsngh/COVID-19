@@ -221,11 +221,20 @@
   border-bottom: 3px solid #fff;
 }
 
+.dark .selected {
+  border-bottom: 3px solid #fff;
+}
+
 .dark #hamburger span {
 	background: #eee;
 }
-.dark .sitenavigation.is-tapped > ul a {
+
+.dark .sitenavigation.is-tapped > ul {
 	background-color: #222;
+}
+
+.dark .sitenavigation.is-tapped > ul a:hover {
+background-color: #333;
 }
 
 .dark #google_translate_element {
