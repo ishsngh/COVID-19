@@ -1355,17 +1355,19 @@ input:checked + .slider:before {
   }
     
   .navbar .sitenavigation.is-tapped > ul a {
-	width: 45%;
-    height: 100px;
-    margin: 15px;
-    display: inline-block;
-    padding-top: 40px;
-    padding-bottom: 10px;
+    width: 45%;
+    margin: auto;
+    margin-top: 5px;
+    display: inline-flex;
+	font-size: 25px;
+    padding-top: 35px;
+	position: relative;
+	background-color: #eee;
+    padding-bottom: 35px;
+	justify-content: space-evenly;
     padding-left: 20px;
     padding-right: 20px;
     border-radius: 10px;
-    /*background-color: #fff;
-     height: auto; */
     float: none;
     border: none !important;
     -webkit-font-smoothing: antialiased;
@@ -1381,7 +1383,7 @@ input:checked + .slider:before {
   }
   
   .navbar .sitenavigation.is-tapped > ul a:hover {
-	background-color: #eee;
+	background-color: #ddd;
   }
   
   .selected a:hover {

@@ -215,6 +215,10 @@
 	/* background-color: #222; */
 }
 
+.dark .navbar .sitenavigation.is-tapped > ul a {
+	background-color: #333;
+}
+
 .dark .sitenavigation li a:hover {
   color: #fff;
   font-weight: 300%;
@@ -234,7 +238,7 @@
 }
 
 .dark .sitenavigation.is-tapped > ul a:hover {
-background-color: #333;
+background-color: #444;
 }
 
 .dark #google_translate_element {
