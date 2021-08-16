@@ -9,7 +9,7 @@ if (width2 > 450) {
 }
 
 function covidpie() {
-$.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
+$.getJSON("https://data.covid19india.org/data.json", function(coviddata) {
     $.each(coviddata.statewise, function(key, value) {
         if (value.state == "Total") {
             active = parseInt(value.active);
@@ -68,7 +68,7 @@ let chart = new Highcharts.Chart({
 }
 
 function chartstates(){ 
-$.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
+$.getJSON("https://data.covid19india.org/data.json", function(coviddata) {
 	var jsonArr = [];
     $.each(coviddata.statewise, function(key, value) {
         if (value.state != "Total") {
@@ -125,7 +125,7 @@ let chart = new Highcharts.Chart({
 }
 
 function chartstates5(){ 
-$.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
+$.getJSON("https://data.covid19india.org/data.json", function(coviddata) {
 	var name = [];
 	var confirmed = [];
 	var recovered = [];
@@ -284,7 +284,7 @@ let chart4 = new Highcharts.Chart({
 }
 
 function chartline2() {
-$.getJSON("https://api.covid19india.org/data.json", function(coviddata) {
+$.getJSON("https://data.covid19india.org/data.json", function(coviddata) {
 var width2 = parseInt($(window).width() * 0.9);
 if (width2 > 450) {
 	width2 = 450

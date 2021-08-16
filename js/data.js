@@ -1,5 +1,5 @@
 function data() {
-    $.getJSON("https://api.covid19india.org/data.json", function(data) {
+    $.getJSON("https://data.covid19india.org/data.json", function(data) {
         var sign = "+";
         var tabledata = '';
         $.each(data.statewise, function(key, value) {
