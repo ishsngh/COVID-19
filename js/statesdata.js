@@ -12,7 +12,7 @@ function states() {
             tabledata1 += '<td style="background-color: rgba(40,167,69,.1); color: #28a745;">' + data[x].total.recovered + '</td>';
             tabledata1 += '<td style="background-color: rgba(255,7,58,0.1); color: #ff073a;">' + data[x].total.deceased + '</td>';
             tabledata1 += '<td style="background-color: rgba(252, 3, 227,0.1); color: #fc03e3;">' + data[x].total.tested + '</td>';
-            tabledata1 += '<td style="background-color: rgba(252, 194, 3,0.1); color: #fcc203;">' + data[x].total.vaccinated + '</td>';
+            tabledata1 += '<td style="background-color: rgba(252, 194, 3,0.1); color: #fcc203;">' + (data[x].total.vaccinated1 + data[x].total.vaccinated2) + '</td>';
             tabledata1 += '</tr>';
             var updata = '';
             updata += '<div class="info" id="test">';
@@ -48,10 +48,10 @@ function states() {
                 } else {
                     updata += '<div class="cases6"><b>Total Tests<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.tested).toLocaleString('en-IN') + '</b><br></div>';
                 }
-                if (data[x].delta.vaccinated != undefined) {
-                    updata += '<div class="cases7"><b>Vaccination<br><div style="font-size:13px;">[+' + parseInt(data[x].delta.vaccinated).toLocaleString('en-IN') + ']</div>' + parseInt(data[x].total.vaccinated).toLocaleString('en-IN') + '</b><br></div>';
+                if ((data[x].delta.vaccinated1 + data[x].delta.vaccinated2) > 0) {
+                    updata += '<div class="cases7"><b>Vaccination<br><div style="font-size:13px;">[+' + parseInt(data[x].delta.vaccinated1 + data[x].delta.vaccinated2).toLocaleString('en-IN') + ']</div>' + parseInt(data[x].total.vaccinated1 + data[x].total.vaccinated2).toLocaleString('en-IN') + '</b><br></div>';
                 } else {
-                    updata += '<div class="cases7"><b>Vaccination<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.vaccinated).toLocaleString('en-IN') + '</b><br></div>';
+                    updata += '<div class="cases7"><b>Vaccination<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].total.vaccinated1 + data[x].total.vaccinated2).toLocaleString('en-IN') + '</b><br></div>';
                 }
                 updata += '</div></div>';
             } else {
@@ -60,7 +60,7 @@ function states() {
                 updata += '<div class="cases4"><b>Total Deaths<br>' + parseInt(data[x].total.deceased).toLocaleString('en-IN') + '</b><br></div>';
                 updata += '<div class="cases5"><b>Recoveries<br>' + parseInt(data[x].total.recovered).toLocaleString('en-IN') + '</b><br></div>';
                 updata += '<div class="cases6"><b>Total Tests<br>' + parseInt(data[x].total.tested).toLocaleString('en-IN') + '</b><br></div>';
-                updata += '<div class="cases7"><b>Vaccination<br>' + parseInt(data[x].total.vaccinated).toLocaleString('en-IN') + '</b><br></div>';
+                updata += '<div class="cases7"><b>Vaccination<br>' + parseInt(data[x].total.vaccinated1 + data[x].total.vaccinated2).toLocaleString('en-IN') + '</b><br></div>';
                 updata += '</div></div>';
             }
             var title = '';
@@ -122,10 +122,10 @@ function states() {
                     } else {
                         tabledata += '<td style="background-color: rgba(252, 3, 227,0.1); color: #fc03e3;"><div class="confirm">0</td>';
                     }
-                    if (data[x].districts[key].delta.vaccinated > 0) {
-                        tabledata += '<td style="background-color: rgba(252, 194, 3,0.1); color: #fcc203;"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">+' + data[x].districts[key].delta.vaccinated + '&nbsp;</div><div class="confirm">' + data[x].districts[key].total.vaccinated + '</td>';
-                    } else if (data[x].districts[key].total.vaccinated != undefined) {
-                        tabledata += '<td style="background-color: rgba(252, 194, 3,0.1); color: #fcc203;"><div class="confirm">' + data[x].districts[key].total.vaccinated + '</td>';
+                    if ((data[x].districts[key].delta.vaccinated1 + data[x].districts[key].delta.vaccinated2) > 0) {
+                        tabledata += '<td style="background-color: rgba(252, 194, 3,0.1); color: #fcc203;"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">+' + (data[x].districts[key].delta.vaccinated1 + data[x].districts[key].delta.vaccinated2) + '&nbsp;</div><div class="confirm">' + (data[x].districts[key].total.vaccinated1 + data[x].districts[key].total.vaccinated2) + '</td>';
+                    } else if ((data[x].districts[key].total.vaccinated1 + data[x].districts[key].total.vaccinated2) != undefined) {
+                        tabledata += '<td style="background-color: rgba(252, 194, 3,0.1); color: #fcc203;"><div class="confirm">' + (data[x].districts[key].total.vaccinated1 + data[x].districts[key].total.vaccinated2) + '</td>';
                     } else {
                         tabledata += '<td style="background-color: rgba(252, 194, 3,0.1); color: #fcc203;"><div class="confirm">0</td>';
                     }
@@ -160,8 +160,8 @@ function states() {
                     } else {
                         tabledata += '<td style="background-color: rgba(252, 3, 227,0.1); color: #fc03e3;"><div class="confirm">0</td>';
                     }
-                    if (data[x].districts[key].total.vaccinated != undefined) {
-                        tabledata += '<td style="background-color: rgba(252, 194, 3,0.1); color: #fcc203;"><div class="confirm">' + data[x].districts[key].total.vaccinated + '</td>';
+                    if ((data[x].districts[key].total.vaccinated1 + data[x].districts[key].total.vaccinated2) != undefined) {
+                        tabledata += '<td style="background-color: rgba(252, 194, 3,0.1); color: #fcc203;"><div class="confirm">' + (data[x].districts[key].total.vaccinated1 + data[x].districts[key].total.vaccinated2) + '</td>';
                     } else {
                         tabledata += '<td style="background-color: rgba(252, 194, 3,0.1); color: #fcc203;"><div class="confirm">0</td>';
                     }
@@ -365,10 +365,10 @@ $.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(data) {
 		} else {
 			updata += '<div class="data">Total Tests<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].districts[y].total.tested).toLocaleString('en-IN') + '<br></div>';
 		}
-		if (data[x].districts[y].delta.vaccinated != undefined) {
-			updata += '<div class="data">Vaccination<br><div style="font-size:13px;">[+' + data[x].districts[y].delta.vaccinated + ']</div>' + parseInt(data[x].districts[y].total.vaccinated).toLocaleString('en-IN') + '<br></div>';
+		if ((data[x].districts[y].delta.vaccinated1 + data[x].districts[y].delta.vaccinated2)  != undefined) {
+			updata += '<div class="data">Vaccination<br><div style="font-size:13px;">[+' + (data[x].districts[y].delta.vaccinated1 + data[x].districts[y].delta.vaccinated2) + ']</div>' + parseInt(data[x].districts[y].total.vaccinated1 + data[x].districts[y].total.vaccinated2).toLocaleString('en-IN') + '<br></div>';
 		} else {
-			updata += '<div class="data">Vaccination<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].districts[y].total.vaccinated).toLocaleString('en-IN') + '<br></div>';
+			updata += '<div class="data">Vaccination<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].districts[y].total.vaccinated1 + data[x].districts[y].total.vaccinated2).toLocaleString('en-IN') + '<br></div>';
 		}
 		updata += '</div></div>';
 	} else {
@@ -377,7 +377,7 @@ $.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(data) {
 		updata += '<div class="data">Total Deaths<br>' + parseInt(data[x].districts[y].total.deceased).toLocaleString('en-IN') + '<br></div>';
 		updata += '<div class="data">Recoveries<br>' + parseInt(data[x].districts[y].total.recovered).toLocaleString('en-IN') + '<br></div>';
 		updata += '<div class="data">Total Tests<br>' + parseInt(data[x].districts[y].total.tested).toLocaleString('en-IN') + '<br></div>';
-		updata += '<div class="data">Vaccination<br>' + parseInt(data[x].districts[y].total.vaccinated).toLocaleString('en-IN') + '<br></div>';
+		updata += '<div class="data">Vaccination<br>' + parseInt(data[x].districts[y].total.vaccinated1 + data[x].districts[y].total.vaccinated2).toLocaleString('en-IN') + '<br></div>';
 		updata += '</div></div>';
 	}
 	$('#coviddis').empty().append(updata);
@@ -447,10 +447,10 @@ $.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(data) {
 		} else {
 			updata += '<div class="data">Total Tests<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].districts[y].total.tested).toLocaleString('en-IN') + '<br></div>';
 		}
-		if (data[x].districts[y].delta.vaccinated != undefined) {
-			updata += '<div class="data">Vaccination<br><div style="font-size:13px;">[+' + data[x].districts[y].delta.vaccinated + ']</div>' + parseInt(data[x].districts[y].total.vaccinated).toLocaleString('en-IN') + '<br></div>';
+		if ((data[x].districts[y].delta.vaccinated1 + data[x].districts[y].delta.vaccinated2) != undefined) {
+			updata += '<div class="data">Vaccination<br><div style="font-size:13px;">[+' + (data[x].districts[y].delta.vaccinated1 + data[x].districts[y].delta.vaccinated2) + ']</div>' + parseInt(data[x].districts[y].total.vaccinated1 + data[x].districts[y].total.vaccinated2).toLocaleString('en-IN') + '<br></div>';
 		} else {
-			updata += '<div class="data">Vaccination<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].districts[y].total.vaccinated).toLocaleString('en-IN') + '<br></div>';
+			updata += '<div class="data">Vaccination<br><div style="font-size:13px;">[--]</div>' + parseInt(data[x].districts[y].total.vaccinated1 + data[x].districts[y].total.vaccinated2).toLocaleString('en-IN') + '<br></div>';
 		}
 		updata += '</div></div>';
 	} else {
@@ -459,7 +459,7 @@ $.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(data) {
 		updata += '<div class="data">Total Deaths<br>' + parseInt(data[x].districts[y].total.deceased).toLocaleString('en-IN') + '<br></div>';
 		updata += '<div class="data">Recoveries<br>' + parseInt(data[x].districts[y].total.recovered).toLocaleString('en-IN') + '<br></div>';
 		updata += '<div class="data">Total Tests<br>' + parseInt(data[x].districts[y].total.tested).toLocaleString('en-IN') + '<br></div>';
-		updata += '<div class="data">Vaccination<br>' + parseInt(data[x].districts[y].total.vaccinated).toLocaleString('en-IN') + '<br></div>';
+		updata += '<div class="data">Vaccination<br>' + parseInt(data[x].districts[y].total.vaccinated1 + data[x].districts[y].total.vaccinated2).toLocaleString('en-IN') + '<br></div>';
 		updata += '</div></div>';
 	}
 	$('#coviddis1').empty().append(updata);

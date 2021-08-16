@@ -127,7 +127,9 @@ function data() {
                 todaytests = value.samplereportedtoday;
                 totaltest = value.totalsamplestested;
                 totalvacine = value.totaldosesadministered;
-                res = 1;
+				if (totaltest != '') {
+					res = 1;
+				}
             }
 
             if (value.updatetimestamp.split(" ")[0] == yest) {
