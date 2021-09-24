@@ -1,6 +1,22 @@
 function states() {
     $.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(data) {
 		$.each(data, function(x, y) {
+			if (data[x].hasOwnProperty('delta')) {
+				if (data[x].delta.deceased == undefined) {
+					data[x].delta.deceased=0
+				}
+				if (data[x].delta.recovered == undefined) {
+					data[x].delta.recovered=0
+				}
+				if (data[x].delta.confirmed == undefined) {
+					data[x].delta.confirmed=0
+				}
+			} else {
+				data[x].delta=0
+				data[x].delta.deceased=0
+				data[x].delta.recovered=0
+				data[x].delta.confirmed=0	
+			}
             var tabledata = '';
             tabledata += '<tr>';
             tabledata += '</tr>';

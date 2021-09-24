@@ -1,172 +1,109 @@
 function data() {
-    $.getJSON("https://data.covid19india.org/data.json", function(data) {
+    $.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(data) {
         var sign = "+";
-        var tabledata = '';
-        $.each(data.statewise, function(key, value) {
-            if ((value.deltaconfirmed - value.deltadeaths - value.deltarecovered) < 0) {
-                sign = "";
-            } else {
-                sign = '+';
-            }
-            if (value.confirmed > 0) {
+        var tabledata = '<tr></tr>';
+        $.each(data, function(x, y) {
+			if (data[x].hasOwnProperty('delta')) {
+				if (data[x].delta.deceased == undefined) {
+					data[x].delta.deceased=0
+				}
+				if (data[x].delta.recovered == undefined) {
+					data[x].delta.recovered=0
+				}
+				if (data[x].delta.confirmed == undefined) {
+					data[x].delta.confirmed=0
+				}
+			} else {
+				data[x].delta=0
+				data[x].delta.deceased=0
+				data[x].delta.recovered=0
+				data[x].delta.confirmed=0	
+			}
+			if(x != "TT") {
+			if ((data[x].delta.confirmed - data[x].delta.recovered - data[x].delta.deceased) < 0) {
+				sign = "";
+			} else {
+				sign = '+';
+			}
+            if (data[x].total.confirmed > 0) {
                 tabledata += '<tr>';
-                if (value.state != "Total") {
-                    tabledata += '<td class="tdgrey click" style="font-weight: 600;" id="' + value.statecode + '" onclick="getdata(this)">' + value.state + '</td>';
-                    if (value.deltaconfirmed > 0) {
-                        tabledata += '<td class="tdpur"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">+' + value.deltaconfirmed + '&nbsp;</div><div class="confirm">' + value.confirmed + '</td>';
-                    } else {
-                        tabledata += '<td class="tdpur"><div class="confirm">' + value.confirmed + '</td>';
-                    }
-                    if (value.deltaconfirmed > 0) {
-                        tabledata += '<td style="background-color: rgba(0,123,255,.1); color: #007bff;"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">' + sign + (value.deltaconfirmed - value.deltadeaths - value.deltarecovered) + '&nbsp;</div><div class="confirm">' + value.active + '</td>';
-                    } else {
-                        tabledata += '<td style="background-color: rgba(0,123,255,.1); color: #007bff;"><div class="confirm">' + value.active + '</td>';
-                    }
-                    if (value.deltarecovered > 0) {
-                        tabledata += '<td style="background-color: rgba(40,167,69,.1); color: #28a745;"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">+' + value.deltarecovered + '&nbsp;</div><div class="confirm">' + value.recovered + '</td>';
-                    } else {
-                        tabledata += '<td style="background-color: rgba(40,167,69,.1); color: #28a745;"><div class="confirm">' + value.recovered + '</td>';
-                    }
-                    if (value.deltadeaths > 0) {
-                        tabledata += '<td style="background-color: rgba(255,7,58,0.1); color: #ff073a;"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">+' + value.deltadeaths + '&nbsp;</div><div class="confirm">' + value.deaths + '</td>';
-                    } else {
-                        tabledata += '<td style="background-color: rgba(255,7,58,0.1); color: #ff073a;"><div class="confirm">' + value.deaths + '</td>';
-                    }
-                    tabledata += '</tr>';
-                }
+				tabledata += '<td class="tdgrey click" style="font-weight: 600;" id="' + x + '" onclick="getdata(this)">' + name(x) + '</td>';
+				
+				if (data[x].delta.confirmed > 0) {
+					tabledata += '<td class="tdpur"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">+' + data[x].delta.confirmed + '&nbsp;</div><div class="confirm">' + data[x].total.confirmed + '</td>';
+				} else {
+					tabledata += '<td class="tdpur"><div class="confirm">' + data[x].total.confirmed + '</td>';
+				}
+				if ((data[x].delta.confirmed - data[x].delta.deceased - data[x].delta.recovered) > 0) {
+					tabledata += '<td style="background-color: rgba(0,123,255,.1); color: #007bff;"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">' + sign + (data[x].delta.confirmed - data[x].delta.deceased - data[x].delta.recovered) + '&nbsp;</div><div class="confirm">' + (data[x].delta.confirmed - data[x].delta.deceased - data[x].delta.recovered) + '</td>';
+				} else {
+					tabledata += '<td style="background-color: rgba(0,123,255,.1); color: #007bff;"><div class="confirm">' + (data[x].total.confirmed - data[x].total.deceased - data[x].total.recovered) + '</td>';
+				}
+				if (data[x].delta.recovered > 0) {
+					tabledata += '<td style="background-color: rgba(40,167,69,.1); color: #28a745;"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">+' + data[x].delta.recovered + '&nbsp;</div><div class="confirm">' + data[x].total.recovered + '</td>';
+				} else {
+					tabledata += '<td style="background-color: rgba(40,167,69,.1); color: #28a745;"><div class="confirm">' + data[x].total.recovered + '</td>';
+				}
+				if (data[x].delta.deceased > 0) {
+					tabledata += '<td style="background-color: rgba(255,7,58,0.1); color: #ff073a;"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">+' + data[x].delta.deceased + '&nbsp;</div><div class="confirm">' + data[x].total.deceased + '</td>';
+				} else {
+					tabledata += '<td style="background-color: rgba(255,7,58,0.1); color: #ff073a;"><div class="confirm">' + data[x].total.deceased + '</td>';
+				}
+				tabledata += '<td style="background-color: rgba(252, 3, 227,0.1); color: #fc03e3;"><div class="confirm">' + data[x].total.tested + '</td>';
+				tabledata += '<td style="background-color: rgba(252, 194, 3,0.1); color: #fcc203;"><div class="confirm">'+(data[x].total.vaccinated1+data[x].total.vaccinated2)+'</td>';
+				tabledata += '</tr>';
             }
+			}
         });
         $('#table').append(tabledata);
         sorttable(1);
         var tabledata = '';
-        $.each(data.statewise, function(key, value) {
-            if (value.state == "Total") {
-                tabledata += '<tr>';
-                tabledata += '<td class="tdgrey" style="font-weight: 600;">' + value.state + '</td>';
-                tabledata += '<td class="tdpur">' + value.confirmed + '</td>';
-                tabledata += '<td style="background-color: rgba(0,123,255,.1); color: #007bff;">' + value.active + '</td>';
-                tabledata += '<td style="background-color: rgba(40,167,69,.1); color: #28a745;">' + value.recovered + '</td>';
-                tabledata += '<td style="background-color: rgba(255,7,58,0.1); color: #ff073a;">' + value.deaths + '</td>';
-                tabledata += '</tr>';
-            }
-        });
+		tabledata += '<tr>';
+		tabledata += '<td class="tdgrey" style="font-weight: 600;">Total</td>';
+		tabledata += '<td class="tdpur">' + data['TT'].total.confirmed + '</td>';
+		tabledata += '<td style="background-color: rgba(0,123,255,.1); color: #007bff;">' + (data['TT'].total.confirmed - data['TT'].total.deceased - data['TT'].total.recovered) + '</td>';
+		tabledata += '<td style="background-color: rgba(40,167,69,.1); color: #28a745;">' + data['TT'].total.recovered + '</td>';
+		tabledata += '<td style="background-color: rgba(255,7,58,0.1); color: #ff073a;">' + data['TT'].total.deceased + '</td>';
+		tabledata += '<td style="background-color: rgba(252, 3, 227,0.1); color: #fc03e3;"><div class="confirm">' + data['TT'].total.tested + '</td>';
+		tabledata += '<td style="background-color: rgba(252, 194, 3,0.1); color: #fcc203;"><div class="confirm">'+(data['TT'].total.vaccinated1+data['TT'].total.vaccinated2)+'</td>';
+		tabledata += '</tr>';
         $('#foot').append(tabledata);
-        var timedata = '';
-        $.each(data.statewise, function(key, value) {
-            if (value.state == "Total") {
-                timedata += 'Last updated: ' + value.lastupdatedtime;
-            }
-        });
-        $('#covid3').append(timedata);
+        //var timedata = '';
+        // $.each(data.statewise, function(key, value) {
+            // if (value.state == "Total") {
+                // timedata += 'Last updated: ' + value.lastupdatedtime;
+            // }
+        // });
+        //$('#covid3').append(timedata);
         var sign = "+";
         var totaltest = 0;
         var updata = '';
-        $.each(data.statewise, function(key, value) {
-            if ((value.deltaconfirmed - value.deltadeaths - value.deltarecovered) < 0) {
-                sign = "";
-            } else {
-                sign = '+';
-            }
-            if (value.state == "Total") {
-                updata += '<div class="info" id="test">';
-                updata += '<div style="font-size:28px; font-weight:bold;">INDIA</div>';
-                updata += '<div class="cases2"><b>Confirmed<br><div style="font-size:13px;">[+' + parseInt(value.deltaconfirmed).toLocaleString('en-IN') + ']</div>' + parseInt(value.confirmed).toLocaleString('en-IN') + '</b><br></div>';
-                updata += '<div class="cases3"><b>Active Cases<br><div style="font-size:13px;">[' + sign + parseInt(value.deltaconfirmed - value.deltadeaths - value.deltarecovered).toLocaleString('en-IN') + ']</div>' + parseInt(value.active).toLocaleString('en-IN') + '</b><br></div>';
-                updata += '<div class="cases4"><b>Total Deaths<br><div style="font-size:13px;">[+' + parseInt(value.deltadeaths).toLocaleString('en-IN') + ']</div>' + parseInt(value.deaths).toLocaleString('en-IN') + '</b><br></div>';
-                updata += '<div class="cases5"><b>Recoveries<br><div style="font-size:13px;">[+' + parseInt(value.deltarecovered).toLocaleString('en-IN') + ']</div>' + parseInt(value.recovered).toLocaleString('en-IN') + '</b><br></div>';
-            }
-        });
+		if ((data['TT'].delta.confirmed - data['TT'].delta.deceased - data['TT'].delta.recovered) < 0) {
+			sign = "";
+		} else {
+			sign = '+';
+		}
+		updata += '<div class="info" id="test">';
+		updata += '<div style="font-size:28px; font-weight:bold;">INDIA</div>';
+		updata += '<div class="cases2"><b>Confirmed<br><div style="font-size:13px;">[+' + parseInt(data['TT'].delta.confirmed).toLocaleString('en-IN') + ']</div>' + parseInt(data['TT'].total.confirmed).toLocaleString('en-IN') + '</b><br></div>';
+		updata += '<div class="cases3"><b>Active Cases<br><div style="font-size:13px;">[' + sign + parseInt(data['TT'].delta.confirmed - data['TT'].delta.deceased - data['TT'].delta.recovered).toLocaleString('en-IN') + ']</div>' + parseInt((data['TT'].total.confirmed - data['TT'].total.deceased - data['TT'].total.recovered)).toLocaleString('en-IN') + '</b><br></div>';
+		updata += '<div class="cases4"><b>Total Deaths<br><div style="font-size:13px;">[+' + parseInt(data['TT'].delta.deceased).toLocaleString('en-IN') + ']</div>' + parseInt(data['TT'].total.deceased).toLocaleString('en-IN') + '</b><br></div>';
+		updata += '<div class="cases5"><b>Recoveries<br><div style="font-size:13px;">[+' + parseInt(data['TT'].delta.recovered).toLocaleString('en-IN') + ']</div>' + parseInt(data['TT'].total.recovered).toLocaleString('en-IN') + '</b><br></div>';
 
-        var today = new Date();
-        var dd = today.getDate();
-
-        var mm = today.getMonth() + 1;
-        var yyyy = today.getFullYear();
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-        today = dd + '/' + mm + '/' + yyyy;
-
-        var date = new Date();
-        date.setDate(date.getDate() - 1);
-        var dd = date.getDate()
-        var mm = date.getMonth() + 1;
-        var yyyy = date.getFullYear();
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-        var yest = dd + '/' + mm + '/' + yyyy;
-
-        var date = new Date();
-        date.setDate(date.getDate() - 2);
-        var dd = date.getDate()
-        var mm = date.getMonth() + 1;
-        var yyyy = date.getFullYear();
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-        var yest2 = dd + '/' + mm + '/' + yyyy;
-        var todaytests = "0";
-        var yestvacine = "0";
-        var totalvacine = '0';
-        var res = 0;
-        $.each(data.tested, function(key, value) {
-            if (value.updatetimestamp.split(" ")[0] == today) {
-                todaytests = value.samplereportedtoday;
-                totaltest = value.totalsamplestested;
-                totalvacine = value.totaldosesadministered;
-				if (totaltest != '') {
-					res = 1;
-				}
-            }
-
-            if (value.updatetimestamp.split(" ")[0] == yest) {
-                yestvacine = value.totaldosesadministered;
-            }
-        });
-        if (res == 0) {
-            $.each(data.tested, function(key, value) {
-                if (value.updatetimestamp.split(" ")[0] == yest) {
-                    todaytests = value.samplereportedtoday;
-                    totaltest = value.totalsamplestested;
-                    totalvacine = value.totaldosesadministered;
-                }
-
-                if (value.updatetimestamp.split(" ")[0] == yest2) {
-                    yestvacine = value.totaldosesadministered;
-                }
-            });
-        }
-        updata += '<div class="cases6"><b>Total tests<br><div style="font-size:13px;">[+' + parseInt(todaytests).toLocaleString('en-IN') + ']</div>' + parseInt(totaltest).toLocaleString('en-IN') + '</b><br></div>';
-        updata += '<div class="cases7"><b>Vaccination<br><div style="font-size:13px;">[+' + parseInt(totalvacine - yestvacine).toLocaleString('en-IN') + ']</div>' + parseInt(totalvacine).toLocaleString('en-IN') + '</b><br></div>';
+        updata += '<div class="cases6"><b>Total tests<br><div style="font-size:13px;">[--]</div>' + parseInt(data['TT'].total.tested).toLocaleString('en-IN') + '</b><br></div>';
+        updata += '<div class="cases7"><b>Vaccination<br><div style="font-size:13px;">[--]</div>' + parseInt(data['TT'].total.vaccinated1+data['TT'].total.vaccinated2).toLocaleString('en-IN') + '</b><br></div>';
         updata += '</div></div>';
         $('#covid4').append(updata);
         var updata = '';
-        $.each(data.statewise, function(key, value) {
-            if (value.state == "Total") {
-                updata += 'Coronavirus Update (Live): ' + value.confirmed + ' Cases and ' + value.deaths + ' Deaths from COVID-19 Virus Pandemic in India';
-            }
-        });
+		updata += 'Coronavirus Update (Live): ' + data['TT'].total.confirmed + ' Cases and ' + data['TT'].total.deceased + ' Deaths from COVID-19 Virus Pandemic in India';
         $('#title').empty().append(updata);
-        var world = '';
-        $.each(data.statewise, function(key, value) {
-            if (value.active == 0) {
-                world += '<div class="cases1" style="display:block;">' + value.state + '</b></div>';
-            }
-        });
-        $('#free').append(world);
+        // var world = '';
+        // $.each(data.statewise, function(key, value) {
+            // if (value.active == 0) {
+                // world += '<div class="cases1" style="display:block;">' + value.state + '</b></div>';
+            // }
+        // });
+        // $('#free').append(world);
     });
 
     $.getJSON("https://corona.lmao.ninja/v2/all", function(data) {
@@ -226,6 +163,12 @@ function data() {
     tabletitle += '</th>';
     tabletitle += '<th class="tdred2 sticky" onclick="sorttable(4,\'#sort4\')">';
     tabletitle += '<div id="sort4" class="sticky heading-content">Deaths&nbsp;&nbsp;</div>';
+    tabletitle += '</th>';
+    tabletitle += '<th class="tdpk2" onclick="sorttable(5,\'#sort5\')">';
+    tabletitle += '<div id="sort5" class="sticky heading-content">Total Tests&nbsp;&nbsp;</div>';
+    tabletitle += '</th>';
+    tabletitle += '<th class="tdyl2" onclick="sorttable(6,\'#sort6\')">';
+    tabletitle += '<div id="sort6" class="sticky heading-content">Vaccination&nbsp;&nbsp;</div>';
     tabletitle += '</th>';
 
     $('#tabletitle').append(tabletitle);
