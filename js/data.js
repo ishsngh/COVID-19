@@ -13,11 +13,19 @@ function data() {
 				if (data[x].delta.confirmed == undefined) {
 					data[x].delta.confirmed=0
 				}
+				if (data[x].delta.vaccinated1 == undefined) {
+					data[x].delta.vaccinated1=0
+				}
+				if (data[x].delta.vaccinated2 == undefined) {
+					data[x].delta.vaccinated2=0
+				}
 			} else {
 				data[x].delta=0
 				data[x].delta.deceased=0
 				data[x].delta.recovered=0
-				data[x].delta.confirmed=0	
+				data[x].delta.confirmed=0
+				data[x].delta.vaccinated2=0
+				data[x].delta.vaccinated1=0
 			}
 			if(x != "TT") {
 			if ((data[x].delta.confirmed - data[x].delta.recovered - data[x].delta.deceased) < 0) {
@@ -50,7 +58,11 @@ function data() {
 					tabledata += '<td style="background-color: rgba(255,7,58,0.1); color: #ff073a;"><div class="confirm">' + data[x].total.deceased + '</td>';
 				}
 				tabledata += '<td style="background-color: rgba(252, 3, 227,0.1); color: #fc03e3;"><div class="confirm">' + data[x].total.tested + '</td>';
-				tabledata += '<td style="background-color: rgba(252, 194, 3,0.1); color: #fcc203;"><div class="confirm">'+(data[x].total.vaccinated1+data[x].total.vaccinated2)+'</td>';
+				if (data[x].delta.vaccinated1+data[x].delta.vaccinated2 > 0) { 
+					tabledata += '<td style="background-color: rgba(252, 194, 3,0.1); color: #fcc203;"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">+' + (data[x].delta.vaccinated1+data[x].delta.vaccinated2) + '&nbsp;</div><div class="confirm">'+(data[x].total.vaccinated1+data[x].total.vaccinated2)+'</td>';
+				} else {
+					tabledata += '<td style="background-color: rgba(252, 194, 3,0.1); color: #fcc203;"><div class="confirm">'+(data[x].total.vaccinated1+data[x].total.vaccinated2)+'</td>';	
+				}
 				tabledata += '</tr>';
             }
 			}
@@ -91,7 +103,7 @@ function data() {
 		updata += '<div class="cases5"><b>Recoveries<br><div style="font-size:13px;">[+' + parseInt(data['TT'].delta.recovered).toLocaleString('en-IN') + ']</div>' + parseInt(data['TT'].total.recovered).toLocaleString('en-IN') + '</b><br></div>';
 
         updata += '<div class="cases6"><b>Total tests<br><div style="font-size:13px;">[--]</div>' + parseInt(data['TT'].total.tested).toLocaleString('en-IN') + '</b><br></div>';
-        updata += '<div class="cases7"><b>Vaccination<br><div style="font-size:13px;">[--]</div>' + parseInt(data['TT'].total.vaccinated1+data['TT'].total.vaccinated2).toLocaleString('en-IN') + '</b><br></div>';
+        updata += '<div class="cases7"><b>Vaccination<br><div style="font-size:13px;">[+'+(data['TT'].delta.vaccinated1+data['TT'].delta.vaccinated2)+']</div>' + parseInt(data['TT'].total.vaccinated1+data['TT'].total.vaccinated2).toLocaleString('en-IN') + '</b><br></div>';
         updata += '</div></div>';
         $('#covid4').append(updata);
         var updata = '';
