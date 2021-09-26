@@ -34,8 +34,8 @@ function data() {
 				} else {
 					tabledata += '<td class="tdpur"><div class="confirm">' + data[x].total.confirmed + '</td>';
 				}
-				if ((data[x].delta.confirmed - data[x].delta.deceased - data[x].delta.recovered) > 0) {
-					tabledata += '<td style="background-color: rgba(0,123,255,.1); color: #007bff;"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">' + sign + (data[x].delta.confirmed - data[x].delta.deceased - data[x].delta.recovered) + '&nbsp;</div><div class="confirm">' + (data[x].delta.confirmed - data[x].delta.deceased - data[x].delta.recovered) + '</td>';
+				if ((data[x].delta.confirmed - data[x].delta.deceased - data[x].delta.recovered) != 0) {
+					tabledata += '<td style="background-color: rgba(0,123,255,.1); color: #007bff;"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">' + sign + (data[x].delta.confirmed - data[x].delta.deceased - data[x].delta.recovered) + '&nbsp;</div><div class="confirm">' + (data[x].total.confirmed - data[x].total.deceased - data[x].total.recovered) + '</td>';
 				} else {
 					tabledata += '<td style="background-color: rgba(0,123,255,.1); color: #007bff;"><div class="confirm">' + (data[x].total.confirmed - data[x].total.deceased - data[x].total.recovered) + '</td>';
 				}

@@ -8,14 +8,90 @@ if (width2 > 450) {
 	width2 = 450
 }
 
+function name_state(x) {
+if (x == "AN") {
+	return "Andaman and Nicobar Islands";
+} else if (x == "AP") {
+	return "Andhra Pradesh";
+} else if (x == "AR") {
+	return "Arunachal Pradesh";
+} else if (x == "AS") {
+	return "Assam";
+} else if (x == "BR") {
+	return "Bihar";
+} else if (x == "CH") {
+	return "Chandigarh";
+} else if (x == "CT") {
+	return "Chhattisgarh";
+} else if (x == "DN") {
+	return "Dadra and Nagar Haveli and Daman and Diu";
+} else if (x == "DL") {
+	return "Delhi";
+} else if (x == "GA") {
+	return "Goa";
+} else if (x == "GJ") {
+	return "Gujarat";
+} else if (x == "HR") {
+	return "Haryana";
+} else if (x == "HP") {
+	return "Himachal Pradesh";
+} else if (x == "JK") {
+	return "Jammu and Kashmir";
+} else if (x == "JH") {
+	return "Jharkhand";
+} else if (x == "KA") {
+	return "Karnataka";
+} else if (x == "KL") {
+	return "Kerala";
+} else if (x == "LA") {
+	return "Ladakh";
+} else if (x == "LD") {
+	return "Lakshadweep";
+} else if (x == "MP") {
+	return "Madhya Pradesh";
+} else if (x == "MH") {
+	return "Maharashtra";
+} else if (x == "MN") {
+	return "Manipur";
+} else if (x == "ML") {
+	return "Meghalaya";
+} else if (x == "MZ") {
+	return "Mizoram";
+} else if (x == "NL") {
+	return "Nagaland";
+} else if (x == "OR") {
+	return "Odisha";
+} else if (x == "PY") {
+	return "Puducherry";
+} else if (x == "PB") {
+	return "Punjab";
+} else if (x == "RJ") {
+	return "Rajasthan";
+} else if (x == "SK") {
+	return "Sikkim";
+} else if (x == "UN") {
+	return "State Unassigned";
+} else if (x == "TN") {
+	return "Tamil Nadu";
+} else if (x == "TG") {
+	return "Telangana";
+} else if (x == "TR") {
+	return "Tripura";
+} else if (x == "UP") {
+	return "Uttar Pradesh";
+} else if (x == "UT") {
+	return "Uttarakhand";
+} else if (x == "WB") {
+	return "West Bengal";
+}
+}
+
 function covidpie() {
-$.getJSON("https://data.covid19india.org/data.json", function(coviddata) {
-    $.each(coviddata.statewise, function(key, value) {
-        if (value.state == "Total") {
-            active = parseInt(value.active);
-            recovered = parseInt(value.recovered);
-            deaths = parseInt(value.deaths);
-        }
+$.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(coviddata) {
+    $.each(coviddata, function(x, y) {
+		active = parseInt(coviddata['TT'].total.confirmed - coviddata['TT'].total.deceased - coviddata['TT'].total.recovered);
+		recovered = parseInt(coviddata['TT'].total.recovered);
+		deaths = parseInt(coviddata['TT'].total.deceased);
     });
 
 let chart = new Highcharts.Chart({
@@ -68,17 +144,17 @@ let chart = new Highcharts.Chart({
 }
 
 function chartstates(){ 
-$.getJSON("https://data.covid19india.org/data.json", function(coviddata) {
+$.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(coviddata) {
 	var jsonArr = [];
-    $.each(coviddata.statewise, function(key, value) {
-        if (value.state != "Total") {
+    $.each(coviddata, function(x, y) {
+        if (x != "TT") {
 			jsonArr.push({
-				name: value.state,
-				y: parseInt(value.confirmed),
-				confirmed: parseInt(value.confirmed),
-				active: parseInt(value.active),
-				deaths: parseInt(value.deaths),
-				recovered: parseInt(value.recovered),
+				name: name_state(x),
+				y: parseInt(coviddata[x].total.confirmed),
+				confirmed: parseInt(coviddata[x].total.confirmed),
+				active: parseInt((coviddata[x].total.confirmed - coviddata[x].total.deceased - coviddata[x].total.recovered)),
+				deaths: parseInt(coviddata[x].total.deceased),
+				recovered: parseInt(coviddata[x].total.recovered),
 			});
         }
     });
@@ -125,19 +201,19 @@ let chart = new Highcharts.Chart({
 }
 
 function chartstates5(){ 
-$.getJSON("https://data.covid19india.org/data.json", function(coviddata) {
+$.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(coviddata) {
 	var name = [];
 	var confirmed = [];
 	var recovered = [];
 	var active = [];
 	var deaths = [];
-    $.each(coviddata.statewise, function(key, value) {
-        if (value.state != "Total") {
-			name.push(value.state);
-			confirmed.push(parseInt(value.confirmed));
-			active.push(parseInt(value.active));
-			recovered.push(parseInt(value.recovered));
-			deaths.push(parseInt(value.deaths));
+    $.each(coviddata, function(x, y) {
+        if (x != "TT") {
+			name.push(name_state(x));
+			confirmed.push(parseInt(coviddata[x].total.confirmed));
+			active.push(parseInt(coviddata[x].total.confirmed - coviddata[x].total.deceased - coviddata[x].total.recovered));
+			recovered.push(parseInt(coviddata[x].total.recovered));
+			deaths.push(parseInt(coviddata[x].total.deceased));
         }
     });
 
@@ -409,7 +485,6 @@ if (width2 > 450) {
     });
 });
 }
-
 chartline2();
 covidpie();
 chartstates();
