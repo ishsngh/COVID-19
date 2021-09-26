@@ -28,22 +28,27 @@ function data() {
 				data[x].delta.vaccinated1=0
 			}
 			if(x != "TT") {
-			if ((data[x].delta.confirmed - data[x].delta.recovered - data[x].delta.deceased) < 0) {
+				var active=data[x].delta.confirmed - data[x].delta.recovered - data[x].delta.deceased
+			if (active < 0) {
 				sign = "";
 			} else {
 				sign = '+';
 			}
+			if(isNaN(active) == true) {
+				active=0;
+				sign = "";
+			}
             if (data[x].total.confirmed > 0) {
                 tabledata += '<tr>';
-				tabledata += '<td class="tdgrey click" style="font-weight: 600;" id="' + x + '" onclick="getdata(this)">' + name(x) + '</td>';
+				tabledata += '<td class="tdgrey click" style="font-weight: 600;" id="' + x + '" onclick="getdata(this)">' + name_state(x) + '</td>';
 				
 				if (data[x].delta.confirmed > 0) {
 					tabledata += '<td class="tdpur"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">+' + data[x].delta.confirmed + '&nbsp;</div><div class="confirm">' + data[x].total.confirmed + '</td>';
 				} else {
 					tabledata += '<td class="tdpur"><div class="confirm">' + data[x].total.confirmed + '</td>';
 				}
-				if ((data[x].delta.confirmed - data[x].delta.deceased - data[x].delta.recovered) != 0) {
-					tabledata += '<td style="background-color: rgba(0,123,255,.1); color: #007bff;"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">' + sign + (data[x].delta.confirmed - data[x].delta.deceased - data[x].delta.recovered) + '&nbsp;</div><div class="confirm">' + (data[x].total.confirmed - data[x].total.deceased - data[x].total.recovered) + '</td>';
+				if (active != 0) {
+					tabledata += '<td style="background-color: rgba(0,123,255,.1); color: #007bff;"><div style="font-size:12px; display:inline-block; align-text:center; margin-right: .15rem; vertical-align:center; color: #ff073a; font-family: Arial;">' + sign + active + '&nbsp;</div><div class="confirm">' + (data[x].total.confirmed - data[x].total.deceased - data[x].total.recovered) + '</td>';
 				} else {
 					tabledata += '<td style="background-color: rgba(0,123,255,.1); color: #007bff;"><div class="confirm">' + (data[x].total.confirmed - data[x].total.deceased - data[x].total.recovered) + '</td>';
 				}
