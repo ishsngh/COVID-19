@@ -360,7 +360,7 @@ let chart4 = new Highcharts.Chart({
 }
 
 function chartline2() {
-$.getJSON("https://data.covid19india.org/data.json", function(coviddata) {
+$.getJSON("https://data.covid19india.org/v4/min/timeseries.min.json", function(coviddata) {
 var width2 = parseInt($(window).width() * 0.9);
 if (width2 > 450) {
 	width2 = 450
@@ -369,11 +369,15 @@ if (width2 > 450) {
     var arrValues1 = [];
     var arrValues2 = [];
     var arrValues3 = [];
-    $.each(coviddata.cases_time_series, function(key, value) {
-		arrValues.push([Date.parse(value.dateymd), parseInt(value.dailyconfirmed)]);
-		arrValues2.push([Date.parse(value.dateymd), parseInt(value.dailyconfirmed - value.dailyrecovered - value.dailydeceased)]);
-		arrValues3.push([Date.parse(value.dateymd), parseInt(value.dailyrecovered)]);
-		arrValues1.push([Date.parse(value.dateymd), parseInt(value.dailydeceased)]);
+    $.each(coviddata['TT'].dates, function(key, value) {
+		try {
+		arrValues.push([Date.parse(key), parseInt(coviddata['TT'].dates[key].delta.confirmed)]);
+		arrValues2.push([Date.parse(key), parseInt(coviddata['TT'].dates[key].delta.confirmed - coviddata['TT'].dates[key].delta.recovered - coviddata['TT'].dates[key].delta.deceased)]);
+		arrValues3.push([Date.parse(key), parseInt(coviddata['TT'].dates[key].delta.recovered)]);
+		arrValues1.push([Date.parse(key), parseInt(coviddata['TT'].dates[key].delta.deceased)]);
+        } catch(e) {
+		  console.log("Cannot Load information of " + key)
+		}
     });
 	
     Highcharts.stockChart({

@@ -629,7 +629,7 @@ function districtpage(x) {
 	districtinfo(id,state);
 	stateid(name(state),id);
 	chartlinedis(id,state);
-	chartlinedis1(id,state);
+	// chartlinedis1(id,state);
 }
 
 function gostate() {
