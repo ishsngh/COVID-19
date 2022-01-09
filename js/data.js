@@ -1,5 +1,5 @@
 function data() {
-    $.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(data) {
+    $.getJSON("https://api.covid19tracker.in/data/static/data.min.json", function(data) {
         var sign = "+";
         var tabledata = '<tr></tr>';
         $.each(data, function(x, y) {

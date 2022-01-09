@@ -87,7 +87,7 @@ if (x == "AN") {
 }
 
 function covidpie() {
-$.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(coviddata) {
+$.getJSON("https://api.covid19tracker.in/data/static/data.min.json", function(coviddata) {
     $.each(coviddata, function(x, y) {
 		active = parseInt(coviddata['TT'].total.confirmed - coviddata['TT'].total.deceased - coviddata['TT'].total.recovered);
 		recovered = parseInt(coviddata['TT'].total.recovered);
@@ -144,7 +144,7 @@ let chart = new Highcharts.Chart({
 }
 
 function chartstates(){ 
-$.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(coviddata) {
+$.getJSON("https://api.covid19tracker.in/data/static/data.min.json", function(coviddata) {
 	var jsonArr = [];
     $.each(coviddata, function(x, y) {
         if (x != "TT") {
@@ -201,7 +201,7 @@ let chart = new Highcharts.Chart({
 }
 
 function chartstates5(){ 
-$.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(coviddata) {
+$.getJSON("https://api.covid19tracker.in/data/static/data.min.json", function(coviddata) {
 	var name = [];
 	var confirmed = [];
 	var recovered = [];
@@ -360,7 +360,7 @@ let chart4 = new Highcharts.Chart({
 }
 
 function chartline2() {
-$.getJSON("https://data.covid19india.org/v4/min/timeseries.min.json", function(coviddata) {
+$.getJSON("https://api.covid19tracker.in/data/static/timeseries.min.json", function(coviddata) {
 var width2 = parseInt($(window).width() * 0.9);
 if (width2 > 450) {
 	width2 = 450

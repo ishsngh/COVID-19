@@ -1,5 +1,5 @@
 function chartlinestate() {
-$.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(data1) {
+$.getJSON("https://api.covid19tracker.in/data/static/data.min.json", function(data1) {
     var jsonArr = [];
 	$.each(data1, function(x, y) {
 	if (x == stateclass) {
@@ -117,7 +117,7 @@ let chart1 = new Highcharts.Chart({
 }
 
 function chartlinestate1() {
-$.getJSON("https://data.covid19india.org/v4/min/timeseries.min.json", function(data2) {
+$.getJSON("https://api.covid19tracker.in/data/static/timeseries.min.json", function(data2) {
     var arrValues = [];
     var arrValues1 = [];
     var arrValues2 = [];
@@ -250,7 +250,7 @@ $.getJSON("https://data.covid19india.org/v4/min/timeseries.min.json", function(d
 }
 
 function chartlinedis(y,x) {
-$.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(data1) {
+$.getJSON("https://api.covid19tracker.in/data/static/data.min.json", function(data1) {
 
 let chart = new Highcharts.Chart({
 	

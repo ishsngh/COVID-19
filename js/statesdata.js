@@ -1,5 +1,5 @@
 function states() {
-    $.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(data) {
+    $.getJSON("https://api.covid19tracker.in/data/static/data.min.json", function(data) {
 		$.each(data, function(x, y) {
 			if (data[x].hasOwnProperty('delta')) {
 				if (data[x].delta.deceased == undefined) {
@@ -303,7 +303,7 @@ if (x == "AN") {
 }
 
 function finddata() {
-$.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(data) {
+$.getJSON("https://api.covid19tracker.in/data/static/data.min.json", function(data) {
 	var search=''
 	$.each(data, function(x, y) {
 		search += '<li class="state" value="'+name(x)+'" onclick="searchdata(this)" id="'+ x +'">'+name(x)+'</li>'
@@ -335,7 +335,7 @@ function searchdata(data) {
 }
 
 function district(y,x) {
-$.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(data) {
+$.getJSON("https://api.covid19tracker.in/data/static/data.min.json", function(data) {
 	var updata="";
 	var pin ='pin';
 	var go1 = window.localStorage.getItem('pind');
@@ -410,7 +410,7 @@ $.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(data) {
 }
 
 function districtinfo(y,x) {
-$.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(data) {
+$.getJSON("https://api.covid19tracker.in/data/static/data.min.json", function(data) {
 	var updata="";
 	var pin ='pin';
 	var go1 = window.localStorage.getItem('pind');
@@ -668,7 +668,7 @@ function pin1(x) {
 }
 
 function districttitle(y,x) {
-$.getJSON("https://data.covid19india.org/v4/min/data.min.json", function(data) {
+$.getJSON("https://api.covid19tracker.in/data/static/data.min.json", function(data) {
 var title = y + ' Coronavirus Update (Live): ' + data[x].districts[y].total.confirmed + ' Cases from COVID-19 Virus Pandemic';
 $('#title').empty().append(title);
 });
